@@ -1,27 +1,41 @@
 import React from 'react';
-import connect from 'react-dom';
+import {connect} from 'react-redux';
+import {AddServiceForm} from './addServiceForm';
 
 
 
-export default class Services extends React.Component {
-  render() {
-    {/*const services = props.serviceList.map(service =>
-      <li className='service' key={serviceList.service.id}>
-        <div className='serviceDateAndTime'></div>
-        <div className='serviceButtonWrapper'>
-          <button className='markLeave'>Mark Leave</button>
-          <button className='removeService'>Remove Service</button>
-        </div>
-      </li>
-    );*/}
+export class Services extends React.Component {
+
+  //   const services = this.props.services.map(service =>
+  //   <li className='service' key={this.props.services.id}>
+  //     <div className='serviceDateAndTime'>{this.props.services.dateTime}</div>
+  //     <div className='serviceButtonWrapper'>
+  //       <button className='markLeave'>Mark Leave</button>
+  //       <button className='removeService'>Remove Service</button>
+  //     </div>
+  //   </li>
+  // );
+    render() {
+
     return (
-      <div className='serviceList'>
+      <section className='serviceList'>
         <ul className='listOfServices'>
-        <p>services</p>
+
+        <AddServiceForm />
         </ul>
-      </div>
+      </section>
     );
   }
 }
 
-// export default connect()(Services);
+Services.defaultProps = {
+  dateTime: 'July 4th 1776'
+}
+
+export const mapStateToProps = state => (
+  console.log(state.services)
+);
+
+console.log(state.services);
+
+export default connect(mapStateToProps)(Services);

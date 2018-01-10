@@ -1,8 +1,10 @@
-import react from 'react';
-import connect from 'ReactDOM';
+import React from 'react';
+import connect from 'react-dom';
 
-export function Leaves(props) {
-  const leaves = props.leaveList.map(leave => (
+export default function Leaves(props) {
+  const leaves = 'Dec 13th';
+
+  {/*props.leaveList.map(leave => (
     <li className='leftService' key={laveList.leftService.id}>
       <div className='leftServiceDateAndTime'>
         {leaveList.leftService.dateAndTime}
@@ -15,7 +17,7 @@ export function Leaves(props) {
         <button className='deleteThisLeave'>Delete</button>
       </div>
     </li>
-  ));
+  ));*/}
 
   return (
     <div classname='leaveList'>

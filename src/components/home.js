@@ -1,17 +1,7 @@
 import React from 'react';
 
 
-export default class Home extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state= {
-      createPerson: false,
-      service: 'Dec 12th'
-    }
-  }
-
-  render() {
+export default function Home(props) {
     return (
       <div className="home-page">
         <h2>Welcome to Leev</h2>
@@ -19,5 +9,4 @@ export default class Home extends React.Component {
         <button onClick={e => this.goToServices(e)}>Services</button>
       </div>
     );
-  }
 }

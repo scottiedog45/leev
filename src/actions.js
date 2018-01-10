@@ -1,24 +1,9 @@
-// add person
-// add services
-// delete person
-// delete services
-// edit person
-// edit service
-//
-// get personnel on load
-// get services on load
-//
-// change service to leave
-// edit/update leave for person
-// see all Services
-// see all people
-//
-// const initialState = {
-//   personnel: [],
-//   services: [],
-//   error: null
-// }
-//
-// Attendance
-// choose service for attendance
-// take attendance (markhere or leave)
+export const ADD_SERVICE = 'ADD_SERVICE';
+export const addService = () => ({
+  type: ADD_SERVICE
+});
+
+export const ADD_PERSON = 'ADD_PERSON';
+export const addPerson = () => ({
+  type: ADD_PERSON
+});
