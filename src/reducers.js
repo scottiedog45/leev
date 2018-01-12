@@ -9,18 +9,18 @@ const initialState = {
       email: 'john@john.com',
       phone: '123-456-7890',
       role: 'violin',
-      services: {
-        services: 7
-      },
-      leave: '(none)'
+      leave: [{
+        'serviceId':'oiwee',
+        'reason': 'sick'
+      }]
     }]
   ,
   services:
     [{
       serviceId: 7,
-      type: 'rehearsal',
+      category: 'rehearsal',
       dateTime: '12/08/2017 8:00pm',
-      expected: 3
+      people: ['3', '4', '5']
     }]
   ,
   error: null
@@ -32,7 +32,7 @@ export function leevReducer(state=initialState, action) {
       if (index !== action.personnelIndex) {
         return person;
       }
-      return Object.assign({}, person, {
+      return Object.assign({}, state, {
         personnel: [...state.personnel, {
           text: action.text
         }]
@@ -43,20 +43,15 @@ export function leevReducer(state=initialState, action) {
     });
   }
   else if (action.type=== actions.ADD_SERVICE) {
-    console.log(state.form.services);
-    let services = state.services.map((service, index) => {
-      if (index !== action.serviceIndex) {
-        return service;
-      }
-      return Object.assign({}, service, {
+    console.log(state.services);
+      return Object.assign({}, state, {
         services: [...state.services, {
-          text: action.text
+          people: action.people,
+          category: action.category,
+          serviceId: action.serviceId,
+          dateTime: action.dateTime
         }]
       });
-    });
-    return Object.assign({}, state, {
-      services
-    });
+    }
+    return state;
   }
-  return state;
-}

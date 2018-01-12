@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Home from './home';
 import PersonnelList from './personnelList';
-import {Services} from './services';
+import Services from './services';
 import {Sidebar} from './sidebar';
 import {Profile} from './profile';
 

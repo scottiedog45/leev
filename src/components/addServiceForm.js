@@ -17,8 +17,8 @@ export class AddServiceForm extends React.Component {
               this.onSubmit(values)
             )}>
       <label htmlFor='form'>Here is the add Service Form</label>
-        <label htmlFor='type'>Type</label>
-        <Field name='type' id='type' type = 'text' component='input'/>
+        <label htmlFor='category'>Type</label>
+        <Field name='category' id='category' type = 'text' component='input'/>
         <label htmlFor='date'>Date Time</label>
         <Field name='datetime' id='datetime' type='datetime-local' component='input'/>
         <button type='submit'>Create Service</button>
