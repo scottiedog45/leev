@@ -12,7 +12,7 @@ class Profile extends React.Component {
         </div>
         <p className='role'>{this.props.member.role}</p>
         <div className='services'>
-          <h2>Services</h2>
+          <h2>Services:</h2>
           <div className='individualService'>
             {this.props.member.services}
           </div>
