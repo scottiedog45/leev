@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
-import {addService} from '../actions';
+import {postService} from '../actions';
 
-export class AddServiceForm extends React.Component {
+export class CreateServiceForm extends React.Component {
   onSubmit(values) {
-    console.log(values);
-    this.props.dispatch(addService(values))
+    this.props.dispatch(postService(values))
   }
-
 
   render() {
 
@@ -20,7 +18,7 @@ export class AddServiceForm extends React.Component {
         <label htmlFor='category'>Type</label>
         <Field name='category' id='category' type = 'text' component='input'/>
         <label htmlFor='date'>Date Time</label>
-        <Field name='datetime' id='datetime' type='datetime-local' component='input'/>
+        <Field name='dateTime' id='dateTime' type='datetime-local' component='input'/>
         <button type='submit'>Create Service</button>
       </form>
     );
@@ -28,6 +26,6 @@ export class AddServiceForm extends React.Component {
 }
 
 
-export default AddServiceForm = reduxForm({
+export default CreateServiceForm = reduxForm({
   form:'service'
-})(AddServiceForm);
+})(CreateServiceForm);

@@ -20,8 +20,8 @@ export default function Leaves(props) {
   ));*/}
 
   return (
-    <div classname='leaveList'>
-      <ul classname='listOfLeave'>
+    <div className='leaveList'>
+      <ul className='listOfLeave'>
         {leaves}
       </ul>
     </div>

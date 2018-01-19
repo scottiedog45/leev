@@ -1,40 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Services from './services.js';
-import Leaves from './leaves.js';
 
+class Profile extends React.Component {
 
-export function Profile(props) {
-  return (
-    <div className='individualProfile'>
-      <div className='name'>
-        <h3>{props.name}</h3>
-      </div>
-      <p className='role'>{props.role}</p>
-      <div className='services'>
-        <h2>Services</h2>
-        <div className='individualService'>
-          {Services}
-          'Some Service'
+  render() {
+    console.log(this.props.member);
+    return (
+      <div className='individualProfile'>
+        <div className='name'>
+          <h3>{this.props.member.name}</h3>
+        </div>
+        <p className='role'>{this.props.member.role}</p>
+        <div className='services'>
+          <h2>Services</h2>
+          <div className='individualService'>
+            {this.props.member.services}
+          </div>
+        </div>
+        <div className='leaves'>
+          <h2>Leave:</h2>
+            {this.props.member.leave.service}
+            {this.props.member.leave.reason}
         </div>
       </div>
-      <div className='leaves'>
-        <h2>Leave:</h2>
-          {Leaves}
-          'Some Leave'
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-// Profile.defaultProps = {
-//   name: 'nothing',
-//   role: 'oboe'
-// }
+const mapStateToProps = (state, ownProps) => ({
+  member : state.leev.members.find(member =>
+    member.id == (ownProps.match.params.memberId))
+})
 
-export const mapStateToProps = state => ({
-  name: state.personnel.name,
-  role: state.personnel.role
-});
-
-export default connect (mapStateToProps)(Profile);
+export default connect(mapStateToProps)(Profile);

@@ -11,7 +11,15 @@ export function Sidebar(props) {
     <div className='sidebar sidebar-left'>
       <nav className='option-menu'>
         <ul className='option-menu-list'>
-          {props.optionList}
+          <Link to = {`/`} activeClassName='active'>
+            <button>Home</button>
+          </Link>
+          <Link to = {`/services`} activeClassName='active'>
+            <button>Services</button>
+          </Link>
+          <Link to ={`/members`} activeClassName='active'>
+            <button>Member List</button>
+          </Link>
         </ul>
       </nav>
     </div>
@@ -23,7 +31,7 @@ Sidebar.defaultProps = {
 };
 
 const mapStateToProps = (state, props)  => ({
-  optionList: state
+  optionList: state.leev.optionList
 });
 
 export default connect(mapStateToProps)(Sidebar);
