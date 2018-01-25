@@ -7,6 +7,7 @@ import {Sidebar} from './sidebar';
 import {connect} from 'react-redux';
 import ChangeServices from './changeServices';
 import Profile from './profile'
+import Attendance from './attendance';
 import {fetchServices, fetchMembers} from '../actions';
 
 class App extends React.Component {
@@ -27,9 +28,10 @@ class App extends React.Component {
           <Sidebar />
           <main>
             <Route exact path="/" component={Home} />
-            <Route exact path='/members' component = {MemberList}/>
-            <Route exact path='/services' component = {Services}/>
-            <Route exact path ='/members/:memberId' component = {Profile}/>
+            <Route exact path='/members' component={MemberList}/>
+            <Route exact path='/members/:memberId' component={Profile}/>
+            <Route exact path='/services' component={Services}/>
+            <Route exact path='/services/:serviceId' component={Attendance} />
           </main>
         </div>
       </Router>

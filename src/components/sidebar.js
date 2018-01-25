@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 export function Sidebar(props) {
-  console.log(props.options);
   const options = 'heeyyyyy';
 
 
@@ -11,13 +10,13 @@ export function Sidebar(props) {
     <div className='sidebar sidebar-left'>
       <nav className='option-menu'>
         <ul className='option-menu-list'>
-          <Link to = {`/`} activeClassName='active'>
+          <Link to = {`/`} className='active'>
             <button>Home</button>
           </Link>
-          <Link to = {`/services`} activeClassName='active'>
+          <Link to = {`/services`} className='active'>
             <button>Services</button>
           </Link>
-          <Link to ={`/members`} activeClassName='active'>
+          <Link to ={`/members`} className='active'>
             <button>Member List</button>
           </Link>
         </ul>

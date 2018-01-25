@@ -1,35 +1,22 @@
 import React from 'react';
-import connect from 'react-dom';
+import {connect} from 'react-dom';
 
-export default function Leaves(props) {
-  const leaves = 'Dec 13th';
+export default function Leaves (props) {
 
-  {/*props.leaveList.map(leave => (
-    <li className='leftService' key={laveList.leftService.id}>
-      <div className='leftServiceDateAndTime'>
-        {leaveList.leftService.dateAndTime}
-      </div>
-      <div className='leftServiceReason'>
-        {leaveList.leftService.reason}
-      </div>
-      <div className='buttonWrapper'>
-        <button className='editThisLeave'>Edit</button>
-        <button className='deleteThisLeave'>Delete</button>
-      </div>
+  const leaves = props.member.leave.map((leftService, index) => (
+    <li key={index}>
+      <h5>Left Service: {leftService.name}</h5>
+      <h5>Left Service Reason:{leftService.reason}</h5>
     </li>
-  ));*/}
+  ))
+
+  console.log(props.services);
 
   return (
     <div className='leaveList'>
       <ul className='listOfLeave'>
-        {leaves}
+      {leaves}
       </ul>
     </div>
   );
 }
-
-// const mapStateToProps = (state, props) => {
-//   const
-// }
-//
-// export default connect(mapStateToProps)(Leaves);
