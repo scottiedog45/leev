@@ -9,6 +9,7 @@ import ChangeServices from './changeServices';
 import Profile from './profile'
 import Attendance from './attendance';
 import {fetchServices, fetchMembers} from '../actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends React.Component {
 
@@ -20,21 +21,23 @@ class App extends React.Component {
   render() {
 
     return (
-      <Router>
-        <div className='app'>
-          <header>
-            <h1><Link to ="/">Leev</Link></h1>
-          </header>
-          <Sidebar />
-          <main>
-            <Route exact path="/" component={Home} />
-            <Route exact path='/members' component={MemberList}/>
-            <Route exact path='/members/:memberId' component={Profile}/>
-            <Route exact path='/services' component={Services}/>
-            <Route exact path='/services/:serviceId' component={Attendance} />
-          </main>
-        </div>
-      </Router>
+      <MuiThemeProvider>
+        <Router>
+          <div className='app'>
+            <header>
+              <h1><Link to ="/">Leev</Link></h1>
+            </header>
+            <Sidebar />
+            <main>
+              <Route exact path="/" component={Home} />
+              <Route exact path='/members' component={MemberList}/>
+              <Route exact path='/members/:memberId' component={Profile}/>
+              <Route exact path='/services' component={Services}/>
+              <Route exact path='/services/:serviceId' component={Attendance} />
+            </main>
+          </div>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }

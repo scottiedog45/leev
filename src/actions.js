@@ -1,55 +1,3 @@
-export const REMOVE_MEMBER_FROM_SERVICE = 'REMOVE_MEMBER_FROM_SERVICE';
-export const removeMemberFromService = (memberId, serviceId) => ({
-  type: REMOVE_MEMBER_FROM_SERVICE,
-  memberId,
-  serviceId
-})
-
-export const ADD_MEMBER_TO_SERVICE = 'ADD_MEMBER_TO_SERVICE';
-export const addMemberToService = (memberId, serviceId) => ({
-  type: ADD_MEMBER_TO_SERVICE,
-  memberId,
-  serviceId,
-})
-
-
-export const ADD_SERVICE_TO_STATE = 'ADD_SERVICE_TO_STATE';
-export const addServiceToState = (values, res) => ({
-  type: ADD_SERVICE_TO_STATE,
-  dateTime: values.dateTime,
-  category: values.category,
-  people: [],
-  serviceId: res.id
-});
-
-export const ADD_MEMBER_TO_STATE = 'ADD_MEMBER_TO_STATE';
-export const addMemberToState = (values, res) => ({
-  type: ADD_MEMBER_TO_STATE,
-  name: values.name,
-  role: values.role,
-  email: values.email,
-  phone: values.phone,
-  services: [],
-  memberId: res.id
-});
-
-export const REMOVE_SERVICE_FROM_STATE = 'REMOVE_SERVICE_FROM_STATE';
-export const removeServiceFromState = (id) => ({
-  type: REMOVE_SERVICE_FROM_STATE,
-  id: id
-});
-
-export const REMOVE_MEMBER_FROM_STATE = 'REMOVE_MEMBER_FROM_STATE';
-export const removeMemberFromState = (id) => ({
-  type: REMOVE_MEMBER_FROM_STATE,
-  id: id
-});
-
-export const ADD_PERSON = 'ADD_PERSON';
-export const addPerson = () => ({
-  type: ADD_PERSON
-});
-
 export const FETCH_MEMBERS_SUCCESS = 'FETCH_MEMBERS_SUCCESS';
 export const fetchMembersSuccess = members => ({
   type: FETCH_MEMBERS_SUCCESS,
@@ -80,14 +28,6 @@ export const fetchServicesError = error => ({
   error: 'error with services fetch'
 })
 
-export const CHANGE_LEAVE_REASON = 'CHANGE_LEAVE_REASON';
-export const changeLeaveReason = (value, memberId, serviceId) => ({
-  type: CHANGE_LEAVE_REASON,
-  memberId,
-  serviceId,
-  value
-})
-
 export const fetchMembers = () => dispatch => {
   // dispatch(fetchMembersRequest()); load spinner
   fetch('http://localhost:8000/leev/members', {
@@ -109,6 +49,7 @@ export const fetchMembers = () => dispatch => {
 };
 
 export const fetchServices = () => dispatch => {
+  console.log('doing this');
   fetch('http://localhost:8000/leev/services', {
     method: 'GET',
     datatype: 'json'
@@ -134,12 +75,107 @@ export const postService = (values) => dispatch => {
     },
     body: JSON.stringify(values)
   }).then(res=>res.json())
+  .then(() => {
+    dispatch(fetchServices())
+  })
   .catch(error => console.error('Error:', error))
   .then(success => console.log('Success:', success))
-  .then(res => {
-    dispatch(addServiceToState(values, res))
+}
+
+
+export const putOneToService = (memberId, serviceId) => dispatch => {
+  let id = serviceId;
+  console.log(memberId, id);
+  let datas = {
+    id: memberId,
+    leave: ''
+  };
+  fetch('http://localhost:8000/leev/services/' + id, {
+    method: 'PUT',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(datas)
+  }).then(res=>res.json())
+  .catch(error => console.error('Error:', error))
+  .then(success => console.log('Success:', success))
+  .then(() => {
+    dispatch(fetchServices())
+  })
+}
+
+export const putManyToService = (members, id) => dispatch => {
+  console.log(members, id);
+  let datas = {
+    members: members
+  }
+  fetch('http://localhost:8000/leev/services/many/' + id, {
+    method: 'PUT',
+    body: JSON.stringify(datas),
+    headers: {
+    "Content-Type": "application/json"
+    },
+    mode: 'cors',
+    header: {
+      'Access-Control-Allow-Origin': '*'
+    }})
+    .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+  })
+  .then(() => {
+    dispatch(fetchServices())
   });
 }
+
+
+export const putLeave = (reason, member, service) => dispatch => {
+  console.log(reason, member, service);
+  let datas = {
+    id: service,
+    member: member,
+    leave: reason
+  }
+  console.log(datas);
+  fetch('http://localhost:8000/leev/services/' + service + '/'+ member, {
+    method: 'PUT',
+    body: JSON.stringify(datas),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    mode: 'cors',
+    header: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  }).then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+  }).catch(err=> {
+    console.error(err)
+  }).then(() => {
+    dispatch(fetchServices())
+  })
+}
+
+export const fetchSingleServiceInfo = (id) => dispatch => {
+  console.log('blah');
+  fetch('http://localhost:8000/leev/services/'+ id, {
+    method: 'GET',
+    datatype: 'json'
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    console.log(res.members);
+    return res.json();
+  }).catch(err => {
+    console.error(err)})
+    .then(res => console.log(res))
+  };
+
 
 export const postMember = (values) => dispatch => {
   console.log(values);
@@ -150,9 +186,10 @@ export const postMember = (values) => dispatch => {
     },
     body: JSON.stringify(values)
   }).then(res=>res.json())
-  .then(res => {
-    dispatch(addMemberToState(values, res))
-  });
+  //only add to state if POST is succsfful, use ID from post and show error to user
+  .then(() => {
+    dispatch(fetchMembers())
+  })
 }
 
 export const deleteService = (id) => dispatch => {
@@ -162,10 +199,12 @@ export const deleteService = (id) => dispatch => {
     if (!res.ok) {
     return Promise.reject(res.statusText);
   }})
-  .then(res => {
-    dispatch(removeServiceFromState(id))
-  });
+  .then(() => {
+    dispatch(fetchServices())
+  })
 }
+
+//when deleting need to delete from all associated records
 
 export const deleteMember = (id) => dispatch => {
   fetch('http://localhost:8000/leev/members/' + id, {
@@ -174,51 +213,20 @@ export const deleteMember = (id) => dispatch => {
     if (!res.ok) {
       return Promise.reject(res.statusText);
   }})
-  .then(res => {
-    dispatch(removeMemberFromState(id))
-  });
+  .then(() => {
+    dispatch(fetchMembers())
+  })
 }
 
-
-export const adjustRoster = (newPeople, id) => dispatch => {
-  console.log(id);
-  console.log(newPeople);
-  let datas = {
-    "id": id,
-    "people": newPeople
-  };
-  fetch('http://localhost:8000/leev/services/' + id, {
-    method: 'PUT',
-    body: JSON.stringify(datas),
-    headers: {
-    "Content-Type": "application/json"
-    },
-    mode: 'cors',
-    header: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }).then(res => res.json())
-  .catch(error => console.error('Error:', error))
-.then(response => console.log('Success:', response));
+export const deleteMemberFromService = (member, service) => dispatch => {
+  console.log(member, service);
+  fetch('http://localhost:8000/leev/services/' + service + '/' + member, {
+    method: 'DELETE'
+  }).then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }})
+    .then(() => {
+      dispatch(fetchServices())
+    })
 }
-
-// export const cleanUpLeave 
-// export const adjustMemberInfo = (leaveInfo, memberId) => dispatch => {
-//   let datas = {
-//     "id": id,
-//     'leave': leaveInfo
-//   };
-//   fetch('http://localhost:8000/leev/member' + id, {
-//     method: 'PUT',
-//     body: JSON.stringify(datas),
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     mode: 'cors',
-//     header: {
-//       'Access-Control-Allow-Origin': '*'
-//     }
-//   }).then(res => res.json())
-//   .catch(error => => console.error('Error:', error))
-//   .then(response => console.log('Success:', response));
-// }

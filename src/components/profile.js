@@ -4,6 +4,8 @@ import Leaves from './leaves';
 
 class Profile extends React.Component {
 
+  //allotted leave amounts? 
+
   render() {
 
     console.log(this.props.member);
@@ -16,7 +18,7 @@ class Profile extends React.Component {
         <p className='role'>{this.props.member.role}</p>
         <div className='leaves'>
           <h2>Leave:</h2>
-          <Leaves member={this.props.member} services={this.props.services} />
+          // <Leaves member={this.props.member} services={this.props.services} />
         </div>
       </div>
     );

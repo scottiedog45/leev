@@ -10,9 +10,6 @@ export function Sidebar(props) {
     <div className='sidebar sidebar-left'>
       <nav className='option-menu'>
         <ul className='option-menu-list'>
-          <Link to = {`/`} className='active'>
-            <button>Home</button>
-          </Link>
           <Link to = {`/services`} className='active'>
             <button>Services</button>
           </Link>

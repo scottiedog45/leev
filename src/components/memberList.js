@@ -14,7 +14,8 @@ class MemberList extends React.Component{
       return;
     } else {
       console.log('deleting');
-      //bug where I can't delete right after adding a person
+      //bug where I can't delete right after adding a person, because the app doesn't
+      //have the id from the database
     this.props.dispatch(deleteMember(id));
   }
   }

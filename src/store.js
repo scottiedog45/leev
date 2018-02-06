@@ -11,6 +11,6 @@ export default createStore(
     leev: leevReducer
   }),
   composeEnhancers(
-    applyMiddleware(thunk)
+    compose(applyMiddleware(thunk))
   )
 );
