@@ -1,3 +1,7 @@
+import {API_BASE_URL} from './config';
+import moment from 'moment';
+
+
 export const FETCH_MEMBERS_SUCCESS = 'FETCH_MEMBERS_SUCCESS';
 export const fetchMembersSuccess = members => ({
   type: FETCH_MEMBERS_SUCCESS,
@@ -28,9 +32,15 @@ export const fetchServicesError = error => ({
   error: 'error with services fetch'
 })
 
+export const FETCH_SINGLE_LEAVE_SUCCESS = 'FETCH_SINGLE_LEAVE_SUCCESS';
+export const fetchSingleLeaveSuccess = services => ({
+  type: FETCH_SINGLE_LEAVE_SUCCESS,
+  services
+})
+
 export const fetchMembers = () => dispatch => {
   // dispatch(fetchMembersRequest()); load spinner
-  fetch('http://localhost:8000/leev/members', {
+  fetch(API_BASE_URL + '/members', {
     method: 'GET',
     datatype: 'json'
   })
@@ -39,7 +49,8 @@ export const fetchMembers = () => dispatch => {
         return Promise.reject(res.statusText);
       }
       return res.json();
-    }).then(res => res.sort(function(a,b) {return (a.name >b.name) ? 1 : ((b.name > a.name) ? -1 : 0
+    })
+    .then(res => res.sort(function(a,b) {return (a.name >b.name) ? 1 : ((b.name > a.name) ? -1 : 0
     );}))
     .then(members => {
       dispatch(fetchMembersSuccess(members));
@@ -50,7 +61,7 @@ export const fetchMembers = () => dispatch => {
 
 export const fetchServices = () => dispatch => {
   console.log('doing this');
-  fetch('http://localhost:8000/leev/services', {
+  fetch(API_BASE_URL + '/services', {
     method: 'GET',
     datatype: 'json'
   })
@@ -59,16 +70,47 @@ export const fetchServices = () => dispatch => {
         return Promise.reject(res.statusText);
       }
       return res.json();
-    }).then(services => {
+    })
+    .then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime}).map(
+      (obj) => (
+        Object.assign({}, obj, {
+          dateTime: moment(obj.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+        }
+    ))))
+    .then(services => {
       dispatch(fetchServicesSuccess(services));
     }).catch(err => {
       dispatch(fetchServicesError(err));
     });
 };
 
+export const getSingleLeave = (memberId) => dispatch => {
+  console.log(memberId);
+  fetch(API_BASE_URL + '/members/'+ memberId + '/leave', {
+    method: 'GET',
+    datatype: 'json'
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+    return res.json();
+  }).then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime}).map(
+    (obj) => (
+      Object.assign({}, obj, {
+        dateTime: moment(obj.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+      }
+  ))))
+  .then(services => {
+    dispatch(fetchSingleLeaveSuccess(services));
+  }).catch(err => {
+    dispatch(fetchServicesError(err));
+  });
+};
+
 export const postService = (values) => dispatch => {
   console.log(values);
-  fetch('http://localhost:8000/leev/services', {
+  fetch(API_BASE_URL + '/services', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
@@ -82,7 +124,6 @@ export const postService = (values) => dispatch => {
   .then(success => console.log('Success:', success))
 }
 
-
 export const putOneToService = (memberId, serviceId) => dispatch => {
   let id = serviceId;
   console.log(memberId, id);
@@ -90,7 +131,7 @@ export const putOneToService = (memberId, serviceId) => dispatch => {
     id: memberId,
     leave: ''
   };
-  fetch('http://localhost:8000/leev/services/' + id, {
+  fetch(API_BASE_URL + '/services/' + id, {
     method: 'PUT',
     headers: {
     'Content-Type': 'application/json'
@@ -109,7 +150,7 @@ export const putManyToService = (members, id) => dispatch => {
   let datas = {
     members: members
   }
-  fetch('http://localhost:8000/leev/services/many/' + id, {
+  fetch(API_BASE_URL + '/services/many/' + id, {
     method: 'PUT',
     body: JSON.stringify(datas),
     headers: {
@@ -129,7 +170,6 @@ export const putManyToService = (members, id) => dispatch => {
   });
 }
 
-
 export const putLeave = (reason, member, service) => dispatch => {
   console.log(reason, member, service);
   let datas = {
@@ -138,7 +178,7 @@ export const putLeave = (reason, member, service) => dispatch => {
     leave: reason
   }
   console.log(datas);
-  fetch('http://localhost:8000/leev/services/' + service + '/'+ member, {
+  fetch(API_BASE_URL + '/services/' + service + '/'+ member, {
     method: 'PUT',
     body: JSON.stringify(datas),
     headers: {
@@ -161,7 +201,7 @@ export const putLeave = (reason, member, service) => dispatch => {
 
 export const fetchSingleServiceInfo = (id) => dispatch => {
   console.log('blah');
-  fetch('http://localhost:8000/leev/services/'+ id, {
+  fetch(API_BASE_URL + 'services/'+ id, {
     method: 'GET',
     datatype: 'json'
   })
@@ -176,10 +216,9 @@ export const fetchSingleServiceInfo = (id) => dispatch => {
     .then(res => console.log(res))
   };
 
-
 export const postMember = (values) => dispatch => {
   console.log(values);
-  fetch('http://localhost:8000/leev/members', {
+  fetch(API_BASE_URL + '/members', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
@@ -193,7 +232,7 @@ export const postMember = (values) => dispatch => {
 }
 
 export const deleteService = (id) => dispatch => {
-  fetch('http://localhost:8000/leev/services/' + id, {
+  fetch(API_BASE_URL + '/services/' + id, {
     method: 'DELETE'
   }).then(res => {
     if (!res.ok) {
@@ -204,10 +243,8 @@ export const deleteService = (id) => dispatch => {
   })
 }
 
-//when deleting need to delete from all associated records
-
 export const deleteMember = (id) => dispatch => {
-  fetch('http://localhost:8000/leev/members/' + id, {
+  fetch(API_BASE_URL + '/members/' + id, {
     method: 'DELETE'
   }).then(res=> {
     if (!res.ok) {
@@ -220,7 +257,7 @@ export const deleteMember = (id) => dispatch => {
 
 export const deleteMemberFromService = (member, service) => dispatch => {
   console.log(member, service);
-  fetch('http://localhost:8000/leev/services/' + service + '/' + member, {
+  fetch(API_BASE_URL + '/services/' + service + '/' + member, {
     method: 'DELETE'
   }).then(res => {
     if (!res.ok) {

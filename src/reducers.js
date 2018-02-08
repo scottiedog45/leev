@@ -4,6 +4,7 @@ const initialState = {
   members:[],
   services:[],
   error: null,
+  singleMemberLeave: []
 };
 
 //don't need optimistic UI for everything
@@ -28,6 +29,12 @@ export function leevReducer(state=initialState, action) {
   else if(action.type === actions.FETCH_SERVICES_SUCCESS){
     return Object.assign({}, state, {
       services: action.services
+    });
+  }
+  else if (action.type === actions.FETCH_SINGLE_LEAVE_SUCCESS) {
+    console.log('triggered');
+    return Object.assign({}, state, {
+      singleMemberLeave: action.services
     });
   }
     return state;

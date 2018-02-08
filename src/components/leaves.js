@@ -1,18 +1,51 @@
 import React from 'react';
-import {connect} from 'react-dom';
+import {connect} from 'react-redux';
+import {getSingleLeave} from '../actions';
 
-export default function Leaves (props) {
+class Leaves extends React.Component {
 
-  console.log(props.services);
+  componentDidMount() {
+    this.props.dispatch(getSingleLeave(this.props.member.id));
+    console.log('happening');
+  }
 
-  //compare current leave stats with alotted leave stats in graph
-  //add relief option
-  
-
-  return (
-    <div className='leaveList'>
-      <ul className='listOfLeave'>
-      </ul>
-    </div>
-  );
+calculateLeave = () => {
+    let leaveArray = [];
+    this.props.singleMemberLeave.forEach(leftService => {
+      let leaveRecord = leftService.members.find(member => member._id === this.props.member.id);
+      let formattedService = {
+        service: leftService.dateTime,
+        reason: leaveRecord.leave
+      };
+      leaveArray.push(formattedService);
+    })
+    return leaveArray;
 }
+
+  render() {
+
+  let someLeave = (this.calculateLeave());
+
+  let leave = someLeave.map((service, index) => (
+    <div>
+      <p>{service.service}</p>
+      <p>{service.reason}</p>
+    </div>
+  ));
+
+
+    return (
+      <div className='leaveList'>
+        <div>
+          {leave}
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  singleMemberLeave: state.leev.singleMemberLeave
+});
+
+export default connect(mapStateToProps)(Leaves);
