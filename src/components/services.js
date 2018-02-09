@@ -43,7 +43,7 @@ class Services extends React.Component {
 }
 
 Services.defaultProps = {
-  dateTime: 'July 4th 1776'
+  dateTime: 'July 100th 1776'
 }
 
 const mapStateToProps = state => ({
