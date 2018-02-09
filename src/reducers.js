@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import {fetchServices} from './actions';
+
 const initialState = {
   members:[],
   services:[],

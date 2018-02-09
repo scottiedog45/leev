@@ -22,10 +22,6 @@ export function Sidebar(props) {
   )
 }
 
-Sidebar.defaultProps = {
-  options: 'personnelllll'
-};
-
 const mapStateToProps = (state, props)  => ({
   optionList: state.leev.optionList
 });

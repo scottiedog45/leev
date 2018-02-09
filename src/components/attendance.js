@@ -1,12 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {putLeave, deleteMemberFromService, addMemberToService,
-  adjustRoster, handleAttendance, putManyToService, fetchSingleServiceInfo,
+import {putLeave, deleteMemberFromService, putManyToService,
 putOneToService} from '../actions';
-import {Field, reduxForm, FormSection, formValueSelector} from 'redux-form';
-import MarkLeave from './markLeave';
-import AutoComplete from 'material-ui/AutoComplete';
-import MenuItem from 'material-ui/MenuItem';
+import {reduxForm} from 'redux-form';
+
+
 import Autosuggest from 'react-autosuggest';
 
 class Attendance extends React.Component {

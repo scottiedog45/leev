@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchMembers, deleteMember} from '../actions';
+import {deleteMember} from '../actions';
 import {CreateMemberForm} from './createMemberForm';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ChangeServices from './changeServices';
 
 class MemberList extends React.Component{

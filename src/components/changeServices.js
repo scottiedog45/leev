@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+// import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {fetchServices} from '../actions';
 
@@ -25,7 +25,7 @@ class ChangeServices extends React.Component {
 
     return(
       <div>
-        
+
         <form>
           <button>Select All</button>
           {checkboxes}

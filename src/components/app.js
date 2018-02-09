@@ -5,7 +5,6 @@ import MemberList from './memberList';
 import Services from './services';
 import {Sidebar} from './sidebar';
 import {connect} from 'react-redux';
-import ChangeServices from './changeServices';
 import Profile from './profile'
 import Attendance from './attendance';
 import {fetchServices, fetchMembers} from '../actions';
