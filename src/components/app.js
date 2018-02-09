@@ -9,7 +9,7 @@ import ChangeServices from './changeServices';
 import Profile from './profile'
 import Attendance from './attendance';
 import {fetchServices, fetchMembers} from '../actions';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 class App extends React.Component {
 
@@ -21,7 +21,6 @@ class App extends React.Component {
   render() {
 
     return (
-      <MuiThemeProvider>
         <Router>
           <div className='app'>
             <header>
@@ -37,7 +36,6 @@ class App extends React.Component {
             </main>
           </div>
         </Router>
-      </MuiThemeProvider>
     );
   }
 }
