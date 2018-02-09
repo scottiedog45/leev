@@ -117,7 +117,8 @@ class Attendance extends React.Component {
         };
 
     const people =
-    this.props.service.members.slice().map((member, index) => (
+    this.props.service.members.slice().sort(function(a,b) {return (a.name >b.name) ? 1 : ((b.name > a.name) ? -1 : 0
+    )}).map((member, index) => (
 
       <div key={index}>
         <p>{this.getNameFromId(member._id)}</p>
