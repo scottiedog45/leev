@@ -1,7 +1,8 @@
 export const API_BASE_URL =
-    process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000/api';
+  'https://frozen-inlet-15221.herokuapp.com/api'   || 'http://localhost:8000/api';
 
-//https://frozen-inlet-15221.herokuapp.com/
+
 
 //make sure netlify is doing build using the heroku environment variable
-//make sure request is going to proper place in devtools
+//make sure request is going to proper
+// process.env.REACT_APP_API_BASE_URL
