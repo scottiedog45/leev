@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 export function Sidebar(props) {
-  const options = 'heeyyyyy';
-
 
   return (
     <div className='sidebar sidebar-left'>

@@ -9,7 +9,7 @@ class MemberList extends React.Component{
 
   onDelete(id) {
     let r =window.confirm('Do you want to delete this member?');
-    if (r == false) {
+    if (r === false) {
       return;
     } else {
       this.props.dispatch(deleteMember(id));
