@@ -5,7 +5,6 @@ import {CreateMemberForm} from './createMemberForm';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import ChangeServices from './changeServices';
 
-
 class MemberList extends React.Component{
 
   onDelete(id) {
@@ -13,11 +12,8 @@ class MemberList extends React.Component{
     if (r == false) {
       return;
     } else {
-      console.log('deleting');
-      //bug where I can't delete right after adding a person, because the app doesn't
-      //have the id from the database
-    this.props.dispatch(deleteMember(id));
-  }
+      this.props.dispatch(deleteMember(id));
+    }
   }
 
   render () {

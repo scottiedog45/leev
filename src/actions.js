@@ -40,7 +40,7 @@ export const fetchSingleLeaveSuccess = services => ({
 
 export const fetchMembers = () => dispatch => {
   // dispatch(fetchMembersRequest()); load spinner
-  fetch(API_BASE_URL + '/members', {
+  fetch(API_BASE_URL + '/api/members', {
     method: 'GET',
     datatype: 'json'
   })
@@ -61,7 +61,7 @@ export const fetchMembers = () => dispatch => {
 
 export const fetchServices = () => dispatch => {
   console.log('doing this');
-  fetch(API_BASE_URL + '/services', {
+  fetch(API_BASE_URL + '/api/services', {
     method: 'GET',
     datatype: 'json'
   })
