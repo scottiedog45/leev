@@ -135,6 +135,8 @@ class Attendance extends React.Component {
 
     return (
       <div>
+      <h2>{this.props.service.dateTime}</h2>
+      <h3>{this.props.service.category}</h3>
       <button onClick={() => this.addAll()}>Add all members</button>
       <Autosuggest
         suggestions={suggestions}

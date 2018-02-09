@@ -21,10 +21,10 @@ class Services extends React.Component {
           <h3>Date and time: {service.dateTime}</h3>
           <h3>Type: {service.category}</h3>
           <Link to = {`/services/${service.id}`} component = {attendance}>
-            <button id={service.id}>attendance</button>
+            <button id={service.id}>Details</button>
           </Link>
           <button id={service.id} onClick={
-            (e)=> this.onDelete(e.target.id)}>Delete this service</button>
+            (e)=> this.onDelete(e.target.id)}>Delete</button>
         </li>
 
       ))

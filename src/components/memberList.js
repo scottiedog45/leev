@@ -23,11 +23,11 @@ class MemberList extends React.Component{
         <h3>{member.role}</h3>
         <h4>{member.email}</h4>
         <h4>{member.phone}</h4>
-        <button id={member.id} onClick={
-          (e)=> this.onDelete(e.target.id)}>Delete</button>
         <Link to = {`/members/${member.id}`} component = {ChangeServices}>
           <button id={member.id}>Details</button>
         </Link>
+        <button id={member.id} onClick={
+          (e)=> this.onDelete(e.target.id)}>Delete</button>
       </li>
     ))
 
