@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app';
-import enzyme from 'enzyme'
+import {shallow} from 'enzyme'
 
 
 
