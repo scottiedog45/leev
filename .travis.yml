@@ -7,11 +7,12 @@
    - npm test
  env:
    - CI=true
-   - REACT_APP_API_BASE_URL=https://frozen-inlet-15221.herokuapp.com/api
+
 
  before_deploy:
    - npm install netlify-cli -g
    - npm run build
+   # - REACT_APP_API_BASE_URL=https://frozen-inlet-15221.herokuapp.com/api
 
  deploy:
    provider: script
