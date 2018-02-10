@@ -6,7 +6,6 @@ import {postMember} from '../actions';
 export class CreateMemberForm extends React.Component {
 
   onSubmit(values) {
-    console.log(values);
     this.props.dispatch(postMember(values))
   }
 

@@ -60,7 +60,6 @@ export const fetchMembers = () => dispatch => {
 };
 
 export const fetchServices = () => dispatch => {
-  console.log('doing this');
   fetch(API_BASE_URL + '/services', {
     method: 'GET',
     datatype: 'json'
@@ -85,7 +84,6 @@ export const fetchServices = () => dispatch => {
 };
 
 export const getSingleLeave = (memberId) => dispatch => {
-  console.log(memberId);
   fetch(API_BASE_URL + '/members/'+ memberId + '/leave', {
     method: 'GET',
     datatype: 'json'
@@ -109,7 +107,6 @@ export const getSingleLeave = (memberId) => dispatch => {
 };
 
 export const postService = (values) => dispatch => {
-  console.log(values);
   fetch(API_BASE_URL + '/services', {
     method: 'POST',
     headers: {
@@ -126,7 +123,6 @@ export const postService = (values) => dispatch => {
 
 export const putOneToService = (memberId, serviceId) => dispatch => {
   let id = serviceId;
-  console.log(memberId, id);
   let datas = {
     id: memberId,
     leave: ''
@@ -146,7 +142,6 @@ export const putOneToService = (memberId, serviceId) => dispatch => {
 }
 
 export const putManyToService = (members, id) => dispatch => {
-  console.log(members, id);
   let datas = {
     members: members
   }
@@ -171,13 +166,11 @@ export const putManyToService = (members, id) => dispatch => {
 }
 
 export const putLeave = (reason, member, service) => dispatch => {
-  console.log(reason, member, service);
   let datas = {
     id: service,
     member: member,
     leave: reason
   }
-  console.log(datas);
   fetch(API_BASE_URL + '/services/' + service + '/'+ member, {
     method: 'PUT',
     body: JSON.stringify(datas),
@@ -200,7 +193,6 @@ export const putLeave = (reason, member, service) => dispatch => {
 }
 
 export const fetchSingleServiceInfo = (id) => dispatch => {
-  console.log('blah');
   fetch(API_BASE_URL + 'services/'+ id, {
     method: 'GET',
     datatype: 'json'
@@ -209,7 +201,6 @@ export const fetchSingleServiceInfo = (id) => dispatch => {
     if (!res.ok) {
       return Promise.reject(res.statusText);
     }
-    console.log(res.members);
     return res.json();
   }).catch(err => {
     console.error(err)})
@@ -217,7 +208,6 @@ export const fetchSingleServiceInfo = (id) => dispatch => {
   };
 
 export const postMember = (values) => dispatch => {
-  console.log(values);
   fetch(API_BASE_URL + '/members', {
     method: 'POST',
     headers: {
@@ -256,7 +246,6 @@ export const deleteMember = (id) => dispatch => {
 }
 
 export const deleteMemberFromService = (member, service) => dispatch => {
-  console.log(member, service);
   fetch(API_BASE_URL + '/services/' + service + '/' + member, {
     method: 'DELETE'
   }).then(res => {

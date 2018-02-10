@@ -4,11 +4,7 @@ import Leaves from './leaves';
 
 class Profile extends React.Component {
 
-  //allotted leave amounts?
-
   render() {
-
-    console.log(this.props.member);
 
     return (
       <div className='individualProfile'>

@@ -32,7 +32,6 @@ export function leevReducer(state=initialState, action) {
     });
   }
   else if (action.type === actions.FETCH_SINGLE_LEAVE_SUCCESS) {
-    console.log('triggered');
     return Object.assign({}, state, {
       singleMemberLeave: action.services
     });

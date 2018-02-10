@@ -45,7 +45,6 @@ class Attendance extends React.Component {
     this.setState({
       value: newValue
     });
-    console.log(this.state.value);
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -86,7 +85,6 @@ class Attendance extends React.Component {
       return
     } else {
     let member = this.props.members.find(obj => obj.name === memberCheck);
-    console.log(member);
     this.props.dispatch(putOneToService(member.id, this.props.service.id));
   }
 }
@@ -96,14 +94,11 @@ class Attendance extends React.Component {
   }
 
   deleteThisMember = (member, service) => {
-    console.log('debug');
     this.props.dispatch(deleteMemberFromService(member, service));
   }
 
   getNameFromId = (id) => {
-    console.log(id);
     let member = this.props.members.find(obj=> obj.id === id);
-    console.log(member);
     return member.name;
   }
 
@@ -138,6 +133,7 @@ class Attendance extends React.Component {
       <div>
       <h2>{this.props.service.dateTime}</h2>
       <h3>{this.props.service.category}</h3>
+      <button>Edit Service Details</button>
       <button onClick={() => this.addAll()}>Add all members</button>
       <Autosuggest
         suggestions={suggestions}

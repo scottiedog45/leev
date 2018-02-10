@@ -6,7 +6,6 @@ class Leaves extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(getSingleLeave(this.props.member.id));
-    console.log('happening');
   }
 
 calculateLeave = () => {

@@ -10,10 +10,10 @@ export class CreateServiceForm extends React.Component {
   render() {
 
     return (
-      <form onSubmit={this.props.handleSubmit(values =>
+      <form className = 'serviceForm' onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>
-      <label className = 'serviceForm' htmlFor='form'>Create New Service:</label>
+      <label htmlFor='form'>Create New Service:</label>
         <label htmlFor='category'>Type</label>
         <Field name='category' id='category' type = 'text' component='input'/>
         <label htmlFor='date'>Date Time</label>

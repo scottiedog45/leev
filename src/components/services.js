@@ -14,8 +14,6 @@ class Services extends React.Component {
 
     render() {
 
-      console.log(this.props);
-
       const services = this.props.services.map((service, index) => (
         <li key={index}>
           <h3>Date and time: {service.dateTime}</h3>
