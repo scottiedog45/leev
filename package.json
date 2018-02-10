@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "sed -i s/process.env.REACT_APP_API_BASE_URL/$process.env.REACT_APP_API_BASE_URL/g ./src/config.js && react-scripts build",
+    "build": "sed -i s/process.env.REACT_APP_API_BASE_URL/$REACT_APP_API_BASE_URL/g ./src/config.js && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
