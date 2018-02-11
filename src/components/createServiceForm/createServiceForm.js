@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {postService} from '../../actions';
+import './createServiceForm.css';
 
 export class CreateServiceForm extends React.Component {
   onSubmit(values) {
@@ -10,7 +11,7 @@ export class CreateServiceForm extends React.Component {
   render() {
 
     return (
-      <form className = 'serviceForm' onSubmit={this.props.handleSubmit(values =>
+      <form className ='serviceForm' onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>
       <label htmlFor='form'>Create New Service:</label>

@@ -127,8 +127,8 @@ export const putOneToService = (memberId, serviceId) => dispatch => {
     id: memberId,
     leave: ''
   };
-  fetch(API_BASE_URL + '/services/' + id, {
-    method: 'PUT',
+  fetch(API_BASE_URL + '/services/' + id + '/members', {
+    method: 'POST',
     headers: {
     'Content-Type': 'application/json'
     },
@@ -141,13 +141,11 @@ export const putOneToService = (memberId, serviceId) => dispatch => {
   })
 }
 
-export const putManyToService = (members, id) => dispatch => {
-  let datas = {
-    members: members
-  }
-  fetch(API_BASE_URL + '/services/many/' + id, {
-    method: 'PUT',
-    body: JSON.stringify(datas),
+export const patchToService = (data, id) => dispatch => {
+  console.log(JSON.stringify(data));
+  fetch(API_BASE_URL + '/services/' + id, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
     headers: {
     "Content-Type": "application/json"
     },
@@ -165,14 +163,14 @@ export const putManyToService = (members, id) => dispatch => {
   });
 }
 
-export const putLeave = (reason, member, service) => dispatch => {
+export const patchLeave = (reason, member, service) => dispatch => {
   let datas = {
     id: service,
     member: member,
     leave: reason
   }
-  fetch(API_BASE_URL + '/services/' + service + '/'+ member, {
-    method: 'PUT',
+  fetch(API_BASE_URL + '/services/' + service + '/members/'+ member, {
+    method: 'PATCH',
     body: JSON.stringify(datas),
     headers: {
       "Content-Type": "application/json"
@@ -208,14 +206,13 @@ export const fetchSingleServiceInfo = (id) => dispatch => {
   };
 
 export const postMember = (values) => dispatch => {
-  fetch(API_BASE_URL + '/members', {
+  fetch(API_BASE_URL + '/members/', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify(values)
   }).then(res=>res.json())
-  //only add to state if POST is succsfful, use ID from post and show error to user
   .then(() => {
     dispatch(fetchMembers())
   })
@@ -246,7 +243,7 @@ export const deleteMember = (id) => dispatch => {
 }
 
 export const deleteMemberFromService = (member, service) => dispatch => {
-  fetch(API_BASE_URL + '/services/' + service + '/' + member, {
+  fetch(API_BASE_URL + '/services/' + service + '/members/' + member, {
     method: 'DELETE'
   }).then(res => {
     if (!res.ok) {

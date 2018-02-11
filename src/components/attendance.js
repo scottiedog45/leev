@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {putLeave, deleteMemberFromService, putManyToService,
+import {patchLeave, deleteMemberFromService, patchToService,
 putOneToService} from '../actions';
 import {reduxForm} from 'redux-form';
 
@@ -62,12 +62,17 @@ class Attendance extends React.Component {
   addAll = () => {
     let id = this.props.service.id;
     let allMembers = this.props.members.slice();
-    let submittedMembers = allMembers.map((member) => (
+    let arrayOfMembers = allMembers.map((member) => (
       {_id: member.id,
       leave: ""}
     ));
+    console.log(arrayOfMembers)
+    let submittedMembers = {
+      members: arrayOfMembers
+    };
+    console.log(submittedMembers);
     if (window.confirm('Adding all members will erase current members from service, and add all stored members to this service. Are you sure you want to continue?')) {
-      this.props.dispatch(putManyToService(submittedMembers, id))
+      this.props.dispatch(patchToService(submittedMembers, id))
     } else {
       return
     }
@@ -90,7 +95,7 @@ class Attendance extends React.Component {
 }
 
   markLeave = (event, member, service) => {
-    this.props.dispatch(putLeave(event.target.value, member, service));
+    this.props.dispatch(patchLeave(event.target.value, member, service));
   }
 
   deleteThisMember = (member, service) => {
@@ -104,6 +109,8 @@ class Attendance extends React.Component {
 
   render() {
 
+    console.log(this.props.service.members.slice());
+
     const { value, suggestions } = this.state;
         const inputProps = {
           placeholder: "Type 'c'",
@@ -112,22 +119,26 @@ class Attendance extends React.Component {
         };
 
     const people =
-    this.props.service.members.slice().sort(function(a,b) {return (a.name >b.name) ? 1 : ((b.name > a.name) ? -1 : 0
-    )}).map((member, index) => (
-
-      <div key={index}>
-        <p>{this.getNameFromId(member._id)}</p>
-        <select
-          value={member.leave}
-          onChange={(event) => this.markLeave(event, member._id, this.props.service.id)}>
-          <option></option>
-          <option value='sick'>sick</option>
-          <option value='left'>left</option>
-          <option value='medical'>medical</option>
-        </select>
-        <button onClick={() => this.deleteThisMember(member._id, this.props.service.id)}>Remove member from Service</button>
-      </div>
-    ))
+      this.props.service.members.slice().map(obj => (
+        Object.assign({}, obj, {
+          name: this.getNameFromId(obj._id)
+        })
+      )).sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0
+      );})
+        .map((member, index) => (
+        <div key={index}>
+          <p>{member.name}</p>
+          <select
+            value={member.leave}
+            onChange={(event) => this.markLeave(event, member._id, this.props.service.id)}>
+            <option></option>
+            <option value='sick'>sick</option>
+            <option value='left'>left</option>
+            <option value='medical'>medical</option>
+          </select>
+          <button onClick={() => this.deleteThisMember(member._id, this.props.service.id)}>Remove member from Service</button>
+        </div>
+      ))
 
     return (
       <div>

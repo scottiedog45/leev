@@ -4,8 +4,9 @@ import React from 'react';
 export default function Home(props) {
     return (
       <div className="home-page">
-        <p>Welcome to leev. With leev you can:</p>
+        <p>Welcome to leev. Leev makes it easy to:</p>
         <ul>
+          <li>Track leave data for each member of your group</li>
           <li>Create services and edit service details</li>
           <li>Create the attendance roster for each service</li>
           <li>Create members and edit member details</li>

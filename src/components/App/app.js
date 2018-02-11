@@ -1,13 +1,14 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import Home from './home';
-import MemberList from './memberList';
-import Services from './services';
-import {Sidebar} from './sidebar';
+import Home from '../home';
+import MemberList from '../memberList';
+import Services from '../services';
+import {Sidebar} from '../sidebar';
 import {connect} from 'react-redux';
-import Profile from './profile'
-import Attendance from './attendance';
-import {fetchServices, fetchMembers} from '../actions';
+import Profile from '../profile'
+import Attendance from '../attendance';
+import {fetchServices, fetchMembers} from '../../actions';
+import './app.css';
 
 
 class App extends React.Component {
