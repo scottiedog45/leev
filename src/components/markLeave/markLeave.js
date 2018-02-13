@@ -1,5 +1,5 @@
 import React from 'react';
-import {putLeave} from '../actions'
+import {patchLeave} from '../../actions'
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form'
 
@@ -7,7 +7,7 @@ class MarkLeave extends React.Component {
 
   handleChange(event, member, service) {
     let reason = event.target.value;
-    this.props.dispatch(putLeave(reason, member, service));
+    this.props.dispatch(patchLeave(reason, member, service));
   }
 
   render() {

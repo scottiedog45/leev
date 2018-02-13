@@ -22,11 +22,13 @@ const initialState = {
 
 export function leevReducer(state=initialState, action) {
   if(action.type === actions.FETCH_MEMBERS_SUCCESS) {
+    // sessionStorage.setItem('members': action.members);
     return Object.assign({}, state, {
       members: action.members
     });
   }
   else if(action.type === actions.FETCH_SERVICES_SUCCESS){
+    // sessionStorage.setItem('services': action.services);
     return Object.assign({}, state, {
       services: action.services
     });

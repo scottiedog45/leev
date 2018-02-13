@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getSingleLeave} from '../actions';
+import {getSingleLeave} from '../../actions';
 
 class Leaves extends React.Component {
 
@@ -8,7 +8,7 @@ class Leaves extends React.Component {
     this.props.dispatch(getSingleLeave(this.props.member.id));
   }
 
-calculateLeave = () => {
+  calculateLeave = () => {
     let leaveArray = [];
     this.props.singleMemberLeave.forEach(leftService => {
       let leaveRecord = leftService.members.find(member => member._id === this.props.member.id);
@@ -19,19 +19,18 @@ calculateLeave = () => {
       leaveArray.push(formattedService);
     })
     return leaveArray;
-}
+  }
 
   render() {
 
   let someLeave = (this.calculateLeave());
 
   let leave = someLeave.map((service, index) => (
-    <div>
+    <div key={index}>
       <p>{service.service}</p>
       <p>{service.reason}</p>
     </div>
   ));
-
 
     return (
       <div className='leaveList'>

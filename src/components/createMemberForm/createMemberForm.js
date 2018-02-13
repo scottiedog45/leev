@@ -39,7 +39,7 @@ export class CreateMemberForm extends React.Component {
 
   onSubmit(values) {
     this.props.dispatch(postMember(values));
-    this.props.dispatch(reset('member'));
+    this.props.reset();
   }
 
   renderField ({
@@ -64,11 +64,11 @@ export class CreateMemberForm extends React.Component {
   render() {
 
     return (
-      <form onSubmit={this.props.handleSubmit(values =>
+      <form onSubmit={this.props.handleSubmit((values) =>
               this.onSubmit(values)
             )}>
             <Field
-              name="fullName"
+              name="name"
               type="text"
               component={this.renderField}
               label="Full Name"
@@ -91,7 +91,7 @@ export class CreateMemberForm extends React.Component {
               validate={[email, required]}
             />
             <Field
-              name="phoneNumber"
+              name="phone"
               type="number"
               component={this.renderField}
               label="Phone number"

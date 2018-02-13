@@ -1,21 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {patchLeave, deleteMemberFromService, patchToService,
-putOneToService} from '../actions';
+putOneToService} from '../../actions';
 import {reduxForm} from 'redux-form';
-
-
 import Autosuggest from 'react-autosuggest';
+import {ServiceInfo} from '../serviceInfo/serviceInfo'
+import moment from 'moment';
 
 class Attendance extends React.Component {
   constructor() {
     super();
     this.state = {
+      editDateTime:false,
+      editCategory: false,
       value: '',
       suggestions: [],
       members: [],
       leave:""
     };
+  }
+
+  componentDidMount() {
+    var someMoment =
+    console.log(moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'));
   }
 
   renderSuggestion(suggestion) {
@@ -66,11 +73,9 @@ class Attendance extends React.Component {
       {_id: member.id,
       leave: ""}
     ));
-    console.log(arrayOfMembers)
     let submittedMembers = {
       members: arrayOfMembers
     };
-    console.log(submittedMembers);
     if (window.confirm('Adding all members will erase current members from service, and add all stored members to this service. Are you sure you want to continue?')) {
       this.props.dispatch(patchToService(submittedMembers, id))
     } else {
@@ -91,8 +96,8 @@ class Attendance extends React.Component {
     } else {
     let member = this.props.members.find(obj => obj.name === memberCheck);
     this.props.dispatch(putOneToService(member.id, this.props.service.id));
+    };
   }
-}
 
   markLeave = (event, member, service) => {
     this.props.dispatch(patchLeave(event.target.value, member, service));
@@ -107,9 +112,9 @@ class Attendance extends React.Component {
     return member.name;
   }
 
-  render() {
 
-    console.log(this.props.service.members.slice());
+
+  render() {
 
     const { value, suggestions } = this.state;
         const inputProps = {
@@ -142,21 +147,19 @@ class Attendance extends React.Component {
 
     return (
       <div>
-      <h2>{this.props.service.dateTime}</h2>
-      <h3>{this.props.service.category}</h3>
-      <button>Edit Service Details</button>
-      <button onClick={() => this.addAll()}>Add all members</button>
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={this.getSuggestionValue}
-        renderSuggestion={this.renderSuggestion}
-        inputProps={inputProps} />
-      <button onClick={() => this.addMember()}>Add this member</button>
-      <div>
-        {people}
-      </div>
+        <ServiceInfo service={this.props.service}/>
+        <button onClick={() => this.addAll()}>Add all members</button>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={this.getSuggestionValue}
+          renderSuggestion={this.renderSuggestion}
+          inputProps={inputProps} />
+        <button onClick={() => this.addMember()}>Add this member</button>
+        <div>
+          {people}
+        </div>
       </div>
     );
   }

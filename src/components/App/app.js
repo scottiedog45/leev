@@ -1,12 +1,12 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import Home from '../home';
-import MemberList from '../memberList';
-import Services from '../services';
-import {Sidebar} from '../sidebar';
+import Home from '../home/home';
+import MemberList from '../memberList/memberList';
+import Services from '../services/services';
+import {Sidebar} from '../sidebar/sidebar';
 import {connect} from 'react-redux';
-import Profile from '../profile'
-import Attendance from '../attendance';
+import Profile from '../profile/profile'
+import Attendance from '../attendance/attendance';
 import {fetchServices, fetchMembers} from '../../actions';
 import './app.css';
 

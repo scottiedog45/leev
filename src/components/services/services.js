@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {CreateServiceForm} from './createServiceForm/createServiceForm';
-import {deleteService} from '../actions';
-import attendance from './attendance';
+import {CreateServiceForm} from '../createServiceForm/createServiceForm';
+import {deleteService} from '../../actions';
+import attendance from '../attendance/attendance';
 import {Link} from 'react-router-dom';
 
 class Services extends React.Component {

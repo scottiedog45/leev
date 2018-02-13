@@ -40,6 +40,7 @@ export const fetchSingleLeaveSuccess = services => ({
 
 export const fetchMembers = () => dispatch => {
   // dispatch(fetchMembersRequest()); load spinner
+  console.log('fetchingggggg');
   fetch(API_BASE_URL + '/members', {
     method: 'GET',
     datatype: 'json'
@@ -58,6 +59,18 @@ export const fetchMembers = () => dispatch => {
       dispatch(fetchMembersError(err));
   });
 };
+
+export const loadMembersIfNeeded = (state) => {
+  return (dispatch, getState) => {
+    console.log('here');
+    console.log(getState().leev.members);
+    if (getState().leev.members.length > 0) {
+      return;
+    }
+    console.log('fetching again');
+    dispatch(fetchMembers());
+  }
+}
 
 export const fetchServices = () => dispatch => {
   fetch(API_BASE_URL + '/services', {
@@ -206,13 +219,26 @@ export const fetchSingleServiceInfo = (id) => dispatch => {
   };
 
 export const postMember = (values) => dispatch => {
-  fetch(API_BASE_URL + '/members/', {
+  fetch(API_BASE_URL + '/members', {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify(values)
   }).then(res=>res.json())
+  .then(() => {
+    dispatch(fetchMembers())
+  })
+}
+
+export const patchInfoToMember = (id, values) => dispatch => {
+  fetch(API_BASE_URL + '/members/' + id, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(values)
+  }).then(res => res.json())
   .then(() => {
     dispatch(fetchMembers())
   })

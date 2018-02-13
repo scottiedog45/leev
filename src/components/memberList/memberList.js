@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deleteMember} from '../actions';
-import {CreateMemberForm} from './createMemberForm/createMemberForm';
+import {deleteMember, loadMembersIfNeeded} from '../../actions';
+import {CreateMemberForm} from '../createMemberForm/createMemberForm';
 import {Link} from 'react-router-dom';
-import ChangeServices from './changeServices';
 
 class MemberList extends React.Component{
 
@@ -11,6 +10,12 @@ class MemberList extends React.Component{
     super(props);
     this.state = {
       showForm: false}
+  }
+
+  componentDidMount() {
+    if (!this.props.members) {
+      this.props.dispatch(loadMembersIfNeeded());
+    }
   }
 
   toggle() {
@@ -31,10 +36,7 @@ class MemberList extends React.Component{
     const members = this.props.members.map((member, index) => (
       <li key={index}>
         <h2>{member.name}</h2>
-        <h3>{member.role}</h3>
-        <h4>{member.email}</h4>
-        <h4>{member.phone}</h4>
-        <Link to = {`/members/${member.id}`} component = {ChangeServices}>
+        <Link to = {`/members/${member.id}`}>
           <button id={member.id}>Details</button>
         </Link>
         <button id={member.id} onClick={
