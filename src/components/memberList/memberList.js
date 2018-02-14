@@ -47,13 +47,16 @@ class MemberList extends React.Component{
     return (
 
       <div className='personnelList'>
-      {this.state.showForm && <CreateMemberForm />}
-        <button
-          name='createNewMember'
-          id='createNewMember'
-          className='button'
-          onClick={(e)=> this.toggle()}
-        >Create New Member</button>
+      {!this.state.showForm ? <button
+        name='createNewMember'
+        id='createNewMember'
+        className='button'
+        onClick={(e)=> this.toggle()}
+      >Create New Member</button> :
+      <div>
+      <CreateMemberForm />
+      <button onClick={(e)=>this.toggle()}>Cancel</button>
+      </div>}
         <ul className='allPeople'>
           {members}
         </ul>

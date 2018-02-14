@@ -6,12 +6,19 @@ import {MemberInfo} from '../memberInfo/memberInfo'
 
 class Profile extends React.Component {
 
-  componentDidMount() {
+  componentWillMount() {
     if(!this.props.member) {
       console.log('whoops');
       this.props.dispatch(fetchMembers());
     }
   }
+
+  //make fetchMember()
+
+  // getMember(id) {
+  //   return (state.leev.members.find(member =>
+  //     id === (ownProps.match.params.memberId)))
+  // }
 
   render() {
 

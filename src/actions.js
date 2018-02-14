@@ -238,9 +238,14 @@ export const patchInfoToMember = (id, values) => dispatch => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(values)
-  }).then(res => res.json())
-  .then(() => {
-    dispatch(fetchMembers())
+  }).then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+  }).catch(err=> {
+    console.error(err)
+  }).then(() => {
+    dispatch(fetchServices())
   })
 }
 

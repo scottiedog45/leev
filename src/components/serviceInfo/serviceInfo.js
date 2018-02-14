@@ -1,39 +1,41 @@
 import React from 'react';
 import moment from 'moment';
+import {Field, reduxForm, reset} from 'redux-form';
 
 export class ServiceInfo extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      editingDateTime: false,
-      editingCategory: false,
+      editing: false,
+      dateTimeValue: moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'),
+      category: this.props.service.category
     }
   }
 
   //use toggle on these instead
+  //make all of this a redux form
+  //single editing button
+  //check which lines have been edited
+  //need to set
+  //change this to editing everything once editing is selected
 
-  editDateTime = () => {
+  toggleEditing = () => {
     this.setState({
-      editDateTime: true
+      editing: !this.state.editing
     });
     console.log('editing');
+    console.log(this.state.editing);
   }
 
-  cancelEditDateTime = () => {
+  handleDateChange = (e) => {
     this.setState({
-      editDateTime: false
-    });
-  }
-
-  editCategory = () => {
-    this.setState({
-      editCategory: true
+      dateTimeValue: e.target.value
     })
   }
 
-  cancelEditCategory = () => {
+  handleCategoryChange= (e) => {
     this.setState({
-      editCategory: false
+      category: e.target.value
     })
   }
 
@@ -41,17 +43,32 @@ export class ServiceInfo extends React.Component {
 
     return (
       <div>
-        <h2>{!this.state.editDateTime && this.props.service.dateTime}</h2>
-        {!this.state.editDateTime && <button onClick={()=>this.editDateTime()}>Edit date and time informatoin</button>}
-        {this.state.editDateTime && <form>
-          <label>Edit the DateTime
-          <input type='datetime-local' value={moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm')}/>
-        </label>
-        <button type='submit'>changeDateTime</button><button onClick = {()=>this.cancelEditDateTime()} type='button'>Cancel</button>
-        </form>}
-        <h3>{this.props.service.category}</h3>
-        {!this.state.editCategory && <button>Edit Service Type</button>}
+        <h2>{!this.state.editing && this.props.service.dateTime}</h2>
+        <h3>{!this.state.editing && this.props.service.category}</h3>
+        {!this.state.editing && <button onClick={()=>this.toggleEditing()}>Edit Service Info</button>}
+        {this.state.editing &&
+          <form>
+            <label>Edit the DateTime
+              <input
+                type='datetime-local'
+                onChange={(e)=>this.handleDateChange(e)}
+                value={this.state.dateTimeValue}/>
+            </label>
+            <label>Edit category
+            <input
+              type='text'
+              onChange={(e)=>this.handleCategoryChange(e)}
+              value={this.state.category}/>
+            </label>
+            <button type='submit'>Submit</button>
+            <button onClick={()=>this.toggleEditing()} type='button'>Cancel</button>
+          </form>}
+
       </div>
     )
   }
 }
+
+export default ServiceInfo = reduxForm({
+  form:'serviceInfo'
+})(ServiceInfo);
