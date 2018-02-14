@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Services from './components/services';
+import Services from './components/services/services';
 import {shallow} from 'enzyme'
 import store from './store';
 
