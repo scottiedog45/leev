@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Leaves from '../leaves/leaves';
-import {loadMembersIfNeeded, fetchMembers} from '../../actions';
+import {loadMembersIfNeeded, fetchMembers, fetchServices, getSingleLeave} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
 
 class Profile extends React.Component {
@@ -10,13 +10,15 @@ class Profile extends React.Component {
     if(!this.props.member) {
       console.log('whoops');
       this.props.dispatch(fetchMembers());
+      this.props.dispatch(fetchServices());
+      // this.props.dispatch(getSingleLeave(this.props.member.id));
     }
   }
 
   //make fetchMember()
 
-  // getMember(id) {
-  //   return (state.leev.members.find(member =>
+  // fetchMember(id) {
+  //   return (this.props.members.find(member =>
   //     id === (ownProps.match.params.memberId)))
   // }
 

@@ -18,7 +18,7 @@ class Services extends React.Component {
         <li key={index}>
           <h3>Date and time: {service.dateTime}</h3>
           <h3>Type: {service.category}</h3>
-          <Link to = {`/services/${service.id}`} component = {attendance}>
+          <Link to = {`/services/${service.id}`}>
             <button id={service.id}>Details</button>
           </Link>
           <button id={service.id} onClick={

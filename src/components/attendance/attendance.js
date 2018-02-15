@@ -20,11 +20,6 @@ class Attendance extends React.Component {
     };
   }
 
-  componentDidMount() {
-    var someMoment =
-    console.log(moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'));
-  }
-
   renderSuggestion(suggestion) {
     return (
       <span>{suggestion.name}</span>
@@ -124,6 +119,8 @@ class Attendance extends React.Component {
         };
 
     const people =
+
+
       this.props.service.members.slice().map(obj => (
         Object.assign({}, obj, {
           name: this.getNameFromId(obj._id)
@@ -144,6 +141,7 @@ class Attendance extends React.Component {
           <button onClick={() => this.deleteThisMember(member._id, this.props.service.id)}>Remove member from Service</button>
         </div>
       ))
+    
 
     return (
       <div>
@@ -164,6 +162,7 @@ class Attendance extends React.Component {
     );
   }
 }
+
 
 const mapStateToProps = (state, ownProps) => ({
   service: state.leev.services.find(service =>

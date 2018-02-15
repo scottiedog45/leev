@@ -37,12 +37,22 @@ export class MemberInfo extends React.Component {
     super(props);
     this.state = {
       editing: false,
+      name: '',
+      role: '',
+      email: '',
+      phone: ''
+    }
+  }
+
+
+  componentWillMount(){
+    this.setState({
       name: this.props.member.name,
       role: this.props.member.role,
       email: this.props.member.email,
       phone: this.props.member.phone
-    }
-  };
+    });
+  }
 
   toggleEditing = () => {
     this.setState({
@@ -140,6 +150,15 @@ export class MemberInfo extends React.Component {
       </div>
     </div>
     )
+  }
+}
+
+MemberInfo.defaultProps = {
+  member : {
+    role: '',
+    email: '',
+    phone: '',
+    name: ''
   }
 }
 

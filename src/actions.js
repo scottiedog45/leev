@@ -60,10 +60,10 @@ export const fetchMembers = () => dispatch => {
   });
 };
 
+
+
 export const loadMembersIfNeeded = (state) => {
   return (dispatch, getState) => {
-    console.log('here');
-    console.log(getState().leev.members);
     if (getState().leev.members.length > 0) {
       return;
     }
@@ -126,7 +126,9 @@ export const postService = (values) => dispatch => {
     'Content-Type': 'application/json'
     },
     body: JSON.stringify(values)
-  }).then(res=>res.json())
+  }).then(res=>{
+    return res.json()
+  })
   .then(() => {
     dispatch(fetchServices())
   })
