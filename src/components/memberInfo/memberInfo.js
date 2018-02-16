@@ -44,6 +44,8 @@ export class MemberInfo extends React.Component {
     }
   }
 
+  //put in warn functions for validations
+
   componentDidMount(){
     this.setState({
       name: this.props.member.name,
@@ -120,7 +122,7 @@ export class MemberInfo extends React.Component {
             <p className='email'>{this.props.member.email}</p>
             <button onClick={()=>this.toggleEditing()}>Edit</button>
           </div> :
-          <form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(this.props.member.id, values)))}>
+          <form onSubmit={this.props.handleSubmit(values=>this.onSubmit(this.props.member.id, values))}>
           <label>Name</label>
           <Field
             label='name'

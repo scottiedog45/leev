@@ -8,37 +8,15 @@ export class ServiceInfo extends React.Component {
     super(props);
     this.state = {
       editing: false,
-      dateTimeValue: moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'),
+      dateTimeValue: this.props.service.dateTime,
       category: this.props.service.category
     }
-  }
-
-  //use toggle on these instead
-  //make all of this a redux form
-  //single editing button
-  //check which lines have been edited
-  //need to set
-  //change this to editing everything once editing is selected
-  componentWillMount() {
-    this.props.initialize({
-      dateTimeValue: moment(this.props.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'),
-      category: this.props.service.category
-    })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      dateTimeValue: moment(nextProps.service.dateTime, "dddd, MMMM Do YYYY, h:mm a").format('YYYY-MM-DDThh:mm'),
-      category: nextProps.service.category
-    })
   }
 
   toggleEditing = () => {
     this.setState({
       editing: !this.state.editing
     });
-    console.log('editing');
-    console.log(this.state.editing);
   }
 
   handleDateChange = (e) => {
@@ -60,7 +38,8 @@ export class ServiceInfo extends React.Component {
       editing: false
     });
     this.props.dispatch(fetchServices());
-  }
+    console.log(this.state)
+    }
 
   render() {
 
@@ -97,5 +76,5 @@ export class ServiceInfo extends React.Component {
 
 
 export default ServiceInfo = reduxForm({
-  form:'serviceInfo',
+  form:'serviceInfo'
 })(ServiceInfo);

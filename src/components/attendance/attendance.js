@@ -11,8 +11,6 @@ class Attendance extends React.Component {
   constructor() {
     super();
     this.state = {
-      editDateTime:false,
-      editCategory: false,
       value: '',
       suggestions: [],
       members: [],
@@ -23,9 +21,12 @@ class Attendance extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchServices());
+    this.props.dispatch(fetchMembers());
+    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (!this.props.members) {
     this.props.dispatch(fetchMembers());
     this.props.dispatch(fetchServices());
@@ -117,12 +118,12 @@ class Attendance extends React.Component {
   }
 
   getNameFromId = (id) => {
-    let member = this.props.members.find(obj=> obj.id === id);
-    if (!member) {
-      return
-    } else {
-    return member.name;
-    }
+      let member = this.props.members.find(obj=> obj.id === id);
+      if (!member) {
+        return
+      } else {
+      return member.name;
+      }
     }
 
 
@@ -136,7 +137,7 @@ class Attendance extends React.Component {
       })
     ));
     return members;
-  }
+    }
   }
 
   render() {
@@ -166,15 +167,17 @@ class Attendance extends React.Component {
         </div>
       ))
 
+      const initializedData = {
+        dateTime: this.props.service.dateTime,
+        category: this.props.service.category
+      }
+
 
     return (
       <div>
         <ServiceInfo
           service={this.props.service}
-          initialValues={{
-            category: {this.props.service.category},
-            dateTime: {this.props.service.dateTime}
-          }}/>
+          initialValues={initializedData}/>
         <button onClick={() => this.addAll()}>Add all members</button>
         <Autosuggest
           suggestions={suggestions}
@@ -201,7 +204,7 @@ Attendance.defaultProps = {
 const mapStateToProps = (state, ownProps) => ({
   service: state.leev.services.find(service =>
     service.id === (ownProps.match.params.serviceId)),
-  members: state.leev.members,
+  members: state.leev.members
 });
 
 Attendance = reduxForm({
