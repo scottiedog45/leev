@@ -247,7 +247,8 @@ export const patchInfoToMember = (id, values) => dispatch => {
   }).catch(err=> {
     console.error(err)
   }).then(() => {
-    dispatch(fetchServices())
+    dispatch(fetchServices());
+    dispatch(fetchMembers());
   })
 }
 

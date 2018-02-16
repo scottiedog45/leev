@@ -1,23 +1,27 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getSingleLeave} from '../../actions';
-import {API_BASE_URL} from '../../config';
-import moment from 'moment';
+import { BarLoader} from 'react-spinners'
 
 
 class Leaves extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      singleMemberLeave: []
+      singleMemberLeave: '',
+      loading: false
     }
   }
 
-  componentWillMount() {
-    console.log(this.props.member.id);
+  componentDidMount() {
     this.props.dispatch(getSingleLeave(this.props.member.id));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.member) {
+    this.props.dispatch(getSingleLeave(nextProps.member.id));
+  }
+}
 
   calculateLeave = () => {
     let leaveArray = [];
@@ -47,11 +51,12 @@ class Leaves extends React.Component {
   let leave = someLeave.map((service, index) => (
     <div key={index}>
       <p>{service.service}</p>
-      <p>{service.reason}</p>
+      <p>Reason: {service.reason}</p>
     </div>
   ));
 
     return (
+
       <div className='leaveList'>
         <div>
           {leave}

@@ -28,7 +28,7 @@ class Profile extends React.Component {
       <div>
         <MemberInfo member={this.props.member} />
         <div className='leaves'>
-          <h2>Leave:</h2>
+          <h2>Left services:</h2>
           <Leaves member={this.props.member} services={this.props.services} />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {patchLeave, deleteMemberFromService, patchToService,
-putOneToService} from '../../actions';
+import {fetchServices, patchLeave, deleteMemberFromService, patchToService,
+putOneToService, fetchMembers} from '../../actions';
 import {reduxForm} from 'redux-form';
 import Autosuggest from 'react-autosuggest';
 import {ServiceInfo} from '../serviceInfo/serviceInfo'
@@ -16,9 +16,23 @@ class Attendance extends React.Component {
       value: '',
       suggestions: [],
       members: [],
-      leave:""
+      leave:'',
+      service: {}
     };
   }
+
+  componentDidMount() {
+    this.props.dispatch(fetchServices());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.members) {
+    this.props.dispatch(fetchMembers());
+    this.props.dispatch(fetchServices());
+  }
+}
+
+//autosuggest things start below
 
   renderSuggestion(suggestion) {
     return (
@@ -104,10 +118,26 @@ class Attendance extends React.Component {
 
   getNameFromId = (id) => {
     let member = this.props.members.find(obj=> obj.id === id);
+    if (!member) {
+      return
+    } else {
     return member.name;
+    }
+    }
+
+
+  getMembersFromProps() {
+    if (this.props.service.members === undefined) {
+      return this.state.members
+    } else {
+    let members = this.props.service.members.slice().map(obj => (
+      Object.assign({}, obj, {
+        name: this.getNameFromId(obj._id)
+      })
+    ));
+    return members;
   }
-
-
+  }
 
   render() {
 
@@ -118,14 +148,8 @@ class Attendance extends React.Component {
           onChange: this.onChange
         };
 
-    const people =
-
-
-      this.props.service.members.slice().map(obj => (
-        Object.assign({}, obj, {
-          name: this.getNameFromId(obj._id)
-        })
-      )).sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0
+    const people = this.getMembersFromProps()
+      .sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0
       );})
         .map((member, index) => (
         <div key={index}>
@@ -141,11 +165,16 @@ class Attendance extends React.Component {
           <button onClick={() => this.deleteThisMember(member._id, this.props.service.id)}>Remove member from Service</button>
         </div>
       ))
-    
+
 
     return (
       <div>
-        <ServiceInfo service={this.props.service}/>
+        <ServiceInfo
+          service={this.props.service}
+          initialValues={{
+            category: {this.props.service.category},
+            dateTime: {this.props.service.dateTime}
+          }}/>
         <button onClick={() => this.addAll()}>Add all members</button>
         <Autosuggest
           suggestions={suggestions}
@@ -163,6 +192,11 @@ class Attendance extends React.Component {
   }
 }
 
+Attendance.defaultProps = {
+  service: {members: [
+    {name: ''}
+  ]},
+}
 
 const mapStateToProps = (state, ownProps) => ({
   service: state.leev.services.find(service =>

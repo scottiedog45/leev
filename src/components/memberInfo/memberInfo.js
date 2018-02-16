@@ -44,13 +44,21 @@ export class MemberInfo extends React.Component {
     }
   }
 
-
-  componentWillMount(){
+  componentDidMount(){
     this.setState({
       name: this.props.member.name,
       role: this.props.member.role,
       email: this.props.member.email,
       phone: this.props.member.phone
+    });
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      name: nextProps.member.name,
+      role: nextProps.member.role,
+      email: nextProps.member.email,
+      phone: nextProps.member.phone
     });
   }
 
@@ -61,33 +69,40 @@ export class MemberInfo extends React.Component {
   }
 
   onSubmit = (id, values) => {
+    console.log(id);
     console.log(values);
     this.props.dispatch(patchInfoToMember(id, values));
     this.toggleEditing();
+    this.setState({
+      name: values.name,
+      role: values.role,
+      email: values.email,
+      phone: values.phone
+    })
   }
 
   onEmailChange = (e) => {
     this.setState({
       email: e.target.value
-    })
+    });
   }
 
   onPhoneChange = (e) => {
     this.setState({
       phone: e.target.value
-    })
+    });
   }
 
   onRoleChange = (e) => {
     this.setState({
       role: e.target.value
-    })
+    });
   }
 
   onNameChange = (e) => {
     this.setState({
       name: e.target.value
-    })
+    });
   }
 
   render() {
@@ -107,7 +122,7 @@ export class MemberInfo extends React.Component {
           </div> :
           <form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(this.props.member.id, values)))}>
           <label>Name</label>
-          <input
+          <Field
             label='name'
             component='input'
             type='text'
@@ -117,7 +132,7 @@ export class MemberInfo extends React.Component {
             onChange={(e)=>this.onNameChange(e)}
             />
           <label>Role</label>
-            <input
+            <Field
               label ='role'
               component='input'
               type='text'
@@ -127,7 +142,7 @@ export class MemberInfo extends React.Component {
               onChange={(e)=>this.onRoleChange(e)}
             />
             <label>Phone</label>
-            <input
+            <Field
               component='input'
               type='text'
               name='phone'
@@ -136,7 +151,7 @@ export class MemberInfo extends React.Component {
               onChange={(e)=>this.onPhoneChange(e)}
             />
             <label>Email</label>
-            <input
+            <Field
               component='input'
               type='text'
               name='email'
