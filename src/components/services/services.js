@@ -2,10 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {CreateServiceForm} from '../createServiceForm/createServiceForm';
 import {deleteService} from '../../actions';
-import attendance from '../attendance/attendance';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
+
 
 class Services extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      editing: false
+    }
+  }
 
   onDelete(id) {
     window.confirm('do you want to delete this service?');
@@ -16,7 +23,7 @@ class Services extends React.Component {
 
       const services = this.props.services.map((service, index) => (
         <li key={index}>
-          <h3>Date and time: {service.dateTime}</h3>
+          <h3>Date and time: {moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</h3>
           <h3>Type: {service.category}</h3>
           <Link to = {`/services/${service.id}`}>
             <button id={service.id}>Details</button>

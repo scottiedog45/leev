@@ -1,6 +1,6 @@
 import React from 'react';
 // import {connect} from 'react-redux';
-import {Field, reduxForm, reset} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {postMember} from '../../actions';
 import './createMemberForm.css';
 

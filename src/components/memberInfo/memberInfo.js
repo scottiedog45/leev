@@ -1,5 +1,5 @@
 import React from 'react';
-import {Field, reduxForm, reset, change} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {patchInfoToMember} from '../../actions'
 
 const maxLength = max => value =>
@@ -23,10 +23,10 @@ const email = value =>
 //   value && /.+@aol\.com/.test(value)
 //     ? 'Really? You still use AOL for your email?'
 //     : undefined
-const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? 'Only alphanumeric characters'
-    : undefined
+// const alphaNumeric = value =>
+//   value && /[^a-zA-Z0-9 ]/i.test(value)
+//     ? 'Only alphanumeric characters'
+//     : undefined
 const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{9})$/i.test(value)
     ? 'Invalid phone number, must be 10 digits'

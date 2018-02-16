@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import CSSModules from 'react-css-modules';
+
 import styles from './sidebar.css'
 export function Sidebar(props) {
 

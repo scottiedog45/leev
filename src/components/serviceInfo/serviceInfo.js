@@ -1,10 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import {Field, reduxForm, reset} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {patchToService, fetchServices} from '../../actions'
 
 export class ServiceInfo extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       editing: false,
@@ -43,9 +44,11 @@ export class ServiceInfo extends React.Component {
 
   render() {
 
+    const formattedDate = moment(this.props.service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+
     return (
       <div>
-        <h2>{!this.state.editing && this.props.service.dateTime}</h2>
+        <h2>{!this.state.editing && formattedDate}</h2>
         <h3>{!this.state.editing && this.props.service.category}</h3>
         {!this.state.editing && <button onClick={()=>this.toggleEditing()}>Edit Service Info</button>}
         {this.state.editing &&

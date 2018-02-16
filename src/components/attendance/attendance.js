@@ -5,7 +5,7 @@ putOneToService, fetchMembers} from '../../actions';
 import {reduxForm} from 'redux-form';
 import Autosuggest from 'react-autosuggest';
 import {ServiceInfo} from '../serviceInfo/serviceInfo'
-import moment from 'moment';
+
 
 class Attendance extends React.Component {
   constructor() {

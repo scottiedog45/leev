@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Leaves from '../leaves/leaves';
-import {loadMembersIfNeeded, fetchMembers, fetchServices, getSingleLeave} from '../../actions';
+import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
 
 class Profile extends React.Component {

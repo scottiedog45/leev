@@ -83,12 +83,14 @@ export const fetchServices = () => dispatch => {
       }
       return res.json();
     })
-    .then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime}).map(
-      (obj) => (
-        Object.assign({}, obj, {
-          dateTime: moment(obj.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
-        }
-    ))))
+    .then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime})
+    // .map(
+    //   (obj) => (
+    //     Object.assign({}, obj, {
+    //       dateTime: moment(obj.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+    //     }
+    // )))
+  )
     .then(services => {
       dispatch(fetchServicesSuccess(services));
     }).catch(err => {

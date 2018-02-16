@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getSingleLeave} from '../../actions';
-import { BarLoader} from 'react-spinners'
+
 
 
 class Leaves extends React.Component {
