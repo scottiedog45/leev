@@ -99,6 +99,7 @@ export const fetchServices = () => dispatch => {
 };
 
 export const getSingleLeave = (memberId) => dispatch => {
+  console.log(memberId);
   fetch(API_BASE_URL + '/members/'+ memberId + '/leave', {
     method: 'GET',
     datatype: 'json'
@@ -236,6 +237,7 @@ export const postMember = (values) => dispatch => {
 }
 
 export const patchInfoToMember = (id, values) => dispatch => {
+  console.log('patching?');
   fetch(API_BASE_URL + '/members/' + id, {
     method: 'PATCH',
     headers: {

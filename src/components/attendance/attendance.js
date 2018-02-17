@@ -19,7 +19,7 @@ class Attendance extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(fetchServices());
     this.props.dispatch(fetchMembers());
     console.log(this.props);
@@ -125,7 +125,6 @@ class Attendance extends React.Component {
       return member.name;
       }
     }
-
 
   getMembersFromProps() {
     if (this.props.service.members === undefined) {

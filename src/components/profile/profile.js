@@ -1,20 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Leaves from '../leaves/leaves';
-import {fetchMembers, fetchServices} from '../../actions';
+import {fetchMembers, fetchServices, getSingleLeave} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
 
 class Profile extends React.Component {
 
   componentWillMount() {
-    if(!this.props.member) {
       console.log('whoops');
       this.props.dispatch(fetchMembers());
       this.props.dispatch(fetchServices());
       // this.props.dispatch(getSingleLeave(this.props.member.id));
-    }
   }
 
+  componentWillReceiveProps(nextProps){
+    if (!this.props.member) {
+      console.log('uhm');
+      this.props.dispatch(fetchMembers());
+      this.props.dispatch(fetchServices());
+    }
+  }
   //make fetchMember()
 
   // fetchMember(id) {
@@ -26,7 +31,7 @@ class Profile extends React.Component {
 
     return (
       <div>
-        <MemberInfo member={this.props.member} />
+        {this.props.member && <MemberInfo member={this.props.member} />}
         <div className='leaves'>
           <h2>Left services:</h2>
           <Leaves member={this.props.member} services={this.props.services} />

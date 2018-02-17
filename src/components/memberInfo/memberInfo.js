@@ -4,29 +4,19 @@ import {patchInfoToMember} from '../../actions'
 
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
+
 const maxLength15 = maxLength(15)
+
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
+
 export const minLength2 = minLength(2)
-// const number = value =>
-//   value && isNaN(Number(value)) ? 'Must be a number' : undefined
-// const minValue = min => value =>
-//   value && value < min ? `Must be at least ${min}` : undefined
-// const minValue18 = minValue(18)
+
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
     : undefined
-// const tooOld = value =>
-//   value && value > 65 ? 'You might be too old for this' : undefined
-// const aol = value =>
-//   value && /.+@aol\.com/.test(value)
-//     ? 'Really? You still use AOL for your email?'
-//     : undefined
-// const alphaNumeric = value =>
-//   value && /[^a-zA-Z0-9 ]/i.test(value)
-//     ? 'Only alphanumeric characters'
-//     : undefined
+
 const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{9})$/i.test(value)
     ? 'Invalid phone number, must be 10 digits'
@@ -37,34 +27,31 @@ export class MemberInfo extends React.Component {
     super(props);
     this.state = {
       editing: false,
-      name: '',
-      role: '',
-      email: '',
-      phone: ''
+      name: this.props.member.name,
+      role: this.props.member.role,
+      email: this.props.member.email,
+      phone: this.props.member.phone,
+      id: this.props.member.id
     }
   }
 
   //put in warn functions for validations
-
-  componentDidMount(){
-    this.setState({
-      name: this.props.member.name,
-      role: this.props.member.role,
-      email: this.props.member.email,
-      phone: this.props.member.phone
-    });
+  handleInitialize() {
+    const initData = {
+      'name': this.props.member.name,
+      'role': this.props.member.role,
+      'email': this.props.member.email,
+      'phone': this.props.member.phone
+    };
+    this.props.initialize(initData);
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      name: nextProps.member.name,
-      role: nextProps.member.role,
-      email: nextProps.member.email,
-      phone: nextProps.member.phone
-    });
-  }
+  componentWillMount(){
+    this.handleInitialize();
+}
 
   toggleEditing = () => {
+    console.log(this.props.member.id);
     this.setState({
       editing: !this.state.editing
     });
@@ -72,15 +59,8 @@ export class MemberInfo extends React.Component {
 
   onSubmit = (id, values) => {
     console.log(id);
-    console.log(values);
     this.props.dispatch(patchInfoToMember(id, values));
     this.toggleEditing();
-    this.setState({
-      name: values.name,
-      role: values.role,
-      email: values.email,
-      phone: values.phone
-    })
   }
 
   onEmailChange = (e) => {
@@ -122,7 +102,7 @@ export class MemberInfo extends React.Component {
             <p className='email'>{this.props.member.email}</p>
             <button onClick={()=>this.toggleEditing()}>Edit</button>
           </div> :
-          <form onSubmit={this.props.handleSubmit(values=>this.onSubmit(this.props.member.id, values))}>
+          <form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
           <label>Name</label>
           <Field
             label='name'

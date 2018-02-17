@@ -5,7 +5,6 @@ import {patchToService, fetchServices} from '../../actions'
 
 export class ServiceInfo extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       editing: false,
@@ -33,13 +32,11 @@ export class ServiceInfo extends React.Component {
   }
 
   onSubmit = (values) => {
-    console.log(values);
     this.props.dispatch(patchToService(values, this.props.service.id))
     this.setState({
       editing: false
     });
     this.props.dispatch(fetchServices());
-    console.log(this.state)
     }
 
   render() {
