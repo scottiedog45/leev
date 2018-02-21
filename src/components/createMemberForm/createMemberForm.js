@@ -1,6 +1,6 @@
 import React from 'react';
 // import {connect} from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, reset} from 'redux-form';
 import {postMember} from '../../actions';
 import './createMemberForm.css';
 
@@ -39,7 +39,7 @@ export class CreateMemberForm extends React.Component {
 
   onSubmit(values) {
     this.props.dispatch(postMember(values));
-    this.props.reset();
+    this.props.dispatch(reset('member'));
   }
 
   renderField ({

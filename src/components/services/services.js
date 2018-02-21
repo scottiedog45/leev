@@ -4,15 +4,57 @@ import {CreateServiceForm} from '../createServiceForm/createServiceForm';
 import {deleteService} from '../../actions';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
+import styled from 'styled-components';
 
+const Service = styled.li`
+  margin-top: 35px;
+`;
+
+const ServiceList = styled.ul`
+  list-style: none;
+  padding-left: 0px;
+`;
+
+const Date = styled.h3`
+  margin-bottom: 0px;
+`;
+
+const Category = styled.h4`
+  margin-top: 9px;
+  margin-bottom: 9px;
+  font-size: 13px;
+`;
+
+const Details = styled.button`
+  width: 70px;
+  background-color: #CCC5B9;
+  color: #403d39;
+  border: none;
+  height: 25px;
+`;
+
+const Delete =styled.button`
+  width: 70px;
+  background-color: #CCC5B9;
+  color: #403d39;
+  border: none;
+  height: 25px;
+  margin-left: 20px;
+`;
+
+const Form = styled.div`
+  position: absolute;
+`;
+
+const Page = styled.div`
+
+`;
+
+const ListSection = styled.section`
+margin-left: 200px;
+`;
 
 class Services extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      editing: false
-    }
-  }
 
   onDelete(id) {
     window.confirm('do you want to delete this service?');
@@ -22,27 +64,28 @@ class Services extends React.Component {
     render() {
 
       const services = this.props.services.map((service, index) => (
-        <li key={index}>
-          <h3>Date and time: {moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</h3>
-          <h3>Type: {service.category}</h3>
+        <Service key={index}>
+          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</Date>
+          <Category>{service.category}</Category>
           <Link to = {`/services/${service.id}`}>
-            <button id={service.id}>Details</button>
+            <Details id={service.id}>Details</Details>
           </Link>
-          <button id={service.id} onClick={
-            (e)=> this.onDelete(e.target.id)}>Delete</button>
-        </li>
-
+          <Delete id={service.id} onClick={
+            (e)=> this.onDelete(e.target.id)}>Delete</Delete>
+        </Service>
       ))
 
     return (
-      <div>
-        <CreateServiceForm />
-        <section className='serviceList'>
-          <ul className='listOfServices'>
+      <Page>
+        <Form>
+          <CreateServiceForm />
+        </Form>
+        <ListSection>
+          <ServiceList>
             {services}
-          </ul>
-        </section>
-      </div>
+          </ServiceList>
+        </ListSection>
+      </Page>
     );
   }
 }

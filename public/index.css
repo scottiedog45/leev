@@ -1,0 +1,10 @@
+body {
+  background-color: #fffcf2;
+  color: #252422;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+button {
+  cursor: pointer;
+}

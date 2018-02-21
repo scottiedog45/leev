@@ -2,21 +2,108 @@ import React from 'react';
 import moment from 'moment';
 import {Field, reduxForm} from 'redux-form';
 import {patchToService, fetchServices} from '../../actions'
+import styled from 'styled-components';
+import FontAwesome from 'react-fontawesome';
+
+
+const DateTime = styled.h2`
+  margin-bottom: 3px;
+  margin-top: 0px;
+  display: inline-block;
+`;
+const Category = styled.h3`
+  margin-top: 0px;
+  margin-bottom: 6px;
+  font-size:15px;
+`;
+
+// const EditButton = styled.button`
+//   width: 120px;
+//   background-color: #CCC5B9;
+//   color: #403d39;
+//   border: none;
+//   height: 30px;
+// `;
+
+const EditButtonWrapper = styled.button`
+  background-color: inherit;
+  border: none;
+
+`;
+
+const Button = styled.button`
+  width: 140px;
+  background-color: #CCC5B9;
+  color: #403d39;
+  border: none;
+  height: 40px;
+`;
+
+// const ServiceInfoForm = styled.form
+
+const EditButton = styled.span`
+  background-color: inherit;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 20px;
+`;
+
+const SubmitButton = styled.button`
+  color: black;
+  border: none;
+  background-color: none;
+  font-size: 30px;
+  cursor: pointer;
+  transform: translateY(10%);
+`;
+
+const SubmitButtonWrapper = styled.span``;
+
+const CancelButton = styled.button`
+  color: black;
+  border: none;
+  background-color: none;
+  font-size: 30px;
+  cursor: pointer;
+  transform: translateY(10%);
+`;
+
+const CancelButtonWrapper = styled.span``;
 
 export class ServiceInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editing: false,
-      dateTimeValue: this.props.service.dateTime,
+      dateTimeValue: '2018-06-01T08:30',
       category: this.props.service.category
     }
   }
+
+  //moment(this.props.service.dateTime).format("yyyy-MM-ddThh:mm")
+
+  handleInitialize() {
+    const initData = {
+      'category': this.props.service.category,
+      'dateTime': moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")
+    };
+    console.log('2018-06-01T08:30');
+    console.log(moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm"));
+    this.props.initialize(initData);
+  }
+
+
+
+  componentWillMount(){
+    this.handleInitialize();
+}
 
   toggleEditing = () => {
     this.setState({
       editing: !this.state.editing
     });
+    console.log(moment(this.props.service.dateTime).format("YYYY-MM-ddThh:mm"));
   }
 
   handleDateChange = (e) => {
@@ -45,18 +132,20 @@ export class ServiceInfo extends React.Component {
 
     return (
       <div>
-        <h2>{!this.state.editing && formattedDate}</h2>
-        <h3>{!this.state.editing && this.props.service.category}</h3>
-        {!this.state.editing && <button onClick={()=>this.toggleEditing()}>Edit Service Info</button>}
+      {this.props.service &&
+      <div>
+        <DateTime>{!this.state.editing && formattedDate}</DateTime>
+        {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
+        <Category>{!this.state.editing && this.props.service.category}</Category>
         {this.state.editing &&
           <form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(values)))}>
-            <label>Edit the DateTime </label>
+            <label>Date and Time: </label>
             <Field
               name ='dateTime'
               component = 'input'
               type='datetime-local'
               onChange={(e)=>this.handleDateChange(e)}
-              value={this.state.dateTimeValue}
+              value={moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")}
             />
             <label>Edit category</label>
             <Field
@@ -64,12 +153,14 @@ export class ServiceInfo extends React.Component {
               component = 'input'
               type='text'
               onChange={(e)=>this.handleCategoryChange(e)}
-              value={this.state.category}
+              value={this.props.service.category}
               />
-            <button type='submit'>Submit</button>
-            <button onClick={()=>this.toggleEditing()} type='button'>Cancel</button>
+            <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>
+            <CancelButton onClick={()=>this.toggleEditing()} type='button'><CancelButtonWrapper><FontAwesome name='times'/></CancelButtonWrapper></CancelButton>
           </form>}
       </div>
+    }
+    </div>
     )
   }
 }

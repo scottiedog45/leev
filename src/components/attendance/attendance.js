@@ -5,6 +5,85 @@ putOneToService, fetchMembers} from '../../actions';
 import {reduxForm} from 'redux-form';
 import Autosuggest from 'react-autosuggest';
 import {ServiceInfo} from '../serviceInfo/serviceInfo'
+import styled from 'styled-components'
+import FontAwesome from 'react-fontawesome';
+
+const StyledTable = styled.table`
+  width: 100%;
+  margin-top: 15px;
+  margin-left: 20px;
+`;
+
+const AddAllWrapper = styled.span`
+  background-color: none;
+
+`;
+
+const AddMemberWrapper = styled.span`
+
+`;
+
+
+
+const AddAllButton = styled.button`
+  color: #EB5E28;
+  background-color: #FFFCF2;
+  border: none;
+  cursor: pointer;
+  font-size: 50px;
+  &:hover {
+    color: #eb5e2896;
+  }
+`;
+
+const Name = styled.p`
+  display: inline-block;
+`;
+
+const Service = styled.div`
+  margin: 20px;
+  margin-top: 0px;
+`;
+
+const MemberAdder = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+  padding-bottom: 0px;
+`;
+
+const MemberAdderContainer = styled.div`
+
+`;
+
+const Button = styled.button`
+  width: 140px;
+  background-color: #CCC5B9;
+  color: #403d39;
+  border: none;
+  height: 40px;
+`;
+
+const AddMemberButton = styled.button`
+border: none;
+background-color: #FFFCF2;
+cursor: pointer;
+margin-left: -110px;
+font-size: 50px;
+color: #EB5E28;
+&:hover {
+  color: #eb5e2896;
+}
+`;
+
+const EditingArea = styled.div`
+  padding: 20px;
+  padding-top:10px;
+`;
+
+const Suggestion = styled.span`
+  position: absolute;
+`;
 
 
 class Attendance extends React.Component {
@@ -37,7 +116,7 @@ class Attendance extends React.Component {
 
   renderSuggestion(suggestion) {
     return (
-      <span>{suggestion.name}</span>
+      <Suggestion>{suggestion.name}</Suggestion>
     );
   }
 
@@ -143,7 +222,7 @@ class Attendance extends React.Component {
 
     const { value, suggestions } = this.state;
         const inputProps = {
-          placeholder: "Type 'c'",
+          placeholder: "Search members",
           value,
           onChange: this.onChange
         };
@@ -152,8 +231,11 @@ class Attendance extends React.Component {
       .sort(function(a,b) {return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0
       );})
         .map((member, index) => (
-        <div key={index}>
-          <p>{member.name}</p>
+        <tr key={index}>
+        <td>
+          <Name>{member.name}</Name>
+        </td>
+        <td>
           <select
             value={member.leave}
             onChange={(event) => this.markLeave(event, member._id, this.props.service.id)}>
@@ -162,22 +244,23 @@ class Attendance extends React.Component {
             <option value='left'>left</option>
             <option value='medical'>medical</option>
           </select>
+        </td>
+        <td>
           <button onClick={() => this.deleteThisMember(member._id, this.props.service.id)}>Remove member from Service</button>
-        </div>
+        </td>
+        </tr>
       ))
 
-      const initializedData = {
-        dateTime: this.props.service.dateTime,
-        category: this.props.service.category
-      }
 
 
     return (
-      <div>
+      <Service>
+        <EditingArea>
         <ServiceInfo
           service={this.props.service}
-          initialValues={initializedData}/>
-        <button onClick={() => this.addAll()}>Add all members</button>
+          />
+        <MemberAdder>
+        <AddAllButton onClick={() => this.addAll()}><AddAllWrapper><FontAwesome name='users'/></AddAllWrapper></AddAllButton>
         <Autosuggest
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -185,11 +268,20 @@ class Attendance extends React.Component {
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           inputProps={inputProps} />
-        <button onClick={() => this.addMember()}>Add this member</button>
-        <div>
+        <AddMemberButton onClick={() => this.addMember()}><AddMemberWrapper><FontAwesome name='user'/></AddMemberWrapper></AddMemberButton>
+        </MemberAdder>
+        </EditingArea>
+        <StyledTable>
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>Mark Leave</th>
+            <th>Delete</th>
+          </tr>
           {people}
-        </div>
-      </div>
+          </tbody>
+        </StyledTable>
+      </Service>
     );
   }
 }

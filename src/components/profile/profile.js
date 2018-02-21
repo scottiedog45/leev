@@ -1,8 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Leaves from '../leaves/leaves';
-import {fetchMembers, fetchServices, getSingleLeave} from '../../actions';
+import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
+import styled from 'styled-components'
+
+const ProfileContainer = styled.div`
+  margin: 20px;
+`;
+
 
 class Profile extends React.Component {
 
@@ -20,6 +26,7 @@ class Profile extends React.Component {
       this.props.dispatch(fetchServices());
     }
   }
+
   //make fetchMember()
 
   // fetchMember(id) {
@@ -30,13 +37,13 @@ class Profile extends React.Component {
   render() {
 
     return (
-      <div>
+      <ProfileContainer>
         {this.props.member && <MemberInfo member={this.props.member} />}
         <div className='leaves'>
           <h2>Left services:</h2>
           <Leaves member={this.props.member} services={this.props.services} />
         </div>
-      </div>
+      </ProfileContainer>
     );
   }
 }

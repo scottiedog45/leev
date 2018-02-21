@@ -8,8 +8,21 @@ import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
 import {fetchServices, fetchMembers} from '../../actions';
-import './app.css';
+import styled from 'styled-components';
 
+
+const StyledLink = styled(Link)`
+  color: #E85E28;
+  font-size: 30px;
+  position: absolute;
+  text-decoration: none;
+
+`;
+
+const Header = styled.header`
+
+
+`;
 
 class App extends React.Component {
 
@@ -22,10 +35,7 @@ class App extends React.Component {
 
     return (
         <Router>
-          <div className='app'>
-            <header>
-              <h1><Link to ="/">Leev</Link></h1>
-            </header>
+          <div>
             <Sidebar />
             <main>
               <Route exact path="/" component={Home} />

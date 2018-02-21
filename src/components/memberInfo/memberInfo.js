@@ -1,6 +1,11 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {patchInfoToMember} from '../../actions'
+import styled from 'styled-components';
+
+const Role = styled.p`
+
+`;
 
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
@@ -97,9 +102,9 @@ export class MemberInfo extends React.Component {
             <div className='name'>
               <h3>{this.props.member.name}</h3>
             </div>
-            <p className='role'>{this.props.member.role}</p>
-            <p className='phone'>{this.props.member.phone}</p>
-            <p className='email'>{this.props.member.email}</p>
+            <Role>Role: {this.props.member.role}</Role>
+            <p className='phone'> Phone: {this.props.member.phone}</p>
+            <p className='email'> Email: {this.props.member.email}</p>
             <button onClick={()=>this.toggleEditing()}>Edit</button>
           </div> :
           <form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
