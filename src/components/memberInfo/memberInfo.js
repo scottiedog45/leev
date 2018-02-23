@@ -3,7 +3,22 @@ import {Field, reduxForm} from 'redux-form';
 import {patchInfoToMember} from '../../actions'
 import styled from 'styled-components';
 
+
+
 const Role = styled.p`
+margin-bottom: 0px;
+`;
+
+const Phone = styled.p`
+margin-top: 0px;
+margin-bottom: 0px;
+`;
+
+const Email = styled.p`
+margin-top: 0px;
+`;
+
+const EditButton = styled.button`
 
 `;
 
@@ -26,6 +41,12 @@ const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{9})$/i.test(value)
     ? 'Invalid phone number, must be 10 digits'
     : undefined
+
+const SubmitButton = styled.button`
+  display: block;
+`;
+
+
 
 export class MemberInfo extends React.Component {
   constructor(props) {
@@ -100,17 +121,16 @@ export class MemberInfo extends React.Component {
         {!this.state.editing ?
           <div>
             <div className='name'>
-              <h3>{this.props.member.name}</h3>
+              <h3>{this.props.member.name}'s Profile</h3>
             </div>
             <Role>Role: {this.props.member.role}</Role>
-            <p className='phone'> Phone: {this.props.member.phone}</p>
-            <p className='email'> Email: {this.props.member.email}</p>
+            <Phone> Phone: {this.props.member.phone}</Phone>
+            <Email> Email: {this.props.member.email}</Email>
             <button onClick={()=>this.toggleEditing()}>Edit</button>
           </div> :
           <form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
-          <label>Name</label>
+          <legend>Name</legend>
           <Field
-            label='name'
             component='input'
             type='text'
             name='name'
@@ -118,9 +138,8 @@ export class MemberInfo extends React.Component {
             valideate={[maxLength15, minLength2]}
             onChange={(e)=>this.onNameChange(e)}
             />
-          <label>Role</label>
+          <legend>Role</legend>
             <Field
-              label ='role'
               component='input'
               type='text'
               name='role'
@@ -128,7 +147,7 @@ export class MemberInfo extends React.Component {
               validate={[maxLength15, minLength2]}
               onChange={(e)=>this.onRoleChange(e)}
             />
-            <label>Phone</label>
+            <legend>Phone</legend>
             <Field
               component='input'
               type='text'
@@ -137,7 +156,7 @@ export class MemberInfo extends React.Component {
               validate={[phoneNumber]}
               onChange={(e)=>this.onPhoneChange(e)}
             />
-            <label>Email</label>
+            <legend>Email</legend>
             <Field
               component='input'
               type='text'
@@ -146,7 +165,7 @@ export class MemberInfo extends React.Component {
               validate={[email]}
               onChange={(e)=>this.onEmailChange(e)}
             />
-            <button type='submit'>Submit</button>
+            <SubmitButton type='submit'>Submit</SubmitButton>
           </form>
         }
       </div>

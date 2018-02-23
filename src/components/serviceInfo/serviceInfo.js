@@ -5,6 +5,9 @@ import {patchToService, fetchServices} from '../../actions'
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 
+const Service = styled.div`
+  padding: 0px;
+`;
 
 const DateTime = styled.h2`
   margin-bottom: 3px;
@@ -28,6 +31,7 @@ const Category = styled.h3`
 const EditButtonWrapper = styled.button`
   background-color: inherit;
   border: none;
+  padding-left: 0px;
 
 `;
 
@@ -46,13 +50,12 @@ const EditButton = styled.span`
   border: none;
   font-size: 30px;
   cursor: pointer;
-  margin-left: 20px;
 `;
 
 const SubmitButton = styled.button`
   color: black;
   border: none;
-  background-color: none;
+  background-color: #FFFCF2;
   font-size: 30px;
   cursor: pointer;
   transform: translateY(10%);
@@ -63,7 +66,7 @@ const SubmitButtonWrapper = styled.span``;
 const CancelButton = styled.button`
   color: black;
   border: none;
-  background-color: none;
+  background-color: #FFFCF2;
   font-size: 30px;
   cursor: pointer;
   transform: translateY(10%);
@@ -131,15 +134,15 @@ export class ServiceInfo extends React.Component {
     const formattedDate = moment(this.props.service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
 
     return (
-      <div>
+      <Service>
       {this.props.service &&
       <div>
         <DateTime>{!this.state.editing && formattedDate}</DateTime>
-        {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
         <Category>{!this.state.editing && this.props.service.category}</Category>
+        {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
         {this.state.editing &&
           <form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(values)))}>
-            <label>Date and Time: </label>
+            <legend>Date and Time: </legend>
             <Field
               name ='dateTime'
               component = 'input'
@@ -147,7 +150,7 @@ export class ServiceInfo extends React.Component {
               onChange={(e)=>this.handleDateChange(e)}
               value={moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")}
             />
-            <label>Edit category</label>
+            <legend>Edit category</legend>
             <Field
               name='category'
               component = 'input'
@@ -160,7 +163,7 @@ export class ServiceInfo extends React.Component {
           </form>}
       </div>
     }
-    </div>
+    </Service>
     )
   }
 }

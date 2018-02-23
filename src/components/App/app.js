@@ -8,7 +8,9 @@ import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
 import {fetchServices, fetchMembers} from '../../actions';
+import Login from '../login/login'
 import styled from 'styled-components';
+
 
 
 const StyledLink = styled(Link)`
@@ -39,6 +41,7 @@ class App extends React.Component {
             <Sidebar />
             <main>
               <Route exact path="/" component={Home} />
+              <Route exact path='/login' component = {Login} />
               <Route exact path='/members' component={MemberList}/>
               <Route exact path='/members/:memberId' component={Profile}/>
               <Route exact path='/services' component={Services}/>

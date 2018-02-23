@@ -11,7 +11,6 @@ import FontAwesome from 'react-fontawesome';
 const StyledTable = styled.table`
   width: 100%;
   margin-top: 15px;
-  margin-left: 20px;
 `;
 
 const AddAllWrapper = styled.span`
@@ -23,17 +22,23 @@ const AddMemberWrapper = styled.span`
 
 `;
 
+const Th = styled.th`
+  text-align: left;
+`;
 
 
 const AddAllButton = styled.button`
-  color: #EB5E28;
-  background-color: #FFFCF2;
-  border: none;
-  cursor: pointer;
-  font-size: 50px;
-  &:hover {
-    color: #eb5e2896;
-  }
+margin-top: 50px;
+display: block;
+height: 40px;
+width: 128px;
+border-radius: 7px;
+background-color: #EB5E28;
+border: none;
+color: #FFFCF2;
+font-size: 15px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+cursor: pointer;
 `;
 
 const Name = styled.p`
@@ -42,18 +47,13 @@ const Name = styled.p`
 
 const Service = styled.div`
   margin: 20px;
-  margin-top: 0px;
+  margin-top: 40px;
+  margin-left: 200px;
 `;
 
-const MemberAdder = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 20px;
-  padding-bottom: 0px;
-`;
-
-const MemberAdderContainer = styled.div`
-
+const AdderWrapper = styled.div`
+  position: absolute;
+  margin-left: -160px;
 `;
 
 const Button = styled.button`
@@ -65,24 +65,31 @@ const Button = styled.button`
 `;
 
 const AddMemberButton = styled.button`
+margin-bottom: 20px;
+margin-top: 40px;
+display: block;
+height: 40px;
+width: 128px;
+border-radius: 7px;
+background-color: #EB5E28;
 border: none;
-background-color: #FFFCF2;
+color: #FFFCF2;
+font-size: 15px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 cursor: pointer;
-margin-left: -110px;
-font-size: 50px;
-color: #EB5E28;
-&:hover {
-  color: #eb5e2896;
-}
 `;
 
 const EditingArea = styled.div`
-  padding: 20px;
-  padding-top:10px;
+
 `;
 
 const Suggestion = styled.span`
   position: absolute;
+`;
+
+const Explanation = styled.p`
+  width: 150px;
+  font-size: 10px;
 `;
 
 
@@ -256,27 +263,33 @@ class Attendance extends React.Component {
     return (
       <Service>
         <EditingArea>
+        <AdderWrapper>
+        <AddAllButton onClick={() => this.addAll()}><AddAllWrapper>Add All Members</AddAllWrapper></AddAllButton>
+<AddMemberButton onClick={() => this.addMember()}><AddMemberWrapper>Add Single User</AddMemberWrapper></AddMemberButton>
+<Explanation>*Type first letter of the member's name, and click their name below. Then use the button to add them</Explanation>
+<Autosuggest
+  suggestions={suggestions}
+  onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+  onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+  getSuggestionValue={this.getSuggestionValue}
+  renderSuggestion={this.renderSuggestion}
+  inputProps={inputProps} />
+</AdderWrapper>
+
+
         <ServiceInfo
           service={this.props.service}
           />
-        <MemberAdder>
-        <AddAllButton onClick={() => this.addAll()}><AddAllWrapper><FontAwesome name='users'/></AddAllWrapper></AddAllButton>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={this.getSuggestionValue}
-          renderSuggestion={this.renderSuggestion}
-          inputProps={inputProps} />
-        <AddMemberButton onClick={() => this.addMember()}><AddMemberWrapper><FontAwesome name='user'/></AddMemberWrapper></AddMemberButton>
-        </MemberAdder>
+
+
+
         </EditingArea>
         <StyledTable>
         <tbody>
           <tr>
-            <th>Name</th>
-            <th>Mark Leave</th>
-            <th>Delete</th>
+            <Th>Name</Th>
+            <Th>Mark Leave</Th>
+            <Th>Delete</Th>
           </tr>
           {people}
           </tbody>

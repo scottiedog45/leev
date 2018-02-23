@@ -5,9 +5,9 @@ import './createServiceForm.css';
 import styled from 'styled-components'
 
 const CreateButton = styled.button`
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
+  height: 40px;
+  width: 128px;
+  border-radius: 7px;
   position: fixed;
   margin-left: 20px;
   background-color: #EB5E28;
@@ -15,12 +15,19 @@ const CreateButton = styled.button`
   color: #FFFCF2;
   font-size: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  cursoer: pointer;
-  
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  width: 200px;
+`;
+
+const FormTitle = styled.p`
+  font-size: 20px;
 `;
 
 const FormWrapper = styled.div`
-  background-color: #eb5e28;
+  background-color: lightgrey;
   overflow: auto;
   color: #FFFCF2;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -52,8 +59,8 @@ const ButtonWrapper = styled.div`
 
 const Button = styled.button`
   width: 70px;
-  background-color: #CCC5B9;
-  color: #403d39;
+  background-color: #EB5E28;
+  color: black;
   border: none;
   height: 25px;
 
@@ -61,6 +68,7 @@ const Button = styled.button`
 
 const Legend = styled.legend`
   margin-bottom: 4px;
+  font-size: 17px;
 `;
 
 
@@ -94,10 +102,10 @@ export class CreateServiceForm extends React.Component {
       <Form className ='serviceForm' onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>
-      <p>Create New Service:</p>
+      <FormTitle>Create Service</FormTitle>
       <CategoryWrapper>
         <Legend>Type</Legend>
-        <Field name='category' id='category' type = 'text' component='input'/>
+        <Input name='category' id='category' type = 'text' component='input'/>
       </CategoryWrapper>
       <DateTimeWrapper>
         <Legend>Date Time</Legend>

@@ -77,6 +77,7 @@ class Services extends React.Component {
 
     return (
       <Page>
+      <p>Services</p>
         <Form>
           <CreateServiceForm />
         </Form>

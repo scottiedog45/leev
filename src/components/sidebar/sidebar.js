@@ -54,21 +54,23 @@ export function Sidebar(props) {
   const StyledRightLinks = styled(Link)`
   text-decoration: none;
   float: right;
-  font-size: 20px;
-  color: #eb5e28;
-  margin-top: 30px;
-  margin-left: 30px;
+  font-size: 15px;
+  color: #FFFCF2;
+  margin-top: 22px;
+  margin-left: 20px;
   margin-right: 10px;
+  margin-bottom: 15px;
   &:hover {
     color: #eb5e2896;
   }
   `;
 
   const StyledLink = styled(Link)`
+    margin-top: 11px;
      text-decoration: none;
      float: left;
-     font-size: 50px;
-     color: #eb5e28;
+     font-size: 35px;
+     color: #FFFCF2;
      display: inline-block;
      margin-left: 15px;
      &:hover {
@@ -78,11 +80,33 @@ export function Sidebar(props) {
 
   const CalendarWrapper = styled.span`
     margin-left: 15px;
+    margin-right: 20px;
+  `;
+
+  const SignUpLoginButton = styled.button`
+    font-size: 15px;
+    width: 127px;
+    height: 31px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eb5e28;
+    color: white;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    float: right;
+    display: inline-block;
   `;
 
   return (
       <NavBar>
         <List>
+        <li>
+        <Link to ={`/login`}>
+          <SignUpLoginButton>Login</SignUpLoginButton>
+        </Link>
+        </li>
           <li>
             <StyledLink to ={`/`}>
             <CalendarWrapper><FontAwesome name='calendar' /></CalendarWrapper>
@@ -90,15 +114,16 @@ export function Sidebar(props) {
             </StyledLink>
           </li>
           <li>
-            <StyledRightLinks to = {`/services`}>
-              Services
-            </StyledRightLinks>
-          </li>
-          <li>
           <StyledRightLinks to ={`/members`}>
-            Profiles
+            Members
           </StyledRightLinks>
           </li>
+          <li>
+          <StyledRightLinks to = {`/services`}>
+            Services
+          </StyledRightLinks>
+          </li>
+
         </List>
       </NavBar>
   )

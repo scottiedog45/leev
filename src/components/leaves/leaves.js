@@ -1,8 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getSingleLeave} from '../../actions';
+import styled from 'styled-components';
 
+const Table = styled.table`
+  text-align: left;
+`;
 
+const Header = styled.th`
+  width: 300px;
+`;
 
 class Leaves extends React.Component {
   constructor(props) {
@@ -49,18 +56,24 @@ class Leaves extends React.Component {
   let someLeave = this.calculateLeave();
 
   let leave = someLeave.map((service, index) => (
-    <div key={index}>
-      <p>{service.service}</p>
-      <p>Reason: {service.reason}</p>
-    </div>
+    <tr key={index}>
+      <td>{service.service}</td>
+      <td>{service.reason}</td>
+    </tr>
   ));
 
     return (
 
       <div className='leaveList'>
-        <div>
+        <Table>
+        <tbody>
+        <tr>
+          <Header>Service</Header>
+          <th>Reason</th>
+        </tr>
           {leave}
-        </div>
+          </tbody>
+          </Table>
       </div>
     );
   }

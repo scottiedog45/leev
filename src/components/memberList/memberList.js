@@ -6,17 +6,17 @@ import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 const CreateMemberButton = styled.button`
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  position: fixed;
-  margin-left: 20px;
-  background-color: #EB5E28;
-  border: none;
-  color: #FFFCF2;
-  font-size: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
+height: 40px;
+width: 128px;
+border-radius: 7px;
+position: fixed;
+margin-left: 20px;
+background-color: #EB5E28;
+border: none;
+color: #FFFCF2;
+font-size: 15px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+cursor: pointer;
 `;
 
 const Name = styled.h3`
@@ -60,22 +60,13 @@ const DeleteButton = Button.extend`
 
 class MemberList extends React.Component{
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      showForm: false}
-  }
-
   componentDidMount() {
     if (!this.props.members) {
       this.props.dispatch(loadMembersIfNeeded());
     }
   }
 
-  toggle() {
-    this.setState({showForm: !this.state.showForm});
-    console.log(this.state.showForm);
-  }
+
 
   onDelete(id) {
     let r =window.confirm('Do you want to delete this member?');
@@ -102,13 +93,9 @@ class MemberList extends React.Component{
     return (
 
       <ListContainer>
-      {!this.state.showForm ? <CreateMemberButton
-        onClick={(e)=> this.toggle()}
-      >Create New Member</CreateMemberButton> :
-      <div>
+      <p>Members</p>
       <CreateMemberForm />
-      <button onClick={(e)=>this.toggle()}>Cancel</button>
-      </div>}
+      
         <PeopleSection>
         <PeopleList>
           {members}
