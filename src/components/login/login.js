@@ -66,7 +66,7 @@ onPasswordChange(e) {
   this.setState({
     password: e.target.value
   });
-  
+
 }
 
 onSubmit() {
@@ -75,7 +75,8 @@ onSubmit() {
     password: this.state.password
   };
   console.log(values);
-  this.props.dispatch(userLogin(values))
+  this.props.dispatch(userLogin(values));
+  
 }
 
 signUp() {
