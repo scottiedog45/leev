@@ -1,4 +1,6 @@
-
+* {
+  font-family: 'Merriweather', serif;
+}
 
 body {
   background-color: #fffcf2;
@@ -6,6 +8,7 @@ body {
   box-sizing: border-box;
   min-height: 100%;
   margin: 0px;
+
 }
 
 button {

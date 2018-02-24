@@ -4,7 +4,8 @@ const initialState = {
   members:[],
   services:[],
   error: null,
-  singleMemberLeave: []
+  singleMemberLeave: [],
+  token: ''
 };
 
 //don't need optimistic UI for everything
@@ -26,16 +27,19 @@ export function leevReducer(state=initialState, action) {
     return Object.assign({}, state, {
       members: action.members
     });
-  }
-  else if(action.type === actions.FETCH_SERVICES_SUCCESS){
+  } else if (action.type === actions.FETCH_SERVICES_SUCCESS) {
     // sessionStorage.setItem('services': action.services);
     return Object.assign({}, state, {
       services: action.services
     });
-  }
-  else if (action.type === actions.FETCH_SINGLE_LEAVE_SUCCESS) {
+  } else if (action.type === actions.FETCH_SINGLE_LEAVE_SUCCESS) {
     return Object.assign({}, state, {
       singleMemberLeave: action.services
+    });
+  } else if (action.type === actions.SET_TOKEN) {
+    console.log(action.token);
+    return Object.assign({}, state, {
+      token: action.token
     });
   }
     return state;

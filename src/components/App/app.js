@@ -30,7 +30,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(fetchServices());
-    this.props.dispatch(fetchMembers());
+    // this.props.dispatch(fetchMembers(this.props.token));
   }
 
   render() {
@@ -54,7 +54,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  state: state.leev
+  state: state.leev,
+  token: state.leev.token
 });
 
 export default connect(mapStateToProps)(App);

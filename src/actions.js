@@ -38,12 +38,66 @@ export const fetchSingleLeaveSuccess = services => ({
   services
 })
 
-export const fetchMembers = () => dispatch => {
-  // dispatch(fetchMembersRequest()); load spinner
+export const SET_TOKEN = 'SET_TOKEN';
+export const setToken = token => ({
+  type: SET_TOKEN,
+  token
+})
+
+export const createNewUser = (creds) => dispatch => {
+  console.log('creating new user');
+  fetch(API_BASE_URL + '/users/signup', {
+    method: 'POST',
+    datatype: 'json',
+    body: JSON.stringify(creds)
+  })
+  .then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText)
+    }
+    return res.json();
+  })
+  .then(response=> {
+    console.log(response);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+export const userLogin = (data) =>  dispatch => {
+  console.log('logging in....');
+  fetch(API_BASE_URL + '/users/login', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(data => {
+    if (!data.ok) {
+      return Promise.reject(data.statusText);
+    } return data.json();
+  })
+  .then(payload => {
+      console.log(payload);
+      dispatch(setToken(payload.token))
+    })
+  .catch(err => {
+    console.log(err)
+  });
+}
+
+export const fetchMembers = (token) => dispatch => {
+  let someToken = token;// dispatch(fetchMembersRequest()); load spinner
   console.log('fetchingggggg');
   fetch(API_BASE_URL + '/members', {
     method: 'GET',
-    datatype: 'json'
+    datatype: 'json',
+    headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${someToken}`
+    }
   })
     .then(res => {
       if (!res.ok) {
@@ -62,13 +116,13 @@ export const fetchMembers = () => dispatch => {
 
 
 
-export const loadMembersIfNeeded = (state) => {
+export const loadMembersIfNeeded = (token) => {
   return (dispatch, getState) => {
     if (getState().leev.members.length > 0) {
       return;
     }
     console.log('fetching again');
-    dispatch(fetchMembers());
+    dispatch(fetchMembers(token));
   }
 }
 

@@ -135,7 +135,7 @@ export class MemberInfo extends React.Component {
             type='text'
             name='name'
             value={this.state.name}
-            valideate={[maxLength15, minLength2]}
+            validate={[maxLength15, minLength2]}
             onChange={(e)=>this.onNameChange(e)}
             />
           <legend>Role</legend>

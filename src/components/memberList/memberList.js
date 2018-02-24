@@ -5,20 +5,6 @@ import {CreateMemberForm} from '../createMemberForm/createMemberForm';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-const CreateMemberButton = styled.button`
-height: 40px;
-width: 128px;
-border-radius: 7px;
-position: fixed;
-margin-left: 20px;
-background-color: #EB5E28;
-border: none;
-color: #FFFCF2;
-font-size: 15px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-cursor: pointer;
-`;
-
 const Name = styled.h3`
   margin-bottom: 0px;
 `;
@@ -61,8 +47,10 @@ const DeleteButton = Button.extend`
 class MemberList extends React.Component{
 
   componentDidMount() {
-    if (!this.props.members) {
-      this.props.dispatch(loadMembersIfNeeded());
+    console.log('something');
+    if (this.props.members !== []) {
+      console.log('haaaalp');
+      this.props.dispatch(loadMembersIfNeeded(this.props.token));
     }
   }
 
@@ -95,7 +83,6 @@ class MemberList extends React.Component{
       <ListContainer>
       <p>Members</p>
       <CreateMemberForm />
-      
         <PeopleSection>
         <PeopleList>
           {members}
@@ -107,7 +94,8 @@ class MemberList extends React.Component{
 }
 
 const mapStateToProps = state => ({
-  members: state.leev.members
+  members: state.leev.members,
+  token: state.leev.token
 });
 
 export default connect(mapStateToProps)(MemberList);

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {getSingleLeave} from '../../actions';
 import styled from 'styled-components';
 
+
 const Table = styled.table`
   text-align: left;
 `;
