@@ -4,11 +4,11 @@ import Leaves from '../leaves/leaves';
 import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
 import styled from 'styled-components'
+import FontAwesome from 'react-fontawesome';
 
 const ProfileContainer = styled.div`
   margin: 20px;
 `;
-
 
 class Profile extends React.Component {
 

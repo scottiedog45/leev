@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 import Home from '../home/home';
 import MemberList from '../memberList/memberList';
 import Services from '../services/services';
-import {Sidebar} from '../sidebar/sidebar';
+import Sidebar from '../sidebar/sidebar';
 import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
@@ -11,6 +11,7 @@ import {fetchServices, fetchMembers} from '../../actions';
 import Login from '../login/login'
 import styled from 'styled-components';
 import store from 'store';
+import HowTo from '../howTo/howTo';
 
 
 
@@ -33,7 +34,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: false
+      loggedIn: true
     }
   }
 
@@ -48,6 +49,10 @@ class App extends React.Component {
       this.setState({
         loggedIn: true
       });
+    } else {
+      this.setState({
+        loggedIn: true
+      });
     }
   }
 
@@ -56,7 +61,7 @@ class App extends React.Component {
     return (
         <Router>
           <div>
-            <Sidebar />
+            <Sidebar loggedIn={this.state.loggedIn}/>
             <main>
               <Route exact path="/" component={Home} />
               <Route exact path='/login' component = {Login} />
@@ -70,6 +75,7 @@ class App extends React.Component {
               <Route exact path='/members/:memberId' component={Profile}/>
               <Route exact path='/services' component={Services}/>
               <Route exact path='/services/:serviceId' component={Attendance} />
+              <Route exact path='/howTo' component={HowTo} />
             </main>
           </div>
         </Router>

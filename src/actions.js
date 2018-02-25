@@ -44,6 +44,11 @@ export const setToken = token => ({
   token
 })
 
+export const LOG_OUT = 'LOG_OUT';
+export const logOut = () => ({
+  type: LOG_OUT
+})
+
 export const createNewUser = (creds) => dispatch => {
   console.log('creating new user');
   fetch(API_BASE_URL + '/users/signup', {
@@ -86,6 +91,11 @@ export const userLogin = (data) =>  dispatch => {
   .catch(err => {
     console.log(err)
   });
+}
+
+export const userLogout = () => dispatch => {
+  console.log('logging out...');
+  dispatch(logOut());
 }
 
 export const fetchMembers = (token) => dispatch => {

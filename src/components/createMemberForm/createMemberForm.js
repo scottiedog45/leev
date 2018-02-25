@@ -39,7 +39,7 @@ const phoneNumber = value =>
     ? 'Invalid phone number, must be 10 digits'
     : undefined
 
-    const CreateMemberButton = styled.button`
+  const CreateMemberButton = styled.button`
     height: 40px;
     width: 128px;
     border-radius: 7px;
@@ -51,10 +51,50 @@ const phoneNumber = value =>
     font-size: 15px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
+    margin-top: 32px;
     `;
 
 const FormContainer = styled.div`
-  position: absolute;
+background-color: lightgrey;
+overflow: auto;
+color: #FFFCF2;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
+
+const Legend = styled.legend`
+  margin-bottom: 4px;
+  font-size: 17px;
+`;
+
+const Form = styled.form`
+  width: 400px;
+`;
+
+const FormTitle = styled.p`
+  font-size: 20px;
+  text-align: center;
+`;
+
+const InputWrapper = styled.div`
+margin: 10px;
+margin-top: 20px;
+text-align: left;
+`;
+
+const ButtonWrapper = styled.div`
+  margin: 10px;
+  text-align: center;
+  justify-content: space-around;
+  display: flex;
+  margin-top:20px;
+`;
+
+const Button = styled.button`
+  width: 70px;
+  background-color: #EB5E28;
+  color: black;
+  border: none;
+  height: 25px;
 `;
 
 export class CreateMemberForm extends React.Component {
@@ -98,44 +138,55 @@ export class CreateMemberForm extends React.Component {
 
     return (
       <FormContainer>
-      {this.state.showForm && <form onSubmit={this.props.handleSubmit((values) =>
-              this.onSubmit(values)
-            )}>
-            <Field
-              name="name"
-              type="text"
-              component={this.renderField}
-              label="Full Name"
-              validate={[required, maxLength15, minLength2]}
-              warn={alphaNumeric}
-            />
+        {this.state.showForm ? (
+          <Form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>
+          <FormTitle>Create Member</FormTitle>
+            <InputWrapper>
+              <Legend>Full Name</Legend>
+              <Field
+                name="name"
+                type="text"
+                component={this.renderField}
+                validate={[required, maxLength15, minLength2]}
+                warn={alphaNumeric}
+              />
+            </InputWrapper>
+            <InputWrapper>
+            <Legend>Role</Legend>
             <Field
               name="role"
               type="text"
               component={this.renderField}
-              label="Role"
               validate={[required, maxLength15, minLength2]}
               warn={alphaNumeric}
             />
+            </InputWrapper>
+            <InputWrapper>
+            <Legend>Email</Legend>
             <Field
               name="email"
               type="email"
               component={this.renderField}
-              label="Email"
               validate={[email, required]}
             />
+            </InputWrapper>
+            <InputWrapper>
+            <Legend>Phone Number</Legend>
             <Field
               name="phone"
               type="number"
               component={this.renderField}
-              label="Phone number"
               validate={[required, phoneNumber]}
             />
-        <button type='submit'>Submit</button>
-        <button onClick={(e)=>this.toggle()}>Cancel</button>
-      </form>}
-      {!this.state.showForm &&
-      <CreateMemberButton onClick={(e)=>this.toggle()}>Create Member</CreateMemberButton>}
+            </InputWrapper>
+          <ButtonWrapper>
+            <Button type='submit'>Submit</Button>
+            <Button onClick={(e)=>this.toggle()}>Cancel</Button>
+          </ButtonWrapper>
+        </Form>
+      ) : (
+      <CreateMemberButton onClick={(e)=>this.toggle()}>Create Member</CreateMemberButton>
+      )}
       </FormContainer>
     );
   }

@@ -15,20 +15,14 @@ const StyledTable = styled.table`
 
 const AddAllWrapper = styled.span`
   background-color: none;
-
-`;
-
-const AddMemberWrapper = styled.span`
-
 `;
 
 const Th = styled.th`
   text-align: left;
 `;
 
-
 const AddAllButton = styled.button`
-margin-top: 50px;
+margin-top: 7px;
 display: block;
 height: 40px;
 width: 128px;
@@ -79,8 +73,9 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 cursor: pointer;
 `;
 
-const EditingArea = styled.div`
+const AddMemberWrapper = styled.div``;
 
+const EditingArea = styled.div`
 `;
 
 const Suggestion = styled.span`

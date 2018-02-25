@@ -66,15 +66,17 @@ class Leaves extends React.Component {
     return (
 
       <div className='leaveList'>
+      {(leave.length > 0) ? (
         <Table>
-        <tbody>
-        <tr>
-          <Header>Service</Header>
-          <th>Reason</th>
-        </tr>
-          {leave}
-          </tbody>
+          <tbody>
+            <tr>
+              <Header>Service</Header>
+              <th>Reason</th>
+            </tr>
+              {leave}
+            </tbody>
           </Table>
+      ) : <p>Hmmm.... no leave yet...</p>}
       </div>
     );
   }

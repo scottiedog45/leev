@@ -20,6 +20,10 @@ const Category = styled.h3`
   font-size:15px;
 `;
 
+const Form = styled.form`
+  text-align: center;
+`;
+
 // const EditButton = styled.button`
 //   width: 120px;
 //   background-color: #CCC5B9;
@@ -73,6 +77,15 @@ const CancelButton = styled.button`
 `;
 
 const CancelButtonWrapper = styled.span``;
+
+const ButtonWrapper = styled.div`
+  display: block;
+`;
+
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+export const minLength2 = minLength(2)
+const required = value => (value ? undefined : 'Required')
 
 export class ServiceInfo extends React.Component {
   constructor(props) {
@@ -141,7 +154,7 @@ export class ServiceInfo extends React.Component {
         <Category>{!this.state.editing && this.props.service.category}</Category>
         {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
         {this.state.editing &&
-          <form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(values)))}>
+          <Form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(values)))}>
             <legend>Date and Time: </legend>
             <Field
               name ='dateTime'
@@ -149,6 +162,7 @@ export class ServiceInfo extends React.Component {
               type='datetime-local'
               onChange={(e)=>this.handleDateChange(e)}
               value={moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")}
+              validate={[required]}
             />
             <legend>Edit category</legend>
             <Field
@@ -157,10 +171,13 @@ export class ServiceInfo extends React.Component {
               type='text'
               onChange={(e)=>this.handleCategoryChange(e)}
               value={this.props.service.category}
+              validate={[required, minLength2]}
               />
+            <ButtonWrapper>
             <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>
             <CancelButton onClick={()=>this.toggleEditing()} type='button'><CancelButtonWrapper><FontAwesome name='times'/></CancelButtonWrapper></CancelButton>
-          </form>}
+            </ButtonWrapper>
+          </Form>}
       </div>
     }
     </Service>

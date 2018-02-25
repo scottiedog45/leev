@@ -41,6 +41,11 @@ export function leevReducer(state=initialState, action) {
     return Object.assign({}, state, {
       token: action.token
     });
+  } else if (action.type === actions.LOG_OUT) {
+    console.log('reducer logging out');
+    return Object.assign({}, state, {
+      token: ''
+    });
   }
     return state;
   }

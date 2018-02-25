@@ -7,6 +7,9 @@ import styled from 'styled-components';
 
 const Name = styled.h3`
   margin-bottom: 0px;
+  &:first-child {
+    margin-top: 0px;
+  }
 `;
 
 const Role = styled.h4`
@@ -26,10 +29,14 @@ const PeopleSection = styled.section`
 const PeopleList = styled.ul`
 list-style: none;
 padding-left: 0px;
+margin-top: -2px;
 `;
 
 const Person = styled.li`
   margin-top: 35px;
+  &:first-child {
+    margin-top: 0px;
+  }
 `;
 
 const Button = styled.button`
@@ -44,6 +51,30 @@ const DeleteButton = Button.extend`
   margin-left: 20px;
 `;
 
+const Title = styled.p`
+  font-size: 90px;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-bottom: 0px;
+`;
+
+const TdName = styled.td`
+  width: 200px;
+`;
+
+const TdRole = styled.td`
+  width: 150px
+`;
+
+const Tr = styled.tr`
+  height: 75px;
+`;
+
+const Form = styled.div`
+  position: absolute;
+  width: 400px;
+`;
+
 class MemberList extends React.Component{
 
   componentDidMount() {
@@ -53,8 +84,6 @@ class MemberList extends React.Component{
       this.props.dispatch(loadMembersIfNeeded(this.props.token));
     }
   }
-
-
 
   onDelete(id) {
     let r =window.confirm('Do you want to delete this member?');
@@ -67,26 +96,34 @@ class MemberList extends React.Component{
 
   render () {
     const members = this.props.members.map((member, index) => (
-      <Person key={index}>
+      <Tr key={index}>
+      <TdName>
         <Name>{member.name}</Name>
+      </TdName>
+      <TdRole>
         <Role>{member.role}</Role>
+      </TdRole>
+      <td>
         <Link to = {`/members/${member.id}`}>
           <Button id={member.id}>Details</Button>
         </Link>
         <DeleteButton id={member.id} onClick={
           (e)=> this.onDelete(e.target.id)}>Delete</DeleteButton>
-      </Person>
+      </td>
+      </Tr>
     ))
 
     return (
 
       <ListContainer>
-      <p>Members</p>
-      <CreateMemberForm />
+        <Title>Members</Title>
+        <Form>
+          <CreateMemberForm />
+        </Form>
         <PeopleSection>
-        <PeopleList>
-          {members}
-        </PeopleList>
+          <table>
+            {members}
+          </table>
         </PeopleSection>
       </ListContainer>
     )

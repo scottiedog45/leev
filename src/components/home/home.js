@@ -54,6 +54,10 @@ const Panel2 = Panel.extend`
   justify-content: space-around;
 `;
 
+const PanelInstructions = Panel.extend`
+
+`;
+
 const Panel3 = Panel.extend`
   background-color: #E5E5E5;
   height: 400px;
@@ -123,6 +127,10 @@ const Quote = styled.h3`
   padding-top: 130px;
 `;
 
+const Subtitle = styled.h3`
+  margin-top: 4px;
+`;
+
 
 export default function Home(props) {
   return (
@@ -130,7 +138,7 @@ export default function Home(props) {
       <Panellist>
         <Panel1>
           <Title>Welcome to Leev.</Title>
-          <h3>Leev provides a stupendous solution for tracking your group's leave.</h3>
+          <Subtitle>Leev provides a stupendous solution for tracking your group's leave.</Subtitle>
           <DemoButton>DEMO</DemoButton>
         </Panel1>
         <Panel2>
@@ -143,6 +151,9 @@ export default function Home(props) {
             <MoneyIcon src={money} alt={'money'} />
             </IconContainer>
         </Panel2>
+        <PanelInstructions>
+
+        </PanelInstructions>
         <Panel3>
         <Quote>"Do not strive to make your presence noticed, just your absence felt"</Quote>
         <h5>-From someone important</h5>

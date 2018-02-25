@@ -8,18 +8,37 @@ import styled from 'styled-components';
 
 const Service = styled.li`
   margin-top: 35px;
+  &:first-child{
+    margin-top: 0px;
+  }
+`;
+
+const Td = styled.td`
+  width: 166px;
+`;
+
+
+const Tr = styled.tr`
+  height: 75px;
 `;
 
 const ServiceList = styled.ul`
   list-style: none;
   padding-left: 0px;
+  margin-top: 0px;
 `;
 
 const Date = styled.h3`
   margin-bottom: 0px;
+  display: inline;
+  &:first-child {
+    margin-top: 0px;
+  }
 `;
 
 const Category = styled.h4`
+  display: inline;
+  margin-left: 20px;
   margin-top: 9px;
   margin-bottom: 9px;
   font-size: 13px;
@@ -44,14 +63,21 @@ const Delete =styled.button`
 
 const Form = styled.div`
   position: absolute;
+  width: 400px;
 `;
 
 const Page = styled.div`
-
 `;
 
 const ListSection = styled.section`
 margin-left: 200px;
+`;
+
+const Title = styled.p`
+  font-size: 90px;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-bottom: 0px;
 `;
 
 class Services extends React.Component {
@@ -64,26 +90,34 @@ class Services extends React.Component {
     render() {
 
       const services = this.props.services.map((service, index) => (
-        <Service key={index}>
+        <Tr key={index}>
+        <td>
           <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</Date>
+        </td>
+        <Td>
           <Category>{service.category}</Category>
+        </Td>
+        <td>
           <Link to = {`/services/${service.id}`}>
             <Details id={service.id}>Details</Details>
           </Link>
           <Delete id={service.id} onClick={
             (e)=> this.onDelete(e.target.id)}>Delete</Delete>
-        </Service>
+        </td>
+        </Tr>
       ))
 
     return (
       <Page>
-      <p>Services</p>
+      <Title>Services</Title>
         <Form>
           <CreateServiceForm />
         </Form>
         <ListSection>
           <ServiceList>
+          <table>
             {services}
+          </table>
           </ServiceList>
         </ListSection>
       </Page>

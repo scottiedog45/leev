@@ -1,14 +1,14 @@
 import React from 'react';
 import {Field, reduxForm, reset} from 'redux-form';
 import {postService} from '../../actions';
-import './createServiceForm.css';
+
 import styled from 'styled-components'
 
 const CreateButton = styled.button`
   height: 40px;
   width: 128px;
   border-radius: 7px;
-  position: fixed;
+  position: absolute;
   margin-left: 20px;
   background-color: #EB5E28;
   border: none;
@@ -16,6 +16,7 @@ const CreateButton = styled.button`
   font-size: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
+  margin-top: 32px;
 `;
 
 const Input = styled.input`
@@ -24,6 +25,7 @@ const Input = styled.input`
 
 const FormTitle = styled.p`
   font-size: 20px;
+  text-align: center;
 `;
 
 const FormWrapper = styled.div`
@@ -71,6 +73,11 @@ const Legend = styled.legend`
   font-size: 17px;
 `;
 
+//validation
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+const minLength2 = minLength(2)
+const required = value => (value ? undefined : 'Required')
 
 export class CreateServiceForm extends React.Component {
   constructor(props) {
@@ -81,6 +88,7 @@ export class CreateServiceForm extends React.Component {
   }
 
   onSubmit(values) {
+    console.log(values);
     this.toggleEditing();
     this.props.dispatch(postService(values));
     this.props.dispatch(reset('service'))
@@ -91,6 +99,25 @@ export class CreateServiceForm extends React.Component {
       editing: !this.state.editing
     })
   }
+
+  renderField ({
+   input,
+   label,
+   type,
+   meta: { touched, error, warning }
+   }) {
+     return  (
+       <div>
+         <label>{label}</label>
+         <div>
+           <input {...input} placeholder={label} type={type} />
+           {touched &&
+             ((error && <span>{error}</span>) ||
+               (warning && <span>{warning}</span>))}
+         </div>
+       </div>
+     )
+   }
 
   render() {
 
@@ -105,11 +132,23 @@ export class CreateServiceForm extends React.Component {
       <FormTitle>Create Service</FormTitle>
       <CategoryWrapper>
         <Legend>Type</Legend>
-        <Input name='category' id='category' type = 'text' component='input'/>
+        <Field
+          name='category'
+          id='category'
+          type = 'text'
+          component={this.renderField}
+          validate={[minLength2, required]}
+          warn={required}/>
       </CategoryWrapper>
       <DateTimeWrapper>
         <Legend>Date Time</Legend>
-        <Field name='dateTime' id='dateTime' type='datetime-local' component='input'/>
+        <Field
+          name='dateTime'
+          id='dateTime'
+          type='datetime-local'
+          component={this.renderField}
+          validate={[required]}
+          warn={required}/>
       </DateTimeWrapper>
       <ButtonWrapper>
         <Button type='submit'>Submit</Button>
@@ -120,7 +159,6 @@ export class CreateServiceForm extends React.Component {
   </FormWrapper>);
   }
 }
-
 
 export default CreateServiceForm = reduxForm({
   form:'service'

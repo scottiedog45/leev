@@ -6,18 +6,17 @@ import {userLogin, createNewUser} from '../../actions'
 
 const Loginbox = styled.div`
   width: 400px;
-  height: 300px;
-  background-color: grey;
+  background-color: #ccc9c7;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
   border-radius: 7px;
-  padding:
+  padding: 20px;
 `;
 
 const LoginTitle = styled.h2`
   margin: 20px;
-  padding-top: 20px;
+
 `;
 
 const InputWrapper = styled.div`
@@ -44,6 +43,13 @@ const Input = styled.input`
 
 const FormWrapper = styled.div`
   display: block;
+`;
+
+const DemoWrapper = styled.div`
+  &:children {
+    margin-top: none;
+    margin-bottom: none;
+  }
 `;
 
 class Login extends React.Component {
@@ -76,7 +82,8 @@ onSubmit() {
   };
   console.log(values);
   this.props.dispatch(userLogin(values));
-  
+  this.props.history.push('/services');
+
 }
 
 signUp() {
@@ -111,6 +118,11 @@ signUp() {
               onChange={(e)=>this.onPasswordChange(e)}
             />
             </InputWrapper>
+            <DemoWrapper>
+            <p>Demo account:</p>
+            <p>email: something3@something.com</p>
+            <p>password: test2 </p>
+            </DemoWrapper>
             <ButtonWrapper>
               <button type='submit'>Login</button>
               <button type='button'>Sign Up</button>

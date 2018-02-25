@@ -2,8 +2,27 @@ import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import {patchInfoToMember} from '../../actions'
 import styled from 'styled-components';
+import FontAwesome from 'react-fontawesome';
 
 
+const EditButton = styled.span`
+  background-color: inherit;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
+const EditButtonWrapper = styled.button`
+  background-color: inherit;
+  border: none;
+  padding-left: 0px;
+
+`;
+
+const TitleName = styled.h3`
+  font-size: 37px;
+  margin-bottom: 0px;
+`;
 
 const Role = styled.p`
 margin-bottom: 0px;
@@ -18,9 +37,7 @@ const Email = styled.p`
 margin-top: 0px;
 `;
 
-const EditButton = styled.button`
 
-`;
 
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
@@ -42,10 +59,38 @@ const phoneNumber = value =>
     ? 'Invalid phone number, must be 10 digits'
     : undefined
 
-const SubmitButton = styled.button`
-  display: block;
+
+
+const Form = styled.form`
+ text-align: center;
 `;
 
+
+const SubmitButton = styled.button`
+  color: black;
+  border: none;
+  background-color: #FFFCF2;
+  font-size: 30px;
+  cursor: pointer;
+  transform: translateY(10%);
+`;
+
+const SubmitButtonWrapper = styled.span``;
+
+const CancelButton = styled.button`
+  color: black;
+  border: none;
+  background-color: #FFFCF2;
+  font-size: 30px;
+  cursor: pointer;
+  transform: translateY(10%);
+`;
+
+const CancelButtonWrapper = styled.span``;
+
+const ButtonWrapper = styled.div`
+  display: block;
+`;
 
 
 export class MemberInfo extends React.Component {
@@ -121,14 +166,14 @@ export class MemberInfo extends React.Component {
         {!this.state.editing ?
           <div>
             <div className='name'>
-              <h3>{this.props.member.name}'s Profile</h3>
+              <TitleName>{this.props.member.name}'s Profile</TitleName>
             </div>
             <Role>Role: {this.props.member.role}</Role>
             <Phone> Phone: {this.props.member.phone}</Phone>
             <Email> Email: {this.props.member.email}</Email>
-            <button onClick={()=>this.toggleEditing()}>Edit</button>
+            {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
           </div> :
-          <form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
+          <Form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
           <legend>Name</legend>
           <Field
             component='input'
@@ -165,8 +210,11 @@ export class MemberInfo extends React.Component {
               validate={[email]}
               onChange={(e)=>this.onEmailChange(e)}
             />
-            <SubmitButton type='submit'>Submit</SubmitButton>
-          </form>
+            <ButtonWrapper>
+            <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>
+            <CancelButton onClick={()=>this.toggleEditing()} type='button'><CancelButtonWrapper><FontAwesome name='times'/></CancelButtonWrapper></CancelButton>
+            </ButtonWrapper>
+          </Form>
         }
       </div>
     </div>
