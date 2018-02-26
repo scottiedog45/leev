@@ -19,10 +19,6 @@ const CreateButton = styled.button`
   margin-top: 32px;
 `;
 
-const Input = styled.input`
-  width: 200px;
-`;
-
 const FormTitle = styled.p`
   font-size: 20px;
   text-align: center;
@@ -65,7 +61,6 @@ const Button = styled.button`
   color: black;
   border: none;
   height: 25px;
-
 `;
 
 const Legend = styled.legend`
@@ -88,7 +83,6 @@ export class CreateServiceForm extends React.Component {
   }
 
   onSubmit(values) {
-    console.log(values);
     this.toggleEditing();
     this.props.dispatch(postService(values));
     this.props.dispatch(reset('service'))

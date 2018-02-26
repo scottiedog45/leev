@@ -6,7 +6,6 @@ import {reduxForm} from 'redux-form';
 import Autosuggest from 'react-autosuggest';
 import {ServiceInfo} from '../serviceInfo/serviceInfo'
 import styled from 'styled-components'
-import FontAwesome from 'react-fontawesome';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -50,27 +49,19 @@ const AdderWrapper = styled.div`
   margin-left: -160px;
 `;
 
-const Button = styled.button`
-  width: 140px;
-  background-color: #CCC5B9;
-  color: #403d39;
-  border: none;
-  height: 40px;
-`;
-
 const AddMemberButton = styled.button`
-margin-bottom: 20px;
-margin-top: 40px;
-display: block;
-height: 40px;
-width: 128px;
-border-radius: 7px;
-background-color: #EB5E28;
-border: none;
-color: #FFFCF2;
-font-size: 15px;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  display: block;
+  height: 40px;
+  width: 128px;
+  border-radius: 7px;
+  background-color: #EB5E28;
+  border: none;
+  color: #FFFCF2;
+  font-size: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
 `;
 
 const AddMemberWrapper = styled.div``;
@@ -103,11 +94,9 @@ class Attendance extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchServices());
     this.props.dispatch(fetchMembers());
-    console.log(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (!this.props.members) {
     this.props.dispatch(fetchMembers());
     this.props.dispatch(fetchServices());
@@ -253,8 +242,6 @@ class Attendance extends React.Component {
         </tr>
       ))
 
-
-
     return (
       <Service>
         <EditingArea>
@@ -270,14 +257,9 @@ class Attendance extends React.Component {
   renderSuggestion={this.renderSuggestion}
   inputProps={inputProps} />
 </AdderWrapper>
-
-
         <ServiceInfo
           service={this.props.service}
           />
-
-
-
         </EditingArea>
         <StyledTable>
         <tbody>
@@ -303,7 +285,8 @@ Attendance.defaultProps = {
 const mapStateToProps = (state, ownProps) => ({
   service: state.leev.services.find(service =>
     service.id === (ownProps.match.params.serviceId)),
-  members: state.leev.members
+  members: state.leev.members,
+  token: state.leev.token
 });
 
 Attendance = reduxForm({

@@ -1,5 +1,6 @@
 import {API_BASE_URL} from './config';
 import moment from 'moment';
+import store from 'store';
 
 
 export const FETCH_MEMBERS_SUCCESS = 'FETCH_MEMBERS_SUCCESS';
@@ -47,13 +48,29 @@ export const setToken = token => ({
 export const LOG_OUT = 'LOG_OUT';
 export const logOut = () => ({
   type: LOG_OUT
-})
+});
+
+const setSessionToken = (token) => {
+  store.set('sessionToken', {token});
+}
+
+const getToken = () => {
+  let token = store.get('sessionToken');
+  return token;
+}
+
+const removeToken = () => {
+  store.remove('sessionToken')
+}
+
 
 export const createNewUser = (creds) => dispatch => {
-  console.log('creating new user');
   fetch(API_BASE_URL + '/users/signup', {
     method: 'POST',
     datatype: 'json',
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: JSON.stringify(creds)
   })
   .then(res => {
@@ -65,13 +82,16 @@ export const createNewUser = (creds) => dispatch => {
   .then(response=> {
     console.log(response);
   })
+  .then(()=>{
+    dispatch(userLogin(creds))
+  }
+  )
   .catch(err => {
     console.log(err);
   });
 }
 
 export const userLogin = (data) =>  dispatch => {
-  console.log('logging in....');
   fetch(API_BASE_URL + '/users/login', {
     method: 'POST',
     headers: {
@@ -85,28 +105,30 @@ export const userLogin = (data) =>  dispatch => {
     } return data.json();
   })
   .then(payload => {
-      console.log(payload);
-      dispatch(setToken(payload.token))
+      setSessionToken(payload.token);
     })
+  .then(()=> {
+    let token = getToken();
+    dispatch(setToken(token.token));
+  })
   .catch(err => {
     console.log(err)
   });
 }
 
 export const userLogout = () => dispatch => {
-  console.log('logging out...');
+  removeToken();
   dispatch(logOut());
 }
 
-export const fetchMembers = (token) => dispatch => {
-  let someToken = token;// dispatch(fetchMembersRequest()); load spinner
-  console.log('fetchingggggg');
+export const fetchMembers = () => dispatch => {
+  let someToken = getToken();
   fetch(API_BASE_URL + '/members', {
     method: 'GET',
     datatype: 'json',
     headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${someToken}`
+    'Authorization': `Bearer ${someToken.token}`
     }
   })
     .then(res => {
@@ -131,7 +153,6 @@ export const loadMembersIfNeeded = (token) => {
     if (getState().leev.members.length > 0) {
       return;
     }
-    console.log('fetching again');
     dispatch(fetchMembers(token));
   }
 }
@@ -163,7 +184,6 @@ export const fetchServices = () => dispatch => {
 };
 
 export const getSingleLeave = (memberId) => dispatch => {
-  console.log(memberId);
   fetch(API_BASE_URL + '/members/'+ memberId + '/leave', {
     method: 'GET',
     datatype: 'json'
@@ -224,7 +244,6 @@ export const putOneToService = (memberId, serviceId) => dispatch => {
 }
 
 export const patchToService = (data, id) => dispatch => {
-  console.log(JSON.stringify(data));
   fetch(API_BASE_URL + '/services/' + id, {
     method: 'PATCH',
     body: JSON.stringify(data),
@@ -301,7 +320,6 @@ export const postMember = (values) => dispatch => {
 }
 
 export const patchInfoToMember = (id, values) => dispatch => {
-  console.log('patching?');
   fetch(API_BASE_URL + '/members/' + id, {
     method: 'PATCH',
     headers: {

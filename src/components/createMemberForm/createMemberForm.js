@@ -2,7 +2,6 @@ import React from 'react';
 // import {connect} from 'react-redux';
 import {Field, reduxForm, reset} from 'redux-form';
 import {postMember} from '../../actions';
-import './createMemberForm.css';
 import styled from 'styled-components';
 
 
@@ -107,7 +106,6 @@ export class CreateMemberForm extends React.Component {
 
   toggle() {
     this.setState({showForm: !this.state.showForm});
-    console.log(this.state.showForm);
   }
 
   onSubmit(values) {

@@ -1,22 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import styles from './sidebar.css'
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome';
 import {userLogout} from '../../actions';
-
-
-const Button = styled.button`
-  width: 200px;
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottm: 10px;
-  height: 40px;
-  background-color: #252422;;
-  color: #eb5e28;
-  font-size: 20px;
-`;
 
 const List = styled.ul`
   list-style: none;
@@ -27,28 +14,6 @@ const List = styled.ul`
 const NavBar = styled.nav`
   background-color: #252422;
   overflow: hidden;
-`;
-
-const RightButton = styled.button`
-  float: right;
-  width: 200px;
-  display: inline-block;
-
-  height: 40px;
-  background-color: #252422;;
-  color: #eb5e28;
-  font-size: 20px;
-`;
-
-const LeftButton = styled.button `
-  float: left;
-  width: 200px;
-  display: inline-block;
-
-  height: 40px;
-  background-color: #252422;;
-  color: #eb5e28;
-  font-size: 20px;
 `;
 
 const StyledRightLinks = styled(Link)`
@@ -100,21 +65,18 @@ const SignUpLoginButton = styled.button`
 `;
 
 const LogOutButton = SignUpLoginButton.extend`
-
 `;
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: true
-      // this.props.loggedIn
+      loggedIn: this.props.loggedIn
     }
   }
 
 logout(e) {
   this.props.dispatch(userLogout());
-
 }
 
 render() {
@@ -140,24 +102,23 @@ render() {
             </li>
             <li>
               <StyledRightLinks to ={'/howTo'}>
-                How to use leev
+                How to use Leev
               </StyledRightLinks>
             </li>
             {this.props.loggedIn &&
               <div>
-              <li>
-              <StyledRightLinks to ={`/members`}>
-                Members
-              </StyledRightLinks>
-              </li>
-              <li>
-              <StyledRightLinks to = {`/services`}>
-                Services
-              </StyledRightLinks>
-              </li>
+                <li>
+                  <StyledRightLinks to ={`/members`}>
+                    Members
+                  </StyledRightLinks>
+                </li>
+                <li>
+                  <StyledRightLinks to = {`/services`}>
+                    Services
+                  </StyledRightLinks>
+                </li>
               </div>
             }
-
         </List>
       </NavBar>
   )

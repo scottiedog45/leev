@@ -4,7 +4,6 @@ import Leaves from '../leaves/leaves';
 import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo'
 import styled from 'styled-components'
-import FontAwesome from 'react-fontawesome';
 
 const ProfileContainer = styled.div`
   margin: 20px;
@@ -13,7 +12,6 @@ const ProfileContainer = styled.div`
 class Profile extends React.Component {
 
   componentWillMount() {
-      console.log('whoops');
       this.props.dispatch(fetchMembers());
       this.props.dispatch(fetchServices());
       // this.props.dispatch(getSingleLeave(this.props.member.id));
@@ -21,7 +19,6 @@ class Profile extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if (!this.props.member) {
-      console.log('uhm');
       this.props.dispatch(fetchMembers());
       this.props.dispatch(fetchServices());
     }

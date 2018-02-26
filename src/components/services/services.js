@@ -1,22 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {CreateServiceForm} from '../createServiceForm/createServiceForm';
-import {deleteService} from '../../actions';
+import {deleteService, fetchServices} from '../../actions';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import styled from 'styled-components';
 
-const Service = styled.li`
-  margin-top: 35px;
-  &:first-child{
-    margin-top: 0px;
-  }
-`;
-
 const Td = styled.td`
   width: 166px;
 `;
-
 
 const Tr = styled.tr`
   height: 75px;
@@ -82,6 +74,10 @@ const Title = styled.p`
 
 class Services extends React.Component {
 
+  componentDidMount() {
+    this.props.dispatch(fetchServices());
+  }
+
   onDelete(id) {
     window.confirm('do you want to delete this service?');
     this.props.dispatch(deleteService(id));
@@ -109,15 +105,17 @@ class Services extends React.Component {
 
     return (
       <Page>
-      <Title>Services</Title>
+        <Title>Services</Title>
         <Form>
           <CreateServiceForm />
         </Form>
         <ListSection>
           <ServiceList>
-          <table>
-            {services}
-          </table>
+            <table>
+              <tbody>
+                {services}
+              </tbody>
+            </table>
           </ServiceList>
         </ListSection>
       </Page>

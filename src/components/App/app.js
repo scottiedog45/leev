@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 import Home from '../home/home';
 import MemberList from '../memberList/memberList';
 import Services from '../services/services';
@@ -9,40 +9,23 @@ import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
 import {fetchServices, fetchMembers} from '../../actions';
 import Login from '../login/login'
-import styled from 'styled-components';
-import store from 'store';
 import HowTo from '../howTo/howTo';
-
-
-
-const StyledLink = styled(Link)`
-  color: #E85E28;
-  font-size: 30px;
-  position: absolute;
-  text-decoration: none;
-
-`;
-
-const Header = styled.header`
-
-
-`;
-
-
+import SignUp from '../signUp/signUp';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: true
+      loggedIn: false
     }
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchServices());
-    this.props.dispatch(fetchMembers(this.props.token));
-    console.log(this.props);
+    if (this.state.loggedIn) {
+      this.props.dispatch(fetchMembers());
+      this.props.dispatch(fetchServices());
     }
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.token !== '') {
@@ -51,7 +34,7 @@ class App extends React.Component {
       });
     } else {
       this.setState({
-        loggedIn: true
+        loggedIn: false
       });
     }
   }
@@ -64,7 +47,9 @@ class App extends React.Component {
             <Sidebar loggedIn={this.state.loggedIn}/>
             <main>
               <Route exact path="/" component={Home} />
+              <Route exact path='/signup' component={SignUp} />
               <Route exact path='/login' component = {Login} />
+              <Route exact path='/howTo' component={HowTo} />
               <Route exact path='/members' render={()=> (
                 this.state.loggedIn ? (
                   <MemberList />
@@ -72,10 +57,27 @@ class App extends React.Component {
                   <Redirect to="/" />
                 )
               )} />
-              <Route exact path='/members/:memberId' component={Profile}/>
-              <Route exact path='/services' component={Services}/>
-              <Route exact path='/services/:serviceId' component={Attendance} />
-              <Route exact path='/howTo' component={HowTo} />
+              <Route exact path='/members/:memberId' render={(props)=> (
+                this.state.loggedIn ? (
+                  <Profile {...props}/>
+                ) : (
+                  <Redirect to="/" />
+                )
+              )} />
+              <Route exact path='/services' render={()=> (
+                this.state.loggedIn ? (
+                  <Services />
+                ) : (
+                  <Redirect to="/" />
+                )
+              )} />
+              <Route exact path='/services/:serviceId' render={(props)=> (
+                this.state.loggedIn ? (
+                  <Attendance {...props}/>
+                ) : (
+                  <Redirect to="/" />
+                )
+              )} />
             </main>
           </div>
         </Router>

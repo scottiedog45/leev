@@ -54,10 +54,6 @@ const Panel2 = Panel.extend`
   justify-content: space-around;
 `;
 
-const PanelInstructions = Panel.extend`
-
-`;
-
 const Panel3 = Panel.extend`
   background-color: #E5E5E5;
   height: 400px;
@@ -123,8 +119,9 @@ const IconLabel = styled.p`
 `;
 
 const Quote = styled.h3`
+  font-size: 40px;
   margin-top: 0px;
-  padding-top: 130px;
+  padding-top: 105px;
 `;
 
 const Subtitle = styled.h3`
@@ -151,13 +148,9 @@ export default function Home(props) {
             <MoneyIcon src={money} alt={'money'} />
             </IconContainer>
         </Panel2>
-        <PanelInstructions>
-
-        </PanelInstructions>
         <Panel3>
-        <Quote>"Do not strive to make your presence noticed, just your absence felt"</Quote>
-        <h5>-From someone important</h5>
-
+          <Quote>"Do not strive to make your presence noticed, just your absence felt."</Quote>
+          <h5>-Someone important</h5>
         </Panel3>
         <Panel4>
           <SignUpTitle>Sign up today to use Leev for your team.</SignUpTitle>

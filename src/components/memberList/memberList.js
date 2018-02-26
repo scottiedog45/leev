@@ -5,6 +5,7 @@ import {CreateMemberForm} from '../createMemberForm/createMemberForm';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
+
 const Name = styled.h3`
   margin-bottom: 0px;
   &:first-child {
@@ -24,19 +25,6 @@ const ListContainer = styled.div`
 
 const PeopleSection = styled.section`
   margin-left: 200px;
-`;
-
-const PeopleList = styled.ul`
-list-style: none;
-padding-left: 0px;
-margin-top: -2px;
-`;
-
-const Person = styled.li`
-  margin-top: 35px;
-  &:first-child {
-    margin-top: 0px;
-  }
 `;
 
 const Button = styled.button`
@@ -78,9 +66,7 @@ const Form = styled.div`
 class MemberList extends React.Component{
 
   componentDidMount() {
-    console.log('something');
     if (this.props.members !== []) {
-      console.log('haaaalp');
       this.props.dispatch(loadMembersIfNeeded(this.props.token));
     }
   }
@@ -122,7 +108,9 @@ class MemberList extends React.Component{
         </Form>
         <PeopleSection>
           <table>
+          <tbody>
             {members}
+          </tbody>
           </table>
         </PeopleSection>
       </ListContainer>

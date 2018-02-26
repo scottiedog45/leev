@@ -77,6 +77,7 @@ class Leaves extends React.Component {
             </tbody>
           </Table>
       ) : <p>Hmmm.... no leave yet...</p>}
+      
       </div>
     );
   }

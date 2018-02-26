@@ -122,14 +122,12 @@ export class MemberInfo extends React.Component {
 }
 
   toggleEditing = () => {
-    console.log(this.props.member.id);
     this.setState({
       editing: !this.state.editing
     });
   }
 
   onSubmit = (id, values) => {
-    console.log(id);
     this.props.dispatch(patchInfoToMember(id, values));
     this.toggleEditing();
   }
@@ -158,6 +156,25 @@ export class MemberInfo extends React.Component {
     });
   }
 
+  renderField ({
+   input,
+   label,
+   type,
+   meta: { touched, error, warning }
+   }) {
+     return  (
+       <div>
+         <label>{label}</label>
+         <div>
+           <input {...input} placeholder={label} type={type} />
+           {touched &&
+             ((error && <span>{error}</span>) ||
+               (warning && <span>{warning}</span>))}
+         </div>
+       </div>
+     )
+   }
+
   render() {
 
     return(
@@ -176,7 +193,7 @@ export class MemberInfo extends React.Component {
           <Form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
           <legend>Name</legend>
           <Field
-            component='input'
+            component={this.renderField}
             type='text'
             name='name'
             value={this.state.name}
@@ -185,7 +202,7 @@ export class MemberInfo extends React.Component {
             />
           <legend>Role</legend>
             <Field
-              component='input'
+              component={this.renderField}
               type='text'
               name='role'
               value={this.state.role}
@@ -194,20 +211,22 @@ export class MemberInfo extends React.Component {
             />
             <legend>Phone</legend>
             <Field
-              component='input'
+              component={this.renderField}
               type='text'
               name='phone'
               value={this.state.phone}
-              validate={[phoneNumber]}
+              validate={phoneNumber}
+              warn={phoneNumber}
               onChange={(e)=>this.onPhoneChange(e)}
             />
             <legend>Email</legend>
             <Field
-              component='input'
+              component={this.renderField}
               type='text'
               name='email'
               value={this.state.email}
               validate={[email]}
+              warn={email}
               onChange={(e)=>this.onEmailChange(e)}
             />
             <ButtonWrapper>

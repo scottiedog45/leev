@@ -39,16 +39,6 @@ const EditButtonWrapper = styled.button`
 
 `;
 
-const Button = styled.button`
-  width: 140px;
-  background-color: #CCC5B9;
-  color: #403d39;
-  border: none;
-  height: 40px;
-`;
-
-// const ServiceInfoForm = styled.form
-
 const EditButton = styled.span`
   background-color: inherit;
   border: none;
@@ -104,9 +94,7 @@ export class ServiceInfo extends React.Component {
       'category': this.props.service.category,
       'dateTime': moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")
     };
-    console.log('2018-06-01T08:30');
-    console.log(moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm"));
-    this.props.initialize(initData);
+       this.props.initialize(initData);
   }
 
 
@@ -119,7 +107,6 @@ export class ServiceInfo extends React.Component {
     this.setState({
       editing: !this.state.editing
     });
-    console.log(moment(this.props.service.dateTime).format("YYYY-MM-ddThh:mm"));
   }
 
   handleDateChange = (e) => {
@@ -142,6 +129,25 @@ export class ServiceInfo extends React.Component {
     this.props.dispatch(fetchServices());
     }
 
+    renderField ({
+     input,
+     label,
+     type,
+     meta: { touched, error, warning }
+     }) {
+       return  (
+         <div>
+           <label>{label}</label>
+           <div>
+             <input {...input} placeholder={label} type={type} />
+             {touched &&
+               ((error && <span>{error}</span>) ||
+                 (warning && <span>{warning}</span>))}
+           </div>
+         </div>
+       )
+     }
+
   render() {
 
     const formattedDate = moment(this.props.service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
@@ -158,20 +164,22 @@ export class ServiceInfo extends React.Component {
             <legend>Date and Time: </legend>
             <Field
               name ='dateTime'
-              component = 'input'
+              component = {this.renderField}
               type='datetime-local'
               onChange={(e)=>this.handleDateChange(e)}
               value={moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")}
               validate={[required]}
+              warn={required}
             />
             <legend>Edit category</legend>
             <Field
               name='category'
-              component = 'input'
+              component = {this.renderField}
               type='text'
               onChange={(e)=>this.handleCategoryChange(e)}
               value={this.props.service.category}
               validate={[required, minLength2]}
+              warn={required}
               />
             <ButtonWrapper>
             <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {reduxForm, Field} from 'redux-form';
-import {userLogin, createNewUser} from '../../actions'
-
+import {reduxForm} from 'redux-form';
+import {userLogin} from '../../actions';
+import {Link} from 'react-router-dom';
 
 const Loginbox = styled.div`
   width: 400px;
@@ -16,7 +16,6 @@ const Loginbox = styled.div`
 
 const LoginTitle = styled.h2`
   margin: 20px;
-
 `;
 
 const InputWrapper = styled.div`
@@ -29,13 +28,6 @@ const ButtonWrapper = styled.div`
   margin-top: 40px;
 `;
 
-const LoginButton = styled.button`
-  border: none;
-  width: 100px;
-  height: 25px;
-  display: inline-block;
-`;
-
 const Input = styled.input`
   height: 30px;
   width: 300px;
@@ -46,10 +38,14 @@ const FormWrapper = styled.div`
 `;
 
 const DemoWrapper = styled.div`
-  &:children {
+  &:child {
     margin-top: none;
     margin-bottom: none;
   }
+`;
+
+const DemoP = styled.p`
+  margin: 0px 0px 0px 20px;
 `;
 
 class Login extends React.Component {
@@ -80,16 +76,8 @@ onSubmit() {
     email: this.state.email,
     password: this.state.password
   };
-  console.log(values);
   this.props.dispatch(userLogin(values));
   this.props.history.push('/services');
-
-}
-
-signUp() {
-  let email = this.state.email;
-  let pword = this.state.password;
-  // this.props.dispatch(signup(email, pword))
 }
 
   render() {
@@ -97,7 +85,9 @@ signUp() {
     return(
       <FormWrapper>
         <Loginbox>
-          <LoginTitle>Login</LoginTitle>
+          <LoginTitle>
+            Login or <Link to={'/signUp'}>Sign up</Link>
+          </LoginTitle>
           <form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>
           <InputWrapper>
             <legend>Email</legend>
@@ -119,13 +109,12 @@ signUp() {
             />
             </InputWrapper>
             <DemoWrapper>
-            <p>Demo account:</p>
-            <p>email: something3@something.com</p>
-            <p>password: test2 </p>
+            <DemoP>Demo account:</DemoP>
+            <DemoP>email: something3@something.com</DemoP>
+            <DemoP>password: test2 </DemoP>
             </DemoWrapper>
             <ButtonWrapper>
               <button type='submit'>Login</button>
-              <button type='button'>Sign Up</button>
             </ButtonWrapper>
           </form>
         </Loginbox>
