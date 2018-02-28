@@ -15,17 +15,17 @@ const Panellist = styled.ul`
 `;
 
 const DemoButton = styled.button`
-display: block;
-margin-left: auto;
-margin-right: auto;
-font-size: 15px;
-width: 127px;
-height: 31px;
-border: none;
-border-radius: 5px;
-background-color: #eb5e28;
-color: white;
-margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  width: 127px;
+  height: 31px;
+  border: none;
+  border-radius: 5px;
+  background-color: #eb5e28;
+  color: white;
+  margin-top: 20px;
 `;
 
 
@@ -38,8 +38,8 @@ const Title = styled.h1`
   font-size: 75px;
   padding-top: 152px;
   ${media.handheld`
-    font-size: 40px;
-
+    font-size: 38px;
+    padding-top: 127px;
     `}
 `;
 
@@ -66,7 +66,7 @@ const Panel2 = Panel.extend`
 `;
 
 const Panel3 = Panel.extend`
-  background-color: #E5E5E5;
+  background-color: #fff0c5;
   height: 400px;
   text-align: center;
 `;
@@ -77,7 +77,7 @@ const Panel4 = Panel.extend`
 `;
 
 const Panel5 = Panel.extend`
-  background-color: #E5E5E5;
+  background-color: #fff0c5;
   height: 100px;
 `;
 
@@ -103,6 +103,7 @@ const MoneyIcon = styled.img`
   height: 250px;
   ${media.handheld`
     height: 125px;
+    margin-top: -15px;
     `}
 `;
 

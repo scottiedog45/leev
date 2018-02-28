@@ -6,7 +6,7 @@ const Title = styled.h3`
   font-size: 90px;
   margin: 0px 0px 0px 0px;
   ${media.handheld`
-    font-size: 70px;
+    font-size: 60px;
     text-align: center;
     `}
 `;
@@ -22,8 +22,8 @@ const Li = styled.li`
 `;
 
 const Header = styled.h4`
-  margin-left: 15px
-  margin-top: 10px
+  margin-left: 15px;
+  margin-top: 10px;
 `;
 
 export default class HowTo extends React.Component {
@@ -36,7 +36,7 @@ render() {
       <Header>How to use Leev</Header>
       <List>
         <Li>
-          1) Click the Login button to login or signup.
+          1) Login or signup.
         </Li>
         <Li>
           2) Create the services and members you wish to track on the Services and Members pages.
@@ -54,7 +54,7 @@ render() {
           service but doesn't have a leave reason, that means they attended).
         </Li>
         <Li>
-          To see aggregated leave for a member, view their details on the Members page
+          To see aggregated leave for a member, view their details on the Members page.
         </Li>
         </ul>
       </List>

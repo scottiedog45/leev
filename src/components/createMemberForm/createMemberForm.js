@@ -44,7 +44,7 @@ const CreateMemberButton = styled.button`
     margin-top: unset;
     position: unset;
     `}
-  `;
+`;
 
 const FormContainer = styled.div`
   overflow: auto;

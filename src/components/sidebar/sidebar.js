@@ -129,6 +129,7 @@ class Sidebar extends React.Component {
   }
 
 logout(e) {
+  this.turnOffHamburger();
   this.props.dispatch(userLogout());
 }
 
@@ -155,15 +156,21 @@ render() {
           </BarWrapper>
           </HamburgerButton>
           {this.state.showingHamburger && <HamburgerMeat>
-          {this.state.loggedIn &&
+          {this.state.loggedIn ? (
             <div>
+              <StyledRightLinks to={`/howTo`} onClick={()=>this.toggleHamburger()}>How To</StyledRightLinks>
               <StyledRightLinks to={`/members`} onClick={()=>this.toggleHamburger()}>Members</StyledRightLinks>
               <StyledRightLinks to={`/services`} onClick={()=>this.toggleHamburger()}>Services</StyledRightLinks>
-            </div>}
-          <StyledRightLinks to={`/howTo`} onClick={()=>this.toggleHamburger()}>How To</StyledRightLinks>
-          <StyledRightLinks to={`/signup`} onClick={()=>this.toggleHamburger()}>Sign Up</StyledRightLinks>
-          <StyledRightLinks to={`/login`} onClick={()=>this.toggleHamburger()}>Log in</StyledRightLinks>
-        </HamburgerMeat>}
+              <StyledRightLinks to={`/`} onClick={()=>this.logout()}>Logout</StyledRightLinks>
+            </div>) :
+            (<div>
+              <StyledRightLinks to={`/howTo`} onClick={()=>this.toggleHamburger()}>How To</StyledRightLinks>
+              <StyledRightLinks to={`/signup`} onClick={()=>this.toggleHamburger()}>Sign Up</StyledRightLinks>
+              <StyledRightLinks to={`login`} onClick={()=>this.toggleHamburger()}>Login</StyledRightLinks>
+            </div>)}
+            </HamburgerMeat>
+          }
+
       </Hamburger>
       <StyledLink to ={`/`} onClick={()=>this.turnOffHamburger()}>
         <CalendarWrapper><FontAwesome name='calendar' /></CalendarWrapper>
