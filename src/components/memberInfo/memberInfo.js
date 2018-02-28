@@ -187,7 +187,7 @@ export class MemberInfo extends React.Component {
         {!this.state.editing ?
           <div>
             <div className='name'>
-              <TitleName>{this.props.member.name}'s Profile</TitleName>
+              <TitleName role='banner'>{this.props.member.name}'s Profile</TitleName>
             </div>
             <Role>Role: {this.props.member.role}</Role>
             <Phone> Phone: {this.props.member.phone}</Phone>

@@ -152,7 +152,7 @@ export default function Home(props) {
     <div className="home-page">
       <Panellist>
         <Panel1>
-          <Title>Welcome to Leev.</Title>
+          <Title role='banner'>Welcome to Leev.</Title>
           <Subtitle>Leev provides a stupendous solution for tracking your group's leave.</Subtitle>
           <StyledLink to={'/signup'}>
             <DemoButton>Sign Up</DemoButton>
