@@ -20,12 +20,12 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if (this.state.loggedIn) {
-      this.props.dispatch(fetchMembers());
-      this.props.dispatch(fetchServices());
-    }
-  }
+  // componentDidMount() {
+  //   if (this.state.loggedIn) {
+  //     this.props.dispatch(fetchMembers());
+  //     this.props.dispatch(fetchServices());
+  //   }
+  // }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.token !== '') {
