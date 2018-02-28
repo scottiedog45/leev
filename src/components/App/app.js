@@ -16,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: true
+      loggedIn: false
     }
   }
 
@@ -30,7 +30,7 @@ class App extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.token !== '') {
       this.setState({
-        loggedIn: true
+        loggedIn: false
       });
     } else {
       this.setState({
