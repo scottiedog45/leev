@@ -107,6 +107,11 @@ const BarWrapper = styled.span`
   display: inherit;
 `;
 
+const HamburgerButton = styled.button`
+  background-color: inherit;
+  border: none;
+`;
+
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -143,12 +148,12 @@ render() {
   return (
       <NavBar>
       <Hamburger>
-        <button
+        <HamburgerButton
           onClick={(e)=>this.toggleHamburger()}>
           <BarWrapper>
             <FontAwesome name='bars' />
           </BarWrapper>
-          </button>
+          </HamburgerButton>
           {this.state.showingHamburger && <HamburgerMeat>
           {this.state.loggedIn &&
             <div>
