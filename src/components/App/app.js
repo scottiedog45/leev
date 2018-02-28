@@ -7,7 +7,7 @@ import Sidebar from '../sidebar/sidebar';
 import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
-import {fetchServices, fetchMembers} from '../../actions';
+// import {fetchServices, fetchMembers} from '../../actions';
 import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
@@ -38,7 +38,6 @@ class App extends React.Component {
         loggedIn: false
       });
     }
-    console.log(this.state);
   }
 
   render() {
