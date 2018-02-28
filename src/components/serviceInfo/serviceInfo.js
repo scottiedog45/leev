@@ -4,6 +4,7 @@ import {Field, reduxForm} from 'redux-form';
 import {patchToService, fetchServices} from '../../actions'
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
+import {media} from '../style-utils'
 
 const Service = styled.div`
   padding: 0px;
@@ -13,11 +14,18 @@ const DateTime = styled.h2`
   margin-bottom: 3px;
   margin-top: 0px;
   display: inline-block;
+  ${media.handheld`
+    font-size: 29px;
+    text-align: center;
+    `}
 `;
 const Category = styled.h3`
   margin-top: 0px;
   margin-bottom: 6px;
   font-size:15px;
+  ${media.handheld`
+    text-align: center;
+    `}
 `;
 
 const Form = styled.form`
@@ -36,7 +44,11 @@ const EditButtonWrapper = styled.button`
   background-color: inherit;
   border: none;
   padding-left: 0px;
-
+  ${media.handheld`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    `}
 `;
 
 const EditButton = styled.span`
@@ -55,7 +67,8 @@ const SubmitButton = styled.button`
   transform: translateY(10%);
 `;
 
-const SubmitButtonWrapper = styled.span``;
+const SubmitButtonWrapper = styled.span`
+`;
 
 const CancelButton = styled.button`
   color: black;
@@ -74,7 +87,9 @@ const ButtonWrapper = styled.div`
 
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
+
 export const minLength2 = minLength(2)
+
 const required = value => (value ? undefined : 'Required')
 
 export class ServiceInfo extends React.Component {
@@ -96,8 +111,6 @@ export class ServiceInfo extends React.Component {
     };
        this.props.initialize(initData);
   }
-
-
 
   componentWillMount(){
     this.handleInitialize();

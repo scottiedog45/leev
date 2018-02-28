@@ -3,10 +3,9 @@ import React from 'react';
 import {Field, reduxForm, reset} from 'redux-form';
 import {postMember} from '../../actions';
 import styled from 'styled-components';
+import {media} from '../style-utils';
 
-
-
-
+//validation for fields
 const required = value => (value ? undefined : 'Required')
 const maxLength = max => value =>
   value && value.length > max ? `Must be ${max} characters or less` : undefined
@@ -14,21 +13,10 @@ const maxLength15 = maxLength(15)
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 export const minLength2 = minLength(2)
-// const number = value =>
-//   value && isNaN(Number(value)) ? 'Must be a number' : undefined
-// const minValue = min => value =>
-//   value && value < min ? `Must be at least ${min}` : undefined
-// const minValue18 = minValue(18)
 const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
     : undefined
-// const tooOld = value =>
-//   value && value > 65 ? 'You might be too old for this' : undefined
-// const aol = value =>
-//   value && /.+@aol\.com/.test(value)
-//     ? 'Really? You still use AOL for your email?'
-//     : undefined
 const alphaNumeric = value =>
   value && /[^a-zA-Z0-9 ]/i.test(value)
     ? 'Only alphanumeric characters'
@@ -38,26 +26,31 @@ const phoneNumber = value =>
     ? 'Invalid phone number, must be 10 digits'
     : undefined
 
-  const CreateMemberButton = styled.button`
-    height: 40px;
-    width: 128px;
-    border-radius: 7px;
-    position: fixed;
-    margin-left: 20px;
-    background-color: #EB5E28;
-    border: none;
-    color: #FFFCF2;
-    font-size: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    cursor: pointer;
-    margin-top: 32px;
-    `;
+const CreateMemberButton = styled.button`
+  height: 40px;
+  width: 128px;
+  border-radius: 7px;
+  position: fixed;
+  margin-left: 20px;
+  background-color: #EB5E28;
+  border: none;
+  color: #FFFCF2;
+  font-size: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  margin-top: 32px;
+  ${media.handheld`
+    margin-left: unset;
+    margin-top: unset;
+    position: unset;
+    `}
+  `;
 
 const FormContainer = styled.div`
-background-color: lightgrey;
-overflow: auto;
-color: #FFFCF2;
-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: auto;
+  ${media.handheld`
+    text-align: center;
+    `}
 `;
 
 const Legend = styled.legend`

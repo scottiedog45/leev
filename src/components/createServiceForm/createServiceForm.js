@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, reset} from 'redux-form';
 import {postService} from '../../actions';
+import {media} from '../style-utils'
 
 import styled from 'styled-components'
 
@@ -17,6 +18,11 @@ const CreateButton = styled.button`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
   margin-top: 32px;
+  ${media.handheld`
+    margin-left: unset;
+    margin-top: unset;
+    position: unset;
+    `}
 `;
 
 const FormTitle = styled.p`
@@ -25,10 +31,10 @@ const FormTitle = styled.p`
 `;
 
 const FormWrapper = styled.div`
-  background-color: lightgrey;
   overflow: auto;
-  color: #FFFCF2;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  ${media.handheld`
+    text-align: center;
+    `}
 `;
 
 const Form = styled.form`

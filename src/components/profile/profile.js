@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Leaves from '../leaves/leaves';
 import {fetchMembers, fetchServices} from '../../actions';
-import {MemberInfo} from '../memberInfo/memberInfo'
-import styled from 'styled-components'
+import {MemberInfo} from '../memberInfo/memberInfo';
+import styled from 'styled-components';
 
 const ProfileContainer = styled.div`
   margin: 20px;

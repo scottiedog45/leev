@@ -92,6 +92,10 @@ const ButtonWrapper = styled.div`
   display: block;
 `;
 
+const AllMemberInfo = styled.div`
+  text-align: center;
+`;
+
 
 export class MemberInfo extends React.Component {
   constructor(props) {
@@ -178,7 +182,7 @@ export class MemberInfo extends React.Component {
   render() {
 
     return(
-      <div className='memberInfo'>
+      <AllMemberInfo>
       <div>
         {!this.state.editing ?
           <div>
@@ -236,7 +240,7 @@ export class MemberInfo extends React.Component {
           </Form>
         }
       </div>
-    </div>
+    </AllMemberInfo>
     )
   }
 }

@@ -5,13 +5,35 @@ import {deleteService, fetchServices} from '../../actions';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import styled from 'styled-components';
+import {media} from '../style-utils'
 
 const Td = styled.td`
   width: 166px;
+  ${media.handheld`
+    display: block;
+    width: unset;
+    `}
+`;
+
+const Table = styled.table`
+${media.handheld`
+  display: block
+  `}
 `;
 
 const Tr = styled.tr`
   height: 75px;
+  ${media.handheld`
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    `}
+`;
+
+const Tb = styled.tbody`
+${media.handheld`
+  display: block
+  `}
 `;
 
 const ServiceList = styled.ul`
@@ -56,6 +78,10 @@ const Delete =styled.button`
 const Form = styled.div`
   position: absolute;
   width: 400px;
+  ${media.handheld`
+    position: unset;
+    width: unset;
+    `}
 `;
 
 const Page = styled.div`
@@ -63,6 +89,9 @@ const Page = styled.div`
 
 const ListSection = styled.section`
 margin-left: 200px;
+${media.handheld`
+  margin-left: 0px;
+  `}
 `;
 
 const Title = styled.p`
@@ -70,6 +99,13 @@ const Title = styled.p`
   margin-top: 0px;
   margin-left: 20px;
   margin-bottom: 0px;
+  ${media.handheld`
+    font-size: 70px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: unset;
+    `}
 `;
 
 class Services extends React.Component {
@@ -87,19 +123,19 @@ class Services extends React.Component {
 
       const services = this.props.services.map((service, index) => (
         <Tr key={index}>
-        <td>
+        <Td>
           <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</Date>
-        </td>
+        </Td>
         <Td>
           <Category>{service.category}</Category>
         </Td>
-        <td>
+        <Td>
           <Link to = {`/services/${service.id}`}>
             <Details id={service.id}>Details</Details>
           </Link>
           <Delete id={service.id} onClick={
             (e)=> this.onDelete(e.target.id)}>Delete</Delete>
-        </td>
+        </Td>
         </Tr>
       ))
 
@@ -111,11 +147,11 @@ class Services extends React.Component {
         </Form>
         <ListSection>
           <ServiceList>
-            <table>
-              <tbody>
+            <Table>
+              <Tb>
                 {services}
-              </tbody>
-            </table>
+              </Tb>
+            </Table>
           </ServiceList>
         </ListSection>
       </Page>

@@ -1,17 +1,29 @@
 import React from 'react';
 import styled from 'styled-components'
+import {media} from '../style-utils'
 
 const Title = styled.h3`
   font-size: 90px;
   margin: 0px 0px 0px 0px;
+  ${media.handheld`
+    font-size: 70px;
+    text-align: center;
+    `}
 `;
 
 const List = styled.ul`
-  List-style: none
+  margin: 15px;
+  list-style: none;
+  padding-left: 0px;
 `;
 
 const Li = styled.li`
   margin-top: 10px;
+`;
+
+const Header = styled.h4`
+  margin-left: 15px
+  margin-top: 10px
 `;
 
 export default class HowTo extends React.Component {
@@ -21,7 +33,7 @@ render() {
   return(
     <div>
       <Title>Welcome!</Title>
-      <h4>How to use Leev</h4>
+      <Header>How to use Leev</Header>
       <List>
         <Li>
           1) Click the Login button to login or signup.

@@ -2,14 +2,32 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getSingleLeave} from '../../actions';
 import styled from 'styled-components';
+import {media} from '../style-utils';
 
 
 const Table = styled.table`
   text-align: left;
+  ${media.handheld`
+    display: block;
+    `}
 `;
 
-const Header = styled.th`
-  width: 300px;
+const Tbody = styled.tbody`
+${media.handheld`
+  display: block;
+  `}
+`;
+
+const Tr = styled.tr`
+${media.handheld`
+  display: block;
+  `}
+`;
+
+const Td = styled.td`
+${media.handheld`
+  display: block;
+  `}
 `;
 
 class Leaves extends React.Component {
@@ -57,10 +75,10 @@ class Leaves extends React.Component {
   let someLeave = this.calculateLeave();
 
   let leave = someLeave.map((service, index) => (
-    <tr key={index}>
-      <td>{service.service}</td>
-      <td>{service.reason}</td>
-    </tr>
+    <Tr key={index}>
+      <Td>{service.service}</Td>
+      <Td>{service.reason}</Td>
+    </Tr>
   ));
 
     return (
@@ -68,16 +86,11 @@ class Leaves extends React.Component {
       <div className='leaveList'>
       {(leave.length > 0) ? (
         <Table>
-          <tbody>
-            <tr>
-              <Header>Service</Header>
-              <th>Reason</th>
-            </tr>
+          <Tbody>
               {leave}
-            </tbody>
+            </Tbody>
           </Table>
       ) : <p>Hmmm.... no leave yet...</p>}
-      
       </div>
     );
   }

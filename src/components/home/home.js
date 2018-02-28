@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import clipboard from './clipbaord.png';
 import money from './notes.png';
+import {Link} from 'react-router-dom'
+import {media} from '../style-utils'
 
 const Panellist = styled.ul`
   list-style: none;
@@ -27,16 +29,21 @@ margin-top: 20px;
 `;
 
 
-//html showing under last li
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Title = styled.h1`
   margin: 0px;
   font-size: 75px;
   padding-top: 152px;
+  ${media.handheld`
+    font-size: 40px;
+
+    `}
 `;
 
 const Panel = styled.li`
-
 `;
 
 const Panel1 = Panel.extend`
@@ -52,6 +59,10 @@ const Panel2 = Panel.extend`
   padding-bottom: 40px;
   display: flex;
   justify-content: space-around;
+  ${media.handheld`
+    display: inherit;
+
+    `}
 `;
 
 const Panel3 = Panel.extend`
@@ -76,20 +87,9 @@ const SignUpTitle = styled.p`
   margin-top: 0px;
   padding-top: 100px;
   font-size: 30px;
-`;
-
-const SignUpButton = styled.button`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 15px;
-  width: 127px;
-  height: 31px;
-  border: none;
-  border-radius: 5px;
-  background-color: #eb5e28;
-  color: white;
-  margin-top: 92px;
+  ${media.handheld`
+    font-size: 27px;
+    `}
 `;
 
 const Signature = styled.p`
@@ -101,12 +101,17 @@ const Signature = styled.p`
 
 const MoneyIcon = styled.img`
   height: 250px;
+  ${media.handheld`
+    height: 125px;
+    `}
 `;
 
 const ClipboardIcon = styled.img`
   height: 256px;
+  ${media.handheld`
+    height: 125px;
+    `}
 `;
-
 
 const IconContainer = styled.div`
   text-align: center;
@@ -116,16 +121,28 @@ const IconLabel = styled.p`
   width: 250px;
   word-wrap: break-word;
   font-size: 18px;
+  ${media.handheld`
+    margin: 10px;
+    text-align: center;
+    width: unset;
+    `}
 `;
 
 const Quote = styled.h3`
   font-size: 40px;
   margin-top: 0px;
   padding-top: 105px;
+  ${media.handheld`
+    font-size: 24px;
+    `}
 `;
 
 const Subtitle = styled.h3`
   margin-top: 4px;
+  ${media.handheld`
+    padding: 5px;
+
+    `}
 `;
 
 
@@ -136,7 +153,9 @@ export default function Home(props) {
         <Panel1>
           <Title>Welcome to Leev.</Title>
           <Subtitle>Leev provides a stupendous solution for tracking your group's leave.</Subtitle>
-          <DemoButton>DEMO</DemoButton>
+          <StyledLink to={'/signup'}>
+            <DemoButton>Sign Up</DemoButton>
+          </StyledLink>
         </Panel1>
         <Panel2>
         <IconContainer>
@@ -154,8 +173,9 @@ export default function Home(props) {
         </Panel3>
         <Panel4>
           <SignUpTitle>Sign up today to use Leev for your team.</SignUpTitle>
-            <SignUpButton>Sign Up</SignUpButton>
-
+          <StyledLink to={'/signup'}>
+            <DemoButton>Sign Up</DemoButton>
+          </StyledLink>
         </Panel4>
         <Panel5>
           <Signature>&#x24B8; Scott O'Toole</Signature>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {reduxForm, Field} from 'redux-form';
 import {createNewUser} from '../../actions';
 import {Link} from 'react-router-dom';
+import {media} from '../style-utils'
 
 
 const required = value => (value ? undefined : 'Required');
@@ -20,6 +21,18 @@ const Loginbox = styled.div`
   margin-top: 100px;
   border-radius: 7px;
   padding: 20px;
+  ${media.handheld`
+    width: 250px;
+    `}
+`;
+
+const Input = styled.input`
+  width: 300px;
+  height: 30px;
+  ${media.handheld`
+    width: 206px;
+
+    `}
 `;
 
 const LoginTitle = styled.h2`
@@ -39,6 +52,10 @@ const ButtonWrapper = styled.div`
 
 const FormWrapper = styled.div`
   display: block;
+`;
+
+const StyledField = styled(Field)`
+  width: 400px;
 `;
 
 class SignUp extends React.Component {
@@ -89,7 +106,7 @@ onSubmit(values) {
        <div>
          <label>{label}</label>
          <div>
-           <input {...input} placeholder={label} type={type} />
+           <Input {...input} placeholder={label} type={type} />
            {touched &&
              ((error && <span>{error}</span>) ||
                (warning && <span>{warning}</span>))}
@@ -110,7 +127,7 @@ onSubmit(values) {
           <form onSubmit={this.props.handleSubmit((e, values) => this.onSubmit(e,values))}>
           <InputWrapper>
             <legend>Email</legend>
-            <Field
+            <StyledField
               name='email'
               component={this.renderField}
               type='text'
@@ -121,10 +138,12 @@ onSubmit(values) {
             <InputWrapper>
             <legend>Password</legend>
             <Field
+              name='password'
               value={this.state.password}
               component={this.renderField}
               type='password'
               validate={required}
+              onChange={(e)=>this.onPasswordChange(e)}
             />
             </InputWrapper>
             <InputWrapper>
@@ -135,6 +154,7 @@ onSubmit(values) {
               component={this.renderField}
               type='password'
               validate={required}
+              onChange={(e)=>this.onPasswordConfirmChange(e)}
             />
             </InputWrapper>
             <ButtonWrapper>
