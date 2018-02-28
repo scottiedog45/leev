@@ -55,6 +55,7 @@ const setSessionToken = (token) => {
 }
 
 const getToken = () => {
+  console.log('getting');
   let token = store.get('sessionToken');
   return token;
 }
@@ -62,7 +63,6 @@ const getToken = () => {
 const removeToken = () => {
   store.remove('sessionToken')
 }
-
 
 export const createNewUser = (creds) => dispatch => {
   fetch(API_BASE_URL + '/users/signup', {
@@ -110,6 +110,10 @@ export const userLogin = (data) =>  dispatch => {
   .then(()=> {
     let token = getToken();
     dispatch(setToken(token.token));
+  })
+  .then(() => {
+    dispatch(fetchMembers());
+    dispatch(fetchServices());
   })
   .catch(err => {
     console.log(err)

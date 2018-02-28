@@ -28,15 +28,17 @@ class App extends React.Component {
   // }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.token !== '') {
-      this.setState({
-        loggedIn: false
-      });
-    } else {
       this.setState({
         loggedIn: true
       });
+    } else {
+      this.setState({
+        loggedIn: false
+      });
     }
+    console.log(this.state);
   }
 
   render() {

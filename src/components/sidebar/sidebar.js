@@ -112,9 +112,15 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       showingHamburger: false
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      loggedIn: nextProps.loggedIn
+    })
   }
 
 logout(e) {
