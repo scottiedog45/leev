@@ -164,7 +164,7 @@ class MemberList extends React.Component{
     return (
 
       <ListContainer>
-        <Title>Members</Title>
+        <Title role='banner'>Members</Title>
         <Form>
           <CreateMemberForm />
         </Form>

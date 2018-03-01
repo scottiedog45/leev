@@ -12,12 +12,12 @@ const Td = styled.td`
   ${media.handheld`
     display: block;
     width: unset;
-    `}
+  `}
 `;
 
 const Table = styled.table`
-${media.handheld`
-  display: block
+  ${media.handheld`
+    display: block
   `}
 `;
 
@@ -27,12 +27,12 @@ const Tr = styled.tr`
     display: block;
     text-align: center;
     margin-top: 30px;
-    `}
+  `}
 `;
 
 const Tb = styled.tbody`
-${media.handheld`
-  display: block
+  ${media.handheld`
+    display: block
   `}
 `;
 
@@ -81,7 +81,7 @@ const Form = styled.div`
   ${media.handheld`
     position: unset;
     width: unset;
-    `}
+  `}
 `;
 
 const Page = styled.div`
@@ -141,7 +141,7 @@ class Services extends React.Component {
 
     return (
       <Page>
-        <Title>Services</Title>
+        <Title role='banner'>Services</Title>
         <Form>
           <CreateServiceForm />
         </Form>

@@ -169,7 +169,7 @@ export class ServiceInfo extends React.Component {
       <Service>
       {this.props.service &&
       <div>
-        <DateTime>{!this.state.editing && formattedDate}</DateTime>
+        <DateTime role='banner'>{!this.state.editing && formattedDate}</DateTime>
         <Category>{!this.state.editing && this.props.service.category}</Category>
         {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
         {this.state.editing &&

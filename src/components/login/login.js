@@ -92,7 +92,7 @@ onSubmit() {
     return(
       <FormWrapper>
         <Loginbox>
-          <LoginTitle>
+          <LoginTitle role = 'banner'>
             Login or <Link to={'/signUp'}>Sign up</Link>
           </LoginTitle>
           <form onSubmit={this.props.handleSubmit((values) => this.onSubmit(values))}>

@@ -33,7 +33,7 @@ render() {
   return(
     <div>
       <Title>Welcome!</Title>
-      <Header>How to use Leev</Header>
+      <Header role='banner'>How to use Leev</Header>
       <List>
         <Li>
           1) Login or signup.

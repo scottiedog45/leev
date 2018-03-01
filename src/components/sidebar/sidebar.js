@@ -147,7 +147,7 @@ turnOffHamburger() {
 
 render() {
   return (
-      <NavBar>
+      <NavBar role='navigation'>
       <Hamburger>
         <HamburgerButton
           onClick={(e)=>this.toggleHamburger()}>

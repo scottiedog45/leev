@@ -31,13 +31,11 @@ const Input = styled.input`
   height: 30px;
   ${media.handheld`
     width: 206px;
-
     `}
 `;
 
 const LoginTitle = styled.h2`
   margin: 20px;
-
 `;
 
 const InputWrapper = styled.div`
@@ -68,33 +66,33 @@ class SignUp extends React.Component {
     }
   }
 
-onEmailChange(e) {
-  this.setState({
-    email: e.target.value
-  });
-}
-
-onPasswordChange(e) {
-  this.setState({
-    password: e.target.value
-  });
-}
-
-onPasswordConfirmChange(e) {
-  this.setState({
-    passwordConfirm: e.target.value
-  });
-}
-
-onSubmit(values) {
-  if(this.state.password !== this.state.passwordConfirm) {
-    window.alert('Passwords do not match');
-    return;
-  } else {
-  this.props.dispatch(createNewUser(values));
-  this.props.history.push('/howTo');
+  onEmailChange(e) {
+    this.setState({
+      email: e.target.value
+    });
   }
-}
+
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  onPasswordConfirmChange(e) {
+    this.setState({
+      passwordConfirm: e.target.value
+    });
+  }
+
+  onSubmit(values) {
+    if(this.state.password !== this.state.passwordConfirm) {
+      window.alert('Passwords do not match');
+      return;
+    } else {
+    this.props.dispatch(createNewUser(values));
+    this.props.history.push('/howTo');
+    }
+  }
 
   renderField ({
    input,
@@ -117,11 +115,10 @@ onSubmit(values) {
 
   render() {
 
-
     return(
       <FormWrapper>
         <Loginbox>
-          <LoginTitle>
+          <LoginTitle role='banner'>
             Sign Up or <Link to={'/login'}>Login</Link>
           </LoginTitle>
           <form onSubmit={this.props.handleSubmit((e, values) => this.onSubmit(e,values))}>
