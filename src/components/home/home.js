@@ -28,7 +28,6 @@ const DemoButton = styled.button`
   margin-top: 20px;
 `;
 
-
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
@@ -149,14 +148,6 @@ const Subtitle = styled.h3`
 
     `}
 `;
-
-const PanelHeader = styled.h4`
-  padding-top: 32px;
-  font-size: 37px;
-  margin-bottom: 14px;
-  margin-top: 0px;
-`;
-
 
 export default function Home(props) {
   return (

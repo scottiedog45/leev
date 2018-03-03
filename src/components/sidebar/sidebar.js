@@ -39,7 +39,6 @@ const StyledRightLinks = styled(Link)`
     margin-top: 5px;
     display: block;
     float: none;
-
     `}
 `;
 
