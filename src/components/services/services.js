@@ -16,7 +16,7 @@ const Td = styled.td`
 `;
 
 const Tdate = styled.td`
-  width: 367px;
+  width: 300px;
   ${media.handheld`
     display: block;
     width: unset;
@@ -68,7 +68,6 @@ const Category = styled.h4`
   ${media.handheld`
     margin-left: unset;
   `}
-
 `;
 
 const Details = styled.button`
@@ -131,7 +130,6 @@ const Time =styled.h5`
 `;
 
 const ButtonWrapper = styled.div`
-
 `;
 
 class Services extends React.Component {
@@ -150,7 +148,7 @@ class Services extends React.Component {
       const services = this.props.services.map((service, index) => (
         <Tr key={index}>
         <Tdate>
-          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY")}</Date>
+          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY")}</Date><br />
           <Time>{moment(service.dateTime).format("h:mm a")}</Time>
         </Tdate>
         <Td>
