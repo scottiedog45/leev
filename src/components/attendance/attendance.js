@@ -300,6 +300,7 @@ class Attendance extends React.Component {
           <AddMemberButton onClick={() => this.addMember()}><AddMemberWrapper>Add Single User</AddMemberWrapper></AddMemberButton>
           <Explanation>*Type first letter of the member's name, and click their name below. Then use the button to add them</Explanation>
           <Autosuggest
+            role='search'
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}

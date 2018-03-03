@@ -47,10 +47,11 @@ const CreateMemberButton = styled.button`
 `;
 
 const FormContainer = styled.div`
-  overflow: auto;
-  ${media.handheld`
-    text-align: center;
-    `}
+overflow: auto;
+border-radius: 10px;
+${media.handheld`
+  text-align: center;
+  `}
 `;
 
 const Legend = styled.legend`
@@ -59,7 +60,10 @@ const Legend = styled.legend`
 `;
 
 const Form = styled.form`
+  padding: 10px;
+  border-radius: 5px;
   width: 400px;
+  background-color: #ccc6b9;
 `;
 
 const FormTitle = styled.p`
@@ -82,11 +86,12 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
-  width: 70px;
-  background-color: #EB5E28;
-  color: black;
-  border: none;
-  height: 25px;
+width: 70px;
+background-color: #EB5E28;
+color: white;
+border: none;
+height: 25px;
+border-radius: 5px;
 `;
 
 export class CreateMemberForm extends React.Component {

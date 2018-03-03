@@ -207,7 +207,6 @@ render() {
                 </li>
               </div>
             }
-
         </List>
       </NavBar>
   )

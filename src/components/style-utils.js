@@ -2,7 +2,7 @@ import {css} from 'styled-components';
 
 export const media = {
   handheld: (...args) => css`
-    @media (max-width: 568px) {
+    @media (max-width: 885px) {
       ${ css(...args)}
     }
   `,

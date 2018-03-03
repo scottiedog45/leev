@@ -15,6 +15,14 @@ const Td = styled.td`
   `}
 `;
 
+const Tdate = styled.td`
+  width: 367px;
+  ${media.handheld`
+    display: block;
+    width: unset;
+  `}
+`;
+
 const Table = styled.table`
   ${media.handheld`
     display: block
@@ -27,6 +35,7 @@ const Tr = styled.tr`
     display: block;
     text-align: center;
     margin-top: 30px;
+    height: 100px;
   `}
 `;
 
@@ -56,6 +65,10 @@ const Category = styled.h4`
   margin-top: 9px;
   margin-bottom: 9px;
   font-size: 13px;
+  ${media.handheld`
+    margin-left: unset;
+  `}
+
 `;
 
 const Details = styled.button`
@@ -108,6 +121,19 @@ const Title = styled.p`
     `}
 `;
 
+const Time =styled.h5`
+  margin-top: 7px;
+  text-indent: 28px;
+  ${media.handheld`
+    margin-bottom: 0px;
+    text-indent: 0px;
+  `}
+`;
+
+const ButtonWrapper = styled.div`
+
+`;
+
 class Services extends React.Component {
 
   componentDidMount() {
@@ -123,18 +149,21 @@ class Services extends React.Component {
 
       const services = this.props.services.map((service, index) => (
         <Tr key={index}>
-        <Td>
-          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")}</Date>
-        </Td>
+        <Tdate>
+          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY")}</Date>
+          <Time>{moment(service.dateTime).format("h:mm a")}</Time>
+        </Tdate>
         <Td>
           <Category>{service.category}</Category>
         </Td>
         <Td>
+        <ButtonWrapper>
           <Link to = {`/services/${service.id}`}>
             <Details id={service.id}>Details</Details>
           </Link>
           <Delete id={service.id} onClick={
             (e)=> this.onDelete(e.target.id)}>Delete</Delete>
+          </ButtonWrapper>
         </Td>
         </Tr>
       ))

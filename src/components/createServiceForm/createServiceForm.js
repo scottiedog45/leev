@@ -2,7 +2,6 @@ import React from 'react';
 import {Field, reduxForm, reset} from 'redux-form';
 import {postService} from '../../actions';
 import {media} from '../style-utils'
-
 import styled from 'styled-components'
 
 const CreateButton = styled.button`
@@ -32,6 +31,7 @@ const FormTitle = styled.p`
 
 const FormWrapper = styled.div`
   overflow: auto;
+  border-radius: 10px;
   ${media.handheld`
     text-align: center;
     `}
@@ -39,18 +39,25 @@ const FormWrapper = styled.div`
 
 const Form = styled.form`
   font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+  background-color: #ccc6b9;
+  ${media.handheld`
+    display: inline-block;
+    `}
 `;
 
 const CategoryWrapper = styled.div`
-margin: 10px;
-margin-top: 20px;
-text-align: left;
+  margin: 10px;
+  margin-top: 20px;
+  text-align: left;
 `;
 
 const DateTimeWrapper = styled.div`
-margin: 10px;
-margin-top: 20px;
-text-align: left;
+  margin: 10px;
+  margin-top: 20px;
+  text-align: left;
 `;
 
 const ButtonWrapper = styled.div`
@@ -64,9 +71,10 @@ const ButtonWrapper = styled.div`
 const Button = styled.button`
   width: 70px;
   background-color: #EB5E28;
-  color: black;
+  color: white;
   border: none;
   height: 25px;
+  border-radius: 5px;
 `;
 
 const Legend = styled.legend`
@@ -123,10 +131,9 @@ export class CreateServiceForm extends React.Component {
 
     return (
       <FormWrapper>
-      {
-      !this.state.editing ? <CreateButton onClick={()=>this.toggleEditing()}>Create Service</CreateButton> :
-
-      <Form className ='serviceForm' onSubmit={this.props.handleSubmit(values =>
+        {
+          !this.state.editing ? <CreateButton className='button' onClick={()=>this.toggleEditing()}>Create Service</CreateButton>
+          : <Form className ='serviceForm' onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>
       <FormTitle>Create Service</FormTitle>

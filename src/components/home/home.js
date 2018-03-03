@@ -61,19 +61,22 @@ const Panel2 = Panel.extend`
   justify-content: space-around;
   ${media.handheld`
     display: inherit;
-
     `}
 `;
 
 const Panel3 = Panel.extend`
+  padding-top: 20px;
+  padding-bottom: 20px;
   background-color: #fff0c5;
   height: 400px;
   text-align: center;
+  height: unset;
 `;
 
 const Panel4 = Panel.extend`
   background-color: none;
   height: 400px;
+  text-align: center;
 `;
 
 const Panel5 = Panel.extend`
@@ -130,9 +133,10 @@ const IconLabel = styled.p`
 `;
 
 const Quote = styled.h3`
-  font-size: 40px;
+  font-size: 17px;
   margin-top: 0px;
-  padding-top: 105px;
+  padding-top: 18px;
+  margin-bottom: 9px;
   ${media.handheld`
     font-size: 24px;
     `}
@@ -144,6 +148,13 @@ const Subtitle = styled.h3`
     padding: 5px;
 
     `}
+`;
+
+const PanelHeader = styled.h4`
+  padding-top: 32px;
+  font-size: 37px;
+  margin-bottom: 14px;
+  margin-top: 0px;
 `;
 
 
@@ -159,6 +170,7 @@ export default function Home(props) {
           </StyledLink>
         </Panel1>
         <Panel2>
+        <h4>The benefits of Leev are virtually endless</h4>
         <IconContainer>
           <IconLabel>Leev takes the hassle out of recording leave data for your group.</IconLabel>
             <ClipboardIcon src={clipboard} alt={'clipboard'} />
@@ -169,10 +181,14 @@ export default function Home(props) {
             </IconContainer>
         </Panel2>
         <Panel3>
+        <h2>Literally everyone is talking about Leev</h2>
           <Quote>"Do not strive to make your presence noticed, just your absence felt."</Quote>
           <h5>-Someone important</h5>
+          <Quote>"I was president for 8 years, all thanks to Leev"</Quote>
+          <h5>-Barack Obama</h5>
         </Panel3>
         <Panel4>
+        <h2>Best of all, it's absolutely free</h2>
           <SignUpTitle>Sign up today to use Leev for your team.</SignUpTitle>
           <StyledLink to={'/signup'}>
             <DemoButton>Sign Up</DemoButton>
