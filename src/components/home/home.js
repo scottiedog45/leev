@@ -161,7 +161,6 @@ export default function Home(props) {
           </StyledLink>
         </Panel1>
         <Panel2>
-        <h4>The benefits of Leev are virtually endless</h4>
         <IconContainer>
           <IconLabel>Leev takes the hassle out of recording leave data for your group.</IconLabel>
             <ClipboardIcon src={clipboard} alt={'clipboard'} />

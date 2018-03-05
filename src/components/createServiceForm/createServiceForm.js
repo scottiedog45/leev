@@ -133,7 +133,7 @@ export class CreateServiceForm extends React.Component {
       <FormWrapper>
         {
           !this.state.editing ? <CreateButton className='button' onClick={()=>this.toggleEditing()}>Create Service</CreateButton>
-          : <Form className ='serviceForm' onSubmit={this.props.handleSubmit(values =>
+          : <Form onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>
       <FormTitle>Create Service</FormTitle>
