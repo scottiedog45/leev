@@ -68,14 +68,12 @@ onEmailChange(e) {
   this.setState({
     email: e.target.value
   });
-
 }
 
 onPasswordChange(e) {
   this.setState({
     password: e.target.value
   });
-
 }
 
 onSubmit() {
