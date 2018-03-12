@@ -103,7 +103,7 @@ export const userLogin = (data) =>  dispatch => {
     if (!responseData.ok) {
       return Promise.reject(data.statusText);
     }
-    return data.json();
+    return responseData.json();
   })
   .then(payload => {
     setSessionToken(payload.token);
