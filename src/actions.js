@@ -99,14 +99,15 @@ export const userLogin = (data) =>  dispatch => {
     },
     body: JSON.stringify(data)
   })
-  .then(data => {
-    if (!data.ok) {
+  .then(responseData => {
+    if (!responseData.ok) {
       return Promise.reject(data.statusText);
-    } return data.json();
+    }
+    return data.json();
   })
   .then(payload => {
-      setSessionToken(payload.token);
-    })
+    setSessionToken(payload.token);
+  })
   .then(()=> {
     let token = getToken();
     dispatch(setToken(token.token));

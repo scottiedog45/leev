@@ -102,7 +102,8 @@ export class CreateServiceForm extends React.Component {
     this.props.dispatch(reset('service'))
   }
 
-  toggleEditing() {
+  toggleEditing(e) {
+    e.preventDefault();
     this.setState({
       editing: !this.state.editing
     })
@@ -132,7 +133,7 @@ export class CreateServiceForm extends React.Component {
     return (
       <FormWrapper>
         {
-          !this.state.editing ? <CreateButton className='button' onClick={()=>this.toggleEditing()}>Create Service</CreateButton>
+          !this.state.editing ? <CreateButton className='button' onClick={(e)=>this.toggleEditing(e)}>Create Service</CreateButton>
           : <Form onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
             )}>

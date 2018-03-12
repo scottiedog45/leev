@@ -102,7 +102,8 @@ export class CreateMemberForm extends React.Component {
     }
   }
 
-  toggle() {
+  toggle(e) {
+    e.preventDefault();
     this.setState({showForm: !this.state.showForm});
   }
 
@@ -181,7 +182,7 @@ export class CreateMemberForm extends React.Component {
           </ButtonWrapper>
         </Form>
       ) : (
-      <CreateMemberButton onClick={(e)=>this.toggle()}>Create Member</CreateMemberButton>
+      <CreateMemberButton onClick={(e)=>this.toggle(e)}>Create Member</CreateMemberButton>
       )}
       </FormContainer>
     );
