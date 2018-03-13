@@ -177,8 +177,8 @@ export class CreateMemberForm extends React.Component {
             />
             </InputWrapper>
           <ButtonWrapper>
-            <Button type='submit'>Submit</Button>
-            <Button type='button' onClick={(e)=>this.toggle(e)}>Cancel</Button>
+            <Button type="submit">Submit</Button>
+            <Button type="button" onClick={(e)=>this.toggle(e)}>Cancel</Button>
           </ButtonWrapper>
         </Form>
       ) : (
