@@ -160,7 +160,7 @@ export class CreateServiceForm extends React.Component {
       </DateTimeWrapper>
       <ButtonWrapper>
         <Button type='submit'>Submit</Button>
-        <Button type='cancel' onClick={(e)=>this.toggleEditing(e)}>Cancel</Button>
+        <Button type='button' onClick={(e)=>this.toggleEditing(e)}>Cancel</Button>
       </ButtonWrapper>
       </Form>
     }
