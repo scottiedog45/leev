@@ -99,21 +99,6 @@ const Signature = styled.p`
   padding-top: 40px;
 `;
 
-const MoneyIcon = styled.img`
-  height: 250px;
-  ${media.handheld`
-    height: 125px;
-    margin-top: -15px;
-    `}
-`;
-
-const ClipboardIcon = styled.img`
-  height: 256px;
-  ${media.handheld`
-    height: 125px;
-    `}
-`;
-
 const IconContainer = styled.div`
   text-align: center;
 `;
@@ -149,10 +134,6 @@ const Best = styled.h2`
   padding-top: 100px;
   margin: 0px;
   margin-bottom: 10px;
-`;
-
-const Literally = styled.h2`
-
 `;
 
 const IconWrapper=styled.div`

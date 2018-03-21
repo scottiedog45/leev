@@ -12,7 +12,6 @@ import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
 import Loader from '../loader/loader';
-import {changeLoadingState} from '../../actions'
 
 class App extends React.Component {
   constructor(props) {
