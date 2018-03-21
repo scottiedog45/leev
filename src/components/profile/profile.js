@@ -5,6 +5,7 @@ import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo';
 import styled from 'styled-components';
 
+
 const ProfileContainer = styled.div`
   margin: 20px;
 `;
@@ -37,7 +38,7 @@ class Profile extends React.Component {
       <ProfileContainer>
         {this.props.member && <MemberInfo member={this.props.member} />}
         <div className='leaves'>
-          <h2>Left services:</h2>
+          <h2>Leave History:</h2>
           <Leaves member={this.props.member} services={this.props.services} />
         </div>
       </ProfileContainer>

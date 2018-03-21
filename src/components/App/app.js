@@ -11,27 +11,24 @@ import Attendance from '../attendance/attendance';
 import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
+import Loader from '../loader/loader';
+import {changeLoadingState} from '../../actions'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: false
+      loggedIn: false,
+      loading: this.props.loading
     }
   }
-
-  // componentDidMount() {
-  //   if (this.state.loggedIn) {
-  //     this.props.dispatch(fetchMembers());
-  //     this.props.dispatch(fetchServices());
-  //   }
-  // }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (nextProps.token !== '') {
       this.setState({
-        loggedIn: true
+        loggedIn: true,
+        loading: false
       });
     } else {
       this.setState({
@@ -40,10 +37,20 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if(this.state.loggedIn) {
+      this.setState({
+        loading: false
+      })
+    }
+  }
+
   render() {
 
     return (
-        <Router>
+      <div>
+      {!this.state.loading ?
+        (<Router>
           <div>
             <Sidebar loggedIn={this.state.loggedIn}/>
             <main>
@@ -81,14 +88,18 @@ class App extends React.Component {
               )} />
             </main>
           </div>
-        </Router>
-    );
+        </Router>)
+        :
+        (<Loader loading={this.state.loading}/>)
+    }
+  </div>);
   }
 }
 
 const mapStateToProps = state => ({
   state: state.leev,
-  token: state.leev.token
+  token: state.leev.token,
+  loading: state.leev.loading,
 });
 
 export default connect(mapStateToProps)(App);

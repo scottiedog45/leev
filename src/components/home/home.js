@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import clipboard from './clipbaord.png';
-import money from './notes.png';
 import {Link} from 'react-router-dom'
 import {media} from '../style-utils'
+import FontAwesome from 'react-fontawesome';
+import {connect} from 'react-redux';
 
 const Panellist = styled.ul`
   list-style: none;
@@ -38,7 +38,7 @@ const Title = styled.h1`
   padding-top: 152px;
   ${media.handheld`
     font-size: 38px;
-    padding-top: 127px;
+    padding-top: 171px;
     `}
 `;
 
@@ -53,7 +53,6 @@ const Panel1 = Panel.extend`
 
 const Panel2 = Panel.extend`
   background-color: none;
-  height: 400px;
   padding-top: 40px;
   padding-bottom: 40px;
   display: flex;
@@ -64,18 +63,18 @@ const Panel2 = Panel.extend`
 `;
 
 const Panel3 = Panel.extend`
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: #fff0c5;
-  height: 400px;
   text-align: center;
   height: unset;
+
 `;
 
 const Panel4 = Panel.extend`
   background-color: none;
-  height: 400px;
+  height: 350px;
   text-align: center;
+  padding: 20px;
 `;
 
 const Panel5 = Panel.extend`
@@ -87,7 +86,6 @@ const SignUpTitle = styled.p`
   display: block;
   text-align: center;
   margin-top: 0px;
-  padding-top: 100px;
   font-size: 30px;
   ${media.handheld`
     font-size: 27px;
@@ -131,13 +129,12 @@ const IconLabel = styled.p`
     `}
 `;
 
-const Quote = styled.h3`
-  font-size: 17px;
+const Quote = styled.h4`
   margin-top: 0px;
   padding-top: 18px;
   margin-bottom: 9px;
   ${media.handheld`
-    font-size: 24px;
+
     `}
 `;
 
@@ -145,11 +142,27 @@ const Subtitle = styled.h3`
   margin-top: 4px;
   ${media.handheld`
     padding: 5px;
-
     `}
 `;
 
-export default function Home(props) {
+const Best = styled.h2`
+  padding-top: 100px;
+  margin: 0px;
+  margin-bottom: 10px;
+`;
+
+const Literally = styled.h2`
+
+`;
+
+const IconWrapper=styled.div`
+  font-size: 170px;
+  ${media.handheld`
+    font-size: 100px;
+    `}
+`;
+
+function Home(props) {
   return (
     <div className="home-page">
       <Panellist>
@@ -163,22 +176,32 @@ export default function Home(props) {
         <Panel2>
         <IconContainer>
           <IconLabel>Leev takes the hassle out of recording leave data for your group.</IconLabel>
-            <ClipboardIcon src={clipboard} alt={'clipboard'} />
+          <IconWrapper>
+            <FontAwesome name='chart-bar'/>
+          </IconWrapper>
+          </IconContainer>
+          <IconContainer>
+            <IconLabel>An ituitive interface means no learning curve for you and your team.</IconLabel>
+            <IconWrapper>
+            <FontAwesome name='check-circle'/>
+            </IconWrapper>
           </IconContainer>
           <IconContainer>
             <IconLabel>With better tools, you have more time to focus on your work.</IconLabel>
-            <MoneyIcon src={money} alt={'money'} />
+            <IconWrapper>
+            <FontAwesome name='dollar-sign'/>
+            </IconWrapper>
             </IconContainer>
         </Panel2>
         <Panel3>
         <h2>Literally everyone is talking about Leev</h2>
           <Quote>"Do not strive to make your presence noticed, just your absence felt."</Quote>
-          <h5>-Someone important</h5>
-          <Quote>"I was president for 8 years, all thanks to Leev"</Quote>
+          <h5>-Anonymous</h5>
+          <Quote>"I was president for 8 years, all thanks to Leev."</Quote>
           <h5>-Barack Obama</h5>
         </Panel3>
         <Panel4>
-        <h2>Best of all, it's absolutely free</h2>
+        <Best>Best of all, it's absolutely free.</Best>
           <SignUpTitle>Sign up today to use Leev for your team.</SignUpTitle>
           <StyledLink to={'/signup'}>
             <DemoButton>Sign Up</DemoButton>
@@ -191,3 +214,9 @@ export default function Home(props) {
     </div>
   );
 }
+
+const mapStateToProps = state => ({
+  loading: state.leev.loading
+});
+
+export default connect(mapStateToProps)(Home);

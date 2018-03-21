@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import {reduxForm} from 'redux-form';
-import {userLogin} from '../../actions';
+import {userLogin, changeLoadingState} from '../../actions';
 import {Link} from 'react-router-dom';
 import {media} from '../style-utils';
+
 
 const Loginbox = styled.div`
   width: 400px;
@@ -82,7 +83,8 @@ onSubmit() {
     password: this.state.password
   };
   this.props.dispatch(userLogin(values));
-  this.props.history.push('/services');
+  this.props.dispatch(changeLoadingState());
+  this.props.history.push('/')
 }
 
   render() {
@@ -128,8 +130,6 @@ onSubmit() {
     )
   }
 }
-
-//add connect to this
 
 export default Login = reduxForm({
   form:'login'

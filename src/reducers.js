@@ -5,7 +5,8 @@ const initialState = {
   services:[],
   error: null,
   singleMemberLeave: [],
-  token: ''
+  token: '',
+  loading: false
 };
 
 //don't need optimistic UI for everything
@@ -44,7 +45,13 @@ export function leevReducer(state=initialState, action) {
   } else if (action.type === actions.LOG_OUT) {
     console.log('reducer logging out');
     return Object.assign({}, state, {
-      token: ''
+      token: '',
+      loading: false
+    });
+  } else if (action.type === actions.SET_LOADING_STATE) {
+    console.log(state.loading);
+    return Object.assign({}, state, {
+      loading: !state.loading
     });
   }
     return state;

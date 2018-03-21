@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components'
 import FontAwesome from 'react-fontawesome';
@@ -183,7 +184,7 @@ render() {
             </Link>
           ) : (
             <Link to ={`/`}>
-              <LogOutButton onClick={(e)=> this.logout()}>Logout</LogOutButton>
+              <LogOutButton onClick={()=> this.logout()}>Logout</LogOutButton>
             </Link>
           )}
           </li>
@@ -208,12 +209,12 @@ render() {
             }
         </List>
       </NavBar>
-  )
-}
+    )
+  }
 }
 
-const mapStateToProps = (state)  => ({
-  optionList: state.leev.optionList
+const mapStateToProps = state => ({
+  loading: state.leev.loading
 });
 
 export default connect(mapStateToProps)(Sidebar);
