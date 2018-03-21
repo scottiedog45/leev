@@ -180,7 +180,7 @@ export class ServiceInfo extends React.Component {
               component = {this.renderField}
               type='datetime-local'
               onChange={(e)=>this.handleDateChange(e)}
-              value={moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")}
+              value={moment(this.props.service.dateTime).local().format("YYYY-MM-DDThh:mm")}
               validate={[required]}
               warn={required}
             />
