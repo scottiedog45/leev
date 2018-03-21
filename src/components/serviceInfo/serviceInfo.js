@@ -107,7 +107,7 @@ export class ServiceInfo extends React.Component {
   handleInitialize() {
     const initData = {
       'category': this.props.service.category,
-      'dateTime': moment(this.props.service.dateTime).format("YYYY-MM-DDThh:mm")
+      'dateTime': moment(this.props.service.dateTime).format("YYYY-MM-DDTHH:mm")
     };
        this.props.initialize(initData);
   }
@@ -116,13 +116,19 @@ export class ServiceInfo extends React.Component {
     this.handleInitialize();
 }
 
+  componentDidMount(){
+    console.log(this.props.service.dateTime);
+  }
+
   toggleEditing = () => {
+    console.log(this.props.service.dateTime);
     this.setState({
       editing: !this.state.editing
     });
   }
 
   handleDateChange = (e) => {
+    console.log(e.target.value);
     this.setState({
       dateTimeValue: e.target.value
     })
@@ -180,7 +186,7 @@ export class ServiceInfo extends React.Component {
               component = {this.renderField}
               type='datetime-local'
               onChange={(e)=>this.handleDateChange(e)}
-              value={moment(this.props.service.dateTime).local().format("YYYY-MM-DDThh:mm")}
+              value={moment(this.props.service.dateTime).format("YYYY-MM-DDTHH:mm")}
               validate={[required]}
               warn={required}
             />

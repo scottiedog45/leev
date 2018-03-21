@@ -101,7 +101,7 @@ export const userLogin = (data) =>  dispatch => {
   })
   .then(responseData => {
     if (!responseData.ok) {
-      return Promise.reject(data.statusText);
+      return Promise.reject(responseData.statusText);
     }
     return responseData.json();
   })
