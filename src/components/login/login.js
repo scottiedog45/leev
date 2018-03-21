@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import styled from 'styled-components';
 import {reduxForm} from 'redux-form';
-import {userLogin, changeLoadingState} from '../../actions';
+import {userLogin} from '../../actions';
 import {Link} from 'react-router-dom';
 import {media} from '../style-utils';
 import Loader from '../loader/loader'

@@ -7,11 +7,9 @@ import Sidebar from '../sidebar/sidebar';
 import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
-import {changeLoadingState} from '../../actions'
 import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
-import Loader from '../loader/loader';
 
 class App extends React.Component {
   constructor(props) {
