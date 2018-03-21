@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const LoaderContainer = styled.div`
   margin-left: 48vw;
-  margin-top: 50vh;
+  margin-top: 30vh;
 `;
 
 const Subtitle = styled.p`

@@ -12,7 +12,8 @@ describe('leevReducer', ()=> {
       services:[],
       error: null,
       singleMemberLeave: [],
-      token: ''
+      token: '',
+      loading: false
     });
   });
 
@@ -31,7 +32,8 @@ describe('leevReducer', ()=> {
         services:[],
         error: null,
         singleMemberLeave: [],
-        token: ''
+        token: '',
+        loading: false
       });
     });
   });

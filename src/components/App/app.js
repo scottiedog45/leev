@@ -7,7 +7,7 @@ import Sidebar from '../sidebar/sidebar';
 import {connect} from 'react-redux';
 import Profile from '../profile/profile'
 import Attendance from '../attendance/attendance';
-// import {fetchServices, fetchMembers} from '../../actions';
+import {changeLoadingState} from '../../actions'
 import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
@@ -17,18 +17,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: false,
-      loading: this.props.loading
+      loggedIn: false
     }
   }
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     if (nextProps.token !== '') {
-      this.setState({
-        loggedIn: true,
-        loading: false
-      });
+        this.setState({
+          loggedIn: true
+        });
     } else {
       this.setState({
         loggedIn: false
@@ -36,20 +34,10 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if(this.state.loggedIn) {
-      this.setState({
-        loading: false
-      })
-    }
-  }
-
   render() {
 
     return (
-      <div>
-      {!this.state.loading ?
-        (<Router>
+        <Router>
           <div>
             <Sidebar loggedIn={this.state.loggedIn}/>
             <main>
@@ -87,11 +75,8 @@ class App extends React.Component {
               )} />
             </main>
           </div>
-        </Router>)
-        :
-        (<Loader loading={this.state.loading}/>)
-    }
-  </div>);
+        </Router>
+      )
   }
 }
 

@@ -1,9 +1,11 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import styled from 'styled-components';
 import {reduxForm} from 'redux-form';
 import {userLogin, changeLoadingState} from '../../actions';
 import {Link} from 'react-router-dom';
 import {media} from '../style-utils';
+import Loader from '../loader/loader'
 
 
 const Loginbox = styled.div`
@@ -61,9 +63,20 @@ class Login extends React.Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      loading: false,
+      token: ''
     }
   }
+
+componentWillReceiveProps(nextProps) {
+  console.log(nextProps);
+  if (nextProps.token !== '') {
+    setTimeout(()=> {
+      this.props.history.push('/services');
+    }, 4000);
+  }
+}
 
 onEmailChange(e) {
   this.setState({
@@ -83,14 +96,18 @@ onSubmit() {
     password: this.state.password
   };
   this.props.dispatch(userLogin(values));
-  this.props.dispatch(changeLoadingState());
-  this.props.history.push('/')
-}
+  this.setState({
+    loading: true
+  })
+  }
+
 
   render() {
 
     return(
-      <FormWrapper>
+      <div>
+      {(this.state.loading) ? (<Loader loading={this.state.loading}/>) :
+      (<FormWrapper>
         <Loginbox>
           <LoginTitle role = 'banner'>
             Login or <Link to={'/signUp'}>Sign up</Link>
@@ -125,12 +142,19 @@ onSubmit() {
             </ButtonWrapper>
           </form>
         </Loginbox>
-      </FormWrapper>
-
-    )
+      </FormWrapper>)}
+      </div>
+    );
   }
 }
 
-export default Login = reduxForm({
+const mapStateToProps = (state) => ({
+  loading: state.leev.loading,
+  token: state.leev.token
+})
+
+Login = reduxForm({
   form:'login'
 })(Login);
+
+export default connect(mapStateToProps)(Login);
