@@ -37,7 +37,7 @@ const ButtonWrapper = styled.div`
 
 const Input = styled.input`
   height: 30px;
-  width: 300px;
+  width: 100%;
   ${media.handheld`
     width: 206px;
     `}
@@ -48,6 +48,7 @@ const FormWrapper = styled.div`
 `;
 
 const DemoWrapper = styled.div`
+  text-align: center;
   &:child {
     margin-top: none;
     margin-bottom: none;
@@ -55,7 +56,7 @@ const DemoWrapper = styled.div`
 `;
 
 const DemoP = styled.p`
-  margin: 0px 0px 0px 20px;
+
 `;
 
 class Login extends React.Component {
@@ -69,38 +70,35 @@ class Login extends React.Component {
     }
   }
 
-componentWillReceiveProps(nextProps) {
-  console.log(nextProps);
-  if (nextProps.token !== '') {
-    setTimeout(()=> {
-      this.props.history.push('/services');
-    }, 4000);
-  }
-}
-
-onEmailChange(e) {
-  this.setState({
-    email: e.target.value
-  });
-}
-
-onPasswordChange(e) {
-  this.setState({
-    password: e.target.value
-  });
-}
-
-onSubmit() {
-  let values = {
-    email: this.state.email,
-    password: this.state.password
-  };
-  this.props.dispatch(userLogin(values));
-  this.setState({
-    loading: true
-  })
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (nextProps.token !== '') {
+        this.props.history.push('/services');
+    }
   }
 
+  onEmailChange(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+
+  onPasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  onSubmit() {
+    let values = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.dispatch(userLogin(values));
+    this.setState({
+      loading: true
+    });
+  }
 
   render() {
 
@@ -133,7 +131,7 @@ onSubmit() {
             />
             </InputWrapper>
             <DemoWrapper>
-            <DemoP>Demo account:</DemoP>
+            <DemoP>Demo Administrator account:</DemoP>
             <DemoP>email: something3@something.com</DemoP>
             <DemoP>password: test2 </DemoP>
             </DemoWrapper>

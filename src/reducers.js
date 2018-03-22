@@ -6,7 +6,8 @@ const initialState = {
   error: null,
   singleMemberLeave: [],
   token: '',
-  loading: false
+  loading: false,
+  loggedIn: false
 };
 
 //don't need optimistic UI for everything
@@ -40,16 +41,22 @@ export function leevReducer(state=initialState, action) {
   } else if (action.type === actions.SET_TOKEN) {
     console.log(action.token);
     return Object.assign({}, state, {
-      token: action.token
+      token: action.token,
+      loggedIn: true
     });
   } else if (action.type === actions.LOG_OUT) {
     return Object.assign({}, state, {
-      token: ''
+      token: '',
+      loggedIn: false
     });
-  } else if (action.type === actions.SET_LOADING_STATE) {
+  } else if (action.type === actions.BEGIN_LOADING_STATE) {
     return Object.assign({}, state, {
-      loading: !state.loading
+      loading: true
     });
+  } else if (action.type === actions.END_LOADING_STATE) {
+    return Object.assign({}, state, {
+      loading: false
+    })
   }
     return state;
   }

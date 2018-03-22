@@ -48,21 +48,28 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const Welcome = styled.div`
+  margin: 20px
+`;
+
 export default class HowTo extends React.Component {
 
 render() {
 
   return(
-    <div>
+    <Welcome>
       <Title>Welcome!</Title>
       <Header role='banner'>Getting Started with Leev:</Header>
+      <p>Administrator accounts can do most of the cool stuff. Member accounts can login and have a read-only view of their leave data in their profile. Administrator accounts can:
+        <ul>
+          <Li>Create members</Li>
+          <li>Modify member information</li>
+          <li>Add, delete, and modify services</li>
+          <li>Adjust allotted leave amounts for each member</li>
+          <li>Mark leave for a member for a given service</li>
+        </ul>
+      </p>
       <List>
-        <Li>
-          1) Login or signup.
-        </Li>
-        <Li>
-          2) Create the services and members you wish to track on the Services and Members pages.
-        </Li>
         <Li>
         Now for the fun part:
         </Li>
@@ -83,6 +90,6 @@ render() {
       <StyledLink to={'/signup'}>
       <Button>Create an account now!</Button>
       </StyledLink>
-    </div>);
+    </Welcome>);
   }
 }

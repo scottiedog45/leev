@@ -175,7 +175,7 @@ function Home(props) {
             </IconContainer>
         </Panel2>
         <Panel3>
-        <h2>Literally everyone is talking about Leev</h2>
+        <h2>Literally everyone is talking about Leev.</h2>
           <Quote>"Do not strive to make your presence noticed, just your absence felt."</Quote>
           <h5>-Anonymous</h5>
           <Quote>"I was president for 8 years, all thanks to Leev."</Quote>

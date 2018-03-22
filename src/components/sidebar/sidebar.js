@@ -116,7 +116,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: this.props.loggedIn,
       showingHamburger: false
     }
   }
@@ -213,7 +213,8 @@ render() {
 }
 
 const mapStateToProps = state => ({
-  loading: state.leev.loading
+  loading: state.leev.loading,
+  loggedIn: state.leev.loggedIn
 });
 
 export default connect(mapStateToProps)(Sidebar);

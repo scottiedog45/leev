@@ -2,11 +2,15 @@ import {API_BASE_URL} from './config';
 import moment from 'moment';
 import store from 'store';
 
-export const SET_LOADING_STATE = 'SET_LOADING_STATE';
-export const setLoadingState = () => ({
-  type: SET_LOADING_STATE
+export const BEGIN_LOADING_STATE = 'BEGIN_LOADING_STATE'
+export const beginLoadingState = () => ({
+  type: BEGIN_LOADING_STATE
 })
 
+export const END_LOADING_STATE = 'END_LOADING_STATE'
+export const endLoadingState = () => ({
+  type: END_LOADING_STATE
+})
 
 export const FETCH_MEMBERS_SUCCESS = 'FETCH_MEMBERS_SUCCESS';
 export const fetchMembersSuccess = members => ({
@@ -55,8 +59,12 @@ export const logOut = () => ({
   type: LOG_OUT
 });
 
-export const changeLoadingState = () => dispatch => {
-  dispatch(setLoadingState());
+export const showSpinner = () => dispatch => {
+  dispatch(beginLoadingState());
+}
+
+export const removeSpinner = () => dispatch => {
+  dispatch(endLoadingState());
 }
 
 const setSessionToken = (token) => {
