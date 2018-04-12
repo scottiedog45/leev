@@ -27,27 +27,26 @@ const phoneNumber = value =>
     : undefined
 
 const CreateMemberButton = styled.button`
-  height: 40px;
-  width: 128px;
+  height: 35px;
+  width: 300px;
   border-radius: 7px;
-  position: fixed;
-  margin-left: 20px;
   background-color: #EB5E28;
   border: none;
   color: #FFFCF2;
-  font-size: 15px;
+  font-size: 30px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
-  margin-top: 32px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   ${media.handheld`
     margin-left: unset;
     margin-top: unset;
     position: unset;
+    margin-bottom: unset;
     `}
 `;
 
 const FormContainer = styled.div`
-overflow: auto;
 border-radius: 10px;
 ${media.handheld`
   text-align: center;
@@ -60,9 +59,11 @@ const Legend = styled.legend`
 `;
 
 const Form = styled.form`
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
   padding: 10px;
   border-radius: 5px;
-  width: 400px;
   background-color: #ccc6b9;
 `;
 
@@ -102,12 +103,28 @@ export class CreateMemberForm extends React.Component {
     }
   }
 
-  toggle(e) {
+  toggleOn(e) {
     e.preventDefault();
-    this.setState({showForm: !this.state.showForm});
+    this.setState({
+      showForm: true
+    });
+  }
+
+  cancelForm(e) {
+    e.preventDefault();
+    this.setState({
+      showForm: false
+    })
+  }
+
+  toggleOff() {
+    this.setState({
+      showForm: false
+    })
   }
 
   onSubmit(values) {
+    this.toggleOff();
     this.props.dispatch(postMember(values));
     this.props.dispatch(reset('member'));
   }
@@ -178,11 +195,11 @@ export class CreateMemberForm extends React.Component {
             </InputWrapper>
           <ButtonWrapper>
             <Button type="submit">Submit</Button>
-            <Button type="button" onClick={(e)=>this.toggle(e)}>Cancel</Button>
+            <Button type="button" onClick={(e)=>this.cancelForm(e)}>Cancel</Button>
           </ButtonWrapper>
         </Form>
       ) : (
-      <CreateMemberButton onClick={(e)=>this.toggle(e)}>Create Member</CreateMemberButton>
+      <CreateMemberButton onClick={(e)=>this.toggleOn(e)}>+</CreateMemberButton>
       )}
       </FormContainer>
     );

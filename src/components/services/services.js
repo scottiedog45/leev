@@ -88,8 +88,6 @@ const Delete =styled.button`
 `;
 
 const Form = styled.div`
-  position: absolute;
-  width: 400px;
   ${media.handheld`
     position: unset;
     width: unset;
@@ -107,9 +105,9 @@ ${media.handheld`
 `;
 
 const Title = styled.p`
+  text-align: center;
   font-size: 90px;
   margin-top: 0px;
-  margin-left: 20px;
   margin-bottom: 0px;
   ${media.handheld`
     font-size: 70px;

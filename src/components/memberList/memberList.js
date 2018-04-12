@@ -36,7 +36,8 @@ const ListContainer = styled.div`
 `;
 
 const PeopleSection = styled.section`
-  margin-left: 200px;
+  margin-left: auto;
+  margin-right: auto;
   ${media.handheld`
     margin-left: 0px;
     `}
@@ -57,7 +58,7 @@ const DeleteButton = Button.extend`
 const Title = styled.p`
   font-size: 90px;
   margin-top: 0px;
-  margin-left: 20px;
+  text-align: center;
   margin-bottom: 0px;
   ${media.handheld`
     font-size: 70px;
@@ -105,6 +106,8 @@ ${media.handheld`
   `}
 `
 const Table = styled.table`
+margin-left: auto;
+margin-right: auto;
 ${media.handheld`
   display: block
   `}
@@ -117,8 +120,7 @@ ${media.handheld`
 `;
 
 const Form = styled.div`
-  position: absolute;
-  width: 400px;
+text-align: center;
   ${media.handheld`
     position: unset;
     width: unset;

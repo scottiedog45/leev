@@ -5,22 +5,22 @@ import {media} from '../style-utils'
 import styled from 'styled-components'
 
 const CreateButton = styled.button`
-  height: 40px;
-  width: 128px;
+  height: 35px;
+  width: 300px;
   border-radius: 7px;
-  position: absolute;
-  margin-left: 20px;
   background-color: #EB5E28;
   border: none;
   color: #FFFCF2;
-  font-size: 15px;
+  font-size: 30px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
-  margin-top: 32px;
+  margin: 10px 0px 20px 0px;
   ${media.handheld`
+    width: 100px;
     margin-left: unset;
     margin-top: unset;
     position: unset;
+    margin-bottom: unset;
     `}
 `;
 
@@ -30,7 +30,7 @@ const FormTitle = styled.p`
 `;
 
 const FormWrapper = styled.div`
-  overflow: auto;
+  text-align: center;
   border-radius: 10px;
   ${media.handheld`
     text-align: center;
@@ -38,6 +38,8 @@ const FormWrapper = styled.div`
 `;
 
 const Form = styled.form`
+  margin-left: auto;
+  margin-right: auto;
   font-size: 16px;
   padding: 10px;
   border-radius: 5px;
@@ -96,17 +98,31 @@ export class CreateServiceForm extends React.Component {
     }
   }
 
-  onSubmit(values) {
-    this.toggleEditing();
-    this.props.dispatch(postService(values));
-    this.props.dispatch(reset('service'))
+  toggleOff(){
+    this.setState({
+      editing: false
+    })
   }
 
-  toggleEditing(e) {
+  toggleOn(e){
     e.preventDefault();
     this.setState({
-      editing: !this.state.editing
+      editing: true
     })
+  }
+
+  cancelForm(e) {
+    console.log(e);
+    e.preventDefault();
+    this.setState({
+      editing: false
+    })
+  }
+
+  onSubmit(values) {
+    this.toggleOff();
+    this.props.dispatch(postService(values));
+    this.props.dispatch(reset('service'))
   }
 
   renderField ({
@@ -133,8 +149,8 @@ export class CreateServiceForm extends React.Component {
     return (
       <FormWrapper>
         {
-          !this.state.editing ? <CreateButton className='button' onClick={(e)=>this.toggleEditing(e)}>Create Service</CreateButton>
-          : <Form onSubmit={this.props.handleSubmit(values =>
+          !this.state.editing ? <CreateButton className='button' onClick={(e)=>{this.toggleOn(e)}}>+</CreateButton>
+          : <Form onSubmit={this.props.handleSubmit((values) =>
               this.onSubmit(values)
             )}>
       <FormTitle>Create Service</FormTitle>
@@ -159,8 +175,8 @@ export class CreateServiceForm extends React.Component {
           warn={required}/>
       </DateTimeWrapper>
       <ButtonWrapper>
-        <Button type='submit'>Submit</Button>
-        <Button type='button' onClick={(e)=>this.toggleEditing(e)}>Cancel</Button>
+        <Button type="submit">Submit</Button>
+        <Button type='button' onClick={(e)=>this.toggleOff(e)}>Cancel</Button>
       </ButtonWrapper>
       </Form>
     }

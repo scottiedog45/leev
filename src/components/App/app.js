@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: false
+      loggedIn: true
     }
   }
 
@@ -27,7 +27,7 @@ class App extends React.Component {
         });
     } else {
       this.setState({
-        loggedIn: false
+        loggedIn: true
       });
     }
   }

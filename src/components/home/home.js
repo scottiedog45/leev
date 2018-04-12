@@ -178,8 +178,6 @@ function Home(props) {
         <h2>Literally everyone is talking about Leev.</h2>
           <Quote>"Do not strive to make your presence noticed, just your absence felt."</Quote>
           <h5>-Anonymous</h5>
-          <Quote>"I was president for 8 years, all thanks to Leev."</Quote>
-          <h5>-Barack Obama</h5>
         </Panel3>
         <Panel4>
         <Best>Best of all, it's absolutely free.</Best>
