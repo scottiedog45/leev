@@ -12,7 +12,7 @@ describe('leevReducer', ()=> {
       services:[],
       error: null,
       singleMemberLeave: [],
-      loggedIn: true,
+      loggedIn: false,
       token: '',
       loading: false
     });
@@ -33,7 +33,7 @@ describe('leevReducer', ()=> {
         services:[],
         error: null,
         singleMemberLeave: [],
-        loggedIn: true,
+        loggedIn: false,
         token: '',
         loading: false
       });
