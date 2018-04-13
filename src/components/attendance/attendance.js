@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchServices, patchLeave, deleteMemberFromService, patchToService,
+import {fetchServices, patchLeave, deleteMemberFromService,
 putOneToService, fetchMembers} from '../../actions';
 import {reduxForm} from 'redux-form';
 import Autosuggest from 'react-autosuggest';
@@ -36,9 +36,6 @@ ${media.handheld`
   `}
 `;
 
-const AddAllWrapper = styled.span`
-  background-color: none;
-`;
 
 // const Th = styled.th`
 //   text-align: left;
@@ -46,24 +43,6 @@ const AddAllWrapper = styled.span`
 //     display: block;
 //     `}
 // `;
-
-const AddAllButton = styled.button`
-  margin-top: 7px;
-  display: block;
-  height: 40px;
-  width: 128px;
-  border-radius: 7px;
-  background-color: #EB5E28;
-  border: none;
-  color: #FFFCF2;
-  font-size: 15px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  cursor: pointer;
-  ${media.handheld`
-    margin-left: auto;
-    margin-right: auto;
-    `}
-`;
 
 const Name = styled.p`
   display: inline-block;

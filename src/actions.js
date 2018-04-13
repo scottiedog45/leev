@@ -150,7 +150,7 @@ export const fetchMembers = () => dispatch => {
     datatype: 'json',
     headers: {
     'Content-Type': 'application/json',
-    // 'Authorization': `Bearer ${someToken.token}`
+    'Authorization': `Bearer ${someToken.token}`
     }
   })
     .then(res => {

@@ -11,7 +11,7 @@ import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 
 class App extends React.Component {
   constructor(props) {

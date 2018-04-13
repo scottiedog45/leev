@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {CreateServiceForm} from '../createServiceForm/createServiceForm';
 import {deleteService, fetchServices} from '../../actions';
 import {Link} from 'react-router-dom';
-import moment from 'moment';
 import styled from 'styled-components';
 import {media} from '../style-utils'
 

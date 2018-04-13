@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import {Field, reduxForm} from 'redux-form';
 import {patchToService, fetchServices} from '../../actions'
 import styled from 'styled-components';
@@ -90,8 +89,6 @@ export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 
 export const minLength2 = minLength(2)
-
-const required = value => (value ? undefined : 'Required')
 
 export class ServiceInfo extends React.Component {
   constructor(props) {
