@@ -40,6 +40,7 @@ const CreateMemberButton = styled.button`
   margin-top: 10px;
   margin-bottom: 20px;
   ${media.handheld`
+    width: 100px;
     margin-left: unset;
     margin-top: unset;
     position: unset;
@@ -66,6 +67,9 @@ const Form = styled.form`
   padding: 10px;
   border-radius: 5px;
   background-color: #ccc6b9;
+  ${media.handheld`
+    width: unset;
+  `}
 `;
 
 const FormTitle = styled.p`

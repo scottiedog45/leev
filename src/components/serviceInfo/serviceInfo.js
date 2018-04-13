@@ -32,14 +32,6 @@ const Form = styled.form`
   text-align: center;
 `;
 
-// const EditButton = styled.button`
-//   width: 120px;
-//   background-color: #CCC5B9;
-//   color: #403d39;
-//   border: none;
-//   height: 30px;
-// `;
-
 const EditButtonWrapper = styled.button`
   background-color: inherit;
   border: none;

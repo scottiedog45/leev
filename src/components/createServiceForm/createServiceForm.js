@@ -51,7 +51,7 @@ const Form = styled.form`
   width: 400px;
   background-color: #ccc6b9;
   ${media.handheld`
-    display: inline-block;
+    width: unset;
     `}
 `;
 
