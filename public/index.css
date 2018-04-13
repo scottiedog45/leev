@@ -14,3 +14,7 @@ body {
 button {
   cursor: pointer;
 }
+
+input:-webkit-autofill {
+-webkit-box-shadow: 0 0 0 30px #ccc6b9 inset;
+}

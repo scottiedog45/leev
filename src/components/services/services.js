@@ -24,6 +24,8 @@ const Tdate = styled.td`
 `;
 
 const Table = styled.table`
+  margin-right: auto;
+  margin-left: auto;
   ${media.handheld`
     display: block
   `}
@@ -98,7 +100,7 @@ const Page = styled.div`
 `;
 
 const ListSection = styled.section`
-margin-left: 200px;
+
 ${media.handheld`
   margin-left: 0px;
   `}
@@ -146,8 +148,8 @@ class Services extends React.Component {
       const services = this.props.services.map((service, index) => (
         <Tr key={index}>
         <Tdate>
-          <Date>{moment(service.dateTime).format("dddd, MMMM Do YYYY")}</Date><br />
-          <Time>{moment(service.dateTime).format("h:mm a")}</Time>
+          <Date>{service.date}</Date><br />
+          <Time>{service.time}</Time>
         </Tdate>
         <Td>
           <Category>{service.category}</Category>

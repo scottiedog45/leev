@@ -1,8 +1,12 @@
 import React from 'react';
+import {connect} from 'react-redux'
 import {Field, reduxForm, reset} from 'redux-form';
 import {postService} from '../../actions';
 import {media} from '../style-utils'
 import styled from 'styled-components'
+import {TimePicker, DatePicker, TextField} from 'redux-form-material-ui'
+import moment from 'moment';
+
 
 const CreateButton = styled.button`
   height: 35px;
@@ -38,6 +42,7 @@ const FormWrapper = styled.div`
 `;
 
 const Form = styled.form`
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
   font-size: 16px;
@@ -53,13 +58,15 @@ const Form = styled.form`
 const CategoryWrapper = styled.div`
   margin: 10px;
   margin-top: 20px;
-  text-align: left;
 `;
 
 const DateTimeWrapper = styled.div`
   margin: 10px;
   margin-top: 20px;
-  text-align: left;
+`;
+
+const TimeWrapper = styled.div`
+  margin: 10px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -98,12 +105,14 @@ export class CreateServiceForm extends React.Component {
     }
   }
 
+  //closes the form when you press submit
   toggleOff(){
     this.setState({
       editing: false
     })
   }
 
+  //opens the form 
   toggleOn(e){
     e.preventDefault();
     this.setState({
@@ -111,6 +120,7 @@ export class CreateServiceForm extends React.Component {
     })
   }
 
+  //closes the form when you press cancel
   cancelForm(e) {
     console.log(e);
     e.preventDefault();
@@ -119,32 +129,25 @@ export class CreateServiceForm extends React.Component {
     })
   }
 
+  //creates a new service
+  //add members here, grab member list from props
   onSubmit(values) {
+    values.members = this.props.members.map(member=> (
+       {
+        _id: member.id,
+        leave: ''
+      }
+    ));
+    console.log(values);
     this.toggleOff();
+    console.log(values);
     this.props.dispatch(postService(values));
     this.props.dispatch(reset('service'))
   }
 
-  renderField ({
-   input,
-   label,
-   type,
-   meta: { touched, error, warning }
-   }) {
-     return  (
-       <div>
-         <label>{label}</label>
-         <div>
-           <input {...input} placeholder={label} type={type} />
-           {touched &&
-             ((error && <span>{error}</span>) ||
-               (warning && <span>{warning}</span>))}
-         </div>
-       </div>
-     )
-   }
-
   render() {
+
+    console.log(this.props);
 
     return (
       <FormWrapper>
@@ -159,20 +162,37 @@ export class CreateServiceForm extends React.Component {
         <Field
           name='category'
           id='category'
-          type = 'text'
-          component={this.renderField}
+          component={TextField}
           validate={[minLength2, required]}
           warn={required}/>
       </CategoryWrapper>
-      <DateTimeWrapper>
-        <Legend>Date Time</Legend>
+      <TimeWrapper>
+        <Legend>Time</Legend>
         <Field
-          name='dateTime'
-          id='dateTime'
-          type='datetime-local'
-          component={this.renderField}
-          validate={[required]}
-          warn={required}/>
+          component={TimePicker}
+          format={null}
+          id='time'
+          name='time'
+          props={{
+              format:'ampm',
+              id: 'thinggggg',
+              name: 'tryinggggg'
+              }}
+        />
+      </TimeWrapper>
+      <DateTimeWrapper>
+        <Legend>Date</Legend>
+        <Field
+          name='date'
+          id='date'
+          component={DatePicker}
+          format= {null}
+          props={
+            {
+              autoOk: true
+            }
+          }
+        />
       </DateTimeWrapper>
       <ButtonWrapper>
         <Button type="submit">Submit</Button>
@@ -184,6 +204,22 @@ export class CreateServiceForm extends React.Component {
   }
 }
 
-export default CreateServiceForm = reduxForm({
-  form:'service'
+const mapStateToProps = (state) => ({
+  members: state.leev.members
+});
+
+CreateServiceForm = reduxForm({
+  form: 'service'
 })(CreateServiceForm);
+
+CreateServiceForm = connect(
+  mapStateToProps
+)(CreateServiceForm);
+
+export default CreateServiceForm;
+
+
+
+
+
+

@@ -61,7 +61,8 @@ class Leaves extends React.Component {
         return
       } else {
       let formattedService = {
-        service: leftService.dateTime,
+        date: leftService.date,
+        time: leftService.time,
         reason: leaveRecord.leave
       };
       leaveArray.push(formattedService);
@@ -76,8 +77,9 @@ class Leaves extends React.Component {
 
   let leave = someLeave.map((service, index) => (
     <Tr key={index}>
-      <Td>{service.service}</Td>
-      <Td>{service.reason}</Td>
+      <Td>{service.date}</Td>
+      <Td>{service.time}</Td>
+      <Td><i>{service.reason}</i></Td>
     </Tr>
   ));
 

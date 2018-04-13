@@ -5,6 +5,7 @@ import {patchToService, fetchServices} from '../../actions'
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
 import {media} from '../style-utils'
+import {TextField, DatePicker, TimePicker} from 'redux-form-material-ui'
 
 const Service = styled.div`
   padding: 0px;
@@ -97,48 +98,18 @@ export class ServiceInfo extends React.Component {
     super(props);
     this.state = {
       editing: false,
-      dateTimeValue: '2018-06-01T08:30',
+      time: '3',
+      date: '2018-06-01T08:30',
       category: this.props.service.category
     }
   }
 
-  //moment(this.props.service.dateTime).format("yyyy-MM-ddThh:mm")
-
-  handleInitialize() {
-    const initData = {
-      'category': this.props.service.category,
-      'dateTime': moment(this.props.service.dateTime).format("YYYY-MM-DDTHH:mm")
-    };
-       this.props.initialize(initData);
-  }
-
-  componentWillMount(){
-    this.handleInitialize();
-}
-
-  componentDidMount(){
-    console.log(this.props.service.dateTime);
-  }
-
   toggleEditing = () => {
-    console.log(this.props.service.dateTime);
     this.setState({
       editing: !this.state.editing
     });
   }
 
-  handleDateChange = (e) => {
-    console.log(e.target.value);
-    this.setState({
-      dateTimeValue: e.target.value
-    })
-  }
-
-  handleCategoryChange= (e) => {
-    this.setState({
-      category: e.target.value
-    })
-  }
 
   onSubmit = (values) => {
     this.props.dispatch(patchToService(values, this.props.service.id))
@@ -148,57 +119,48 @@ export class ServiceInfo extends React.Component {
     this.props.dispatch(fetchServices());
     }
 
-    renderField ({
-     input,
-     label,
-     type,
-     meta: { touched, error, warning }
-     }) {
-       return  (
-         <div>
-           <label>{label}</label>
-           <div>
-             <input {...input} placeholder={label} type={type} />
-             {touched &&
-               ((error && <span>{error}</span>) ||
-                 (warning && <span>{warning}</span>))}
-           </div>
-         </div>
-       )
-     }
-
   render() {
 
-    const formattedDate = moment(this.props.service.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+    const formattedDate = this.props.service.date;
+
+    const time = this.props.service.time;
 
     return (
       <Service>
       {this.props.service &&
       <div>
-        <DateTime role='banner'>{!this.state.editing && formattedDate}</DateTime>
+        <DateTime role='banner'>
+          {!this.state.editing && 
+            <div>
+            <div>
+            {formattedDate}
+            </div>
+            <div>
+            {time}
+          </div>
+        </div>}
+        </DateTime>
         <Category>{!this.state.editing && this.props.service.category}</Category>
         {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
         {this.state.editing &&
           <Form onSubmit={this.props.handleSubmit((values)=>(this.onSubmit(values)))}>
             <legend>Date and Time: </legend>
             <Field
-              name ='dateTime'
-              component = {this.renderField}
-              type='datetime-local'
-              onChange={(e)=>this.handleDateChange(e)}
-              value={moment(this.props.service.dateTime).format("YYYY-MM-DDTHH:mm")}
-              validate={[required]}
-              warn={required}
+              name ='date'
+              component = {DatePicker}
             />
+            <legend>Time:</legend>
+            <Field 
+              name='time'
+              component={TimePicker}
+        />
             <legend>Edit category</legend>
             <Field
               name='category'
-              component = {this.renderField}
+              component = {TextField}
               type='text'
-              onChange={(e)=>this.handleCategoryChange(e)}
-              value={this.props.service.category}
-              validate={[required, minLength2]}
-              warn={required}
+              validate={[minLength2]}
+              defaultValue={this.state.category}
               />
             <ButtonWrapper>
             <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>

@@ -73,6 +73,7 @@ const Service = styled.div`
   margin: 20px;
   margin-top: 40px;
   margin-left: 200px;
+
   ${media.handheld`
     margin:unset;
     margin-top: 10px;
@@ -193,23 +194,6 @@ class Attendance extends React.Component {
     });
   };
 
-  addAll = () => {
-    let id = this.props.service.id;
-    let allMembers = this.props.members.slice();
-    let arrayOfMembers = allMembers.map((member) => (
-      {_id: member.id,
-      leave: ""}
-    ));
-    let submittedMembers = {
-      members: arrayOfMembers
-    };
-    if (window.confirm('Adding all members will erase current members from service, and add all stored members to this service. Are you sure you want to continue?')) {
-      this.props.dispatch(patchToService(submittedMembers, id))
-    } else {
-      return
-    }
-  }
-
   addMember = () => {
     let memberCheck = this.state.value;
     let member = this.props.members.find(obj => obj.name === memberCheck);
@@ -227,6 +211,7 @@ class Attendance extends React.Component {
   }
 
   markLeave = (event, member, service) => {
+    console.log(event.target.value);
     this.props.dispatch(patchLeave(event.target.value, member, service));
   }
 
@@ -277,10 +262,21 @@ class Attendance extends React.Component {
           <select
             value={member.leave}
             onChange={(event) => this.markLeave(event, member._id, this.props.service.id)}>
-            <option></option>
+            <option value=''>will work</option>
             <option value='sick'>sick</option>
             <option value='left'>left</option>
-            <option value='medical'>medical</option>
+            <option value='vacation'>vacation</option>
+            <option value='late'>late</option>
+            <option value='relief'>relief</option>
+            <option value='bereavement'>bereavement</option>
+            <option value='pregnancy'>pregnancy</option>
+            <option value='maternity'>maternity</option>
+            <option value='military'>military</option>
+            <option value='jury'>jury</option>
+            <option value='religious'>religious</option>
+            <option value='holiday'>holiday</option>
+            <option value='voting'>medical</option>
+            
           </select>
         </Td>
         <Td>
@@ -296,7 +292,6 @@ class Attendance extends React.Component {
         />
         <EditingArea>
         <AdderWrapper>
-          <AddAllButton onClick={() => this.addAll()}><AddAllWrapper>Add All Members</AddAllWrapper></AddAllButton>
           <AddMemberButton onClick={() => this.addMember()}><AddMemberWrapper>Add Single User</AddMemberWrapper></AddMemberButton>
           <Explanation>*Type first letter of the member's name, and click their name below. Then use the button to add them</Explanation>
           <Autosuggest

@@ -4,6 +4,7 @@ import {Field, reduxForm, reset} from 'redux-form';
 import {postMember} from '../../actions';
 import styled from 'styled-components';
 import {media} from '../style-utils';
+import {TextField} from 'redux-form-material-ui';
 
 //validation for fields
 const required = value => (value ? undefined : 'Required')
@@ -87,12 +88,12 @@ const ButtonWrapper = styled.div`
 `;
 
 const Button = styled.button`
-width: 70px;
-background-color: #EB5E28;
-color: white;
-border: none;
-height: 25px;
-border-radius: 5px;
+  width: 70px;
+  background-color: #EB5E28;
+  color: white;
+  border: none;
+  height: 25px;
+  border-radius: 5px;
 `;
 
 export class CreateMemberForm extends React.Component {
@@ -129,25 +130,6 @@ export class CreateMemberForm extends React.Component {
     this.props.dispatch(reset('member'));
   }
 
-  renderField ({
-   input,
-   label,
-   type,
-   meta: { touched, error, warning }
-   }) {
-     return  (
-       <div>
-         <label>{label}</label>
-         <div>
-           <input {...input} placeholder={label} type={type} />
-           {touched &&
-             ((error && <span>{error}</span>) ||
-               (warning && <span>{warning}</span>))}
-         </div>
-       </div>
-     )
-   }
-
   render() {
 
     return (
@@ -160,7 +142,7 @@ export class CreateMemberForm extends React.Component {
               <Field
                 name="name"
                 type="text"
-                component={this.renderField}
+                component={TextField}
                 validate={[required, maxLength15, minLength2]}
                 warn={alphaNumeric}
               />
@@ -170,7 +152,7 @@ export class CreateMemberForm extends React.Component {
             <Field
               name="role"
               type="text"
-              component={this.renderField}
+              component={TextField}
               validate={[required, maxLength15, minLength2]}
               warn={alphaNumeric}
             />
@@ -180,7 +162,7 @@ export class CreateMemberForm extends React.Component {
             <Field
               name="email"
               type="email"
-              component={this.renderField}
+              component={TextField}
               validate={[email, required]}
             />
             </InputWrapper>
@@ -189,7 +171,7 @@ export class CreateMemberForm extends React.Component {
             <Field
               name="phone"
               type="number"
-              component={this.renderField}
+              component={TextField}
               validate={[required, phoneNumber]}
             />
             </InputWrapper>

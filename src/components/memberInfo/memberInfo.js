@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form';
 import {patchInfoToMember} from '../../actions'
 import styled from 'styled-components';
 import FontAwesome from 'react-fontawesome';
-
+import {TextField} from 'redux-form-material-ui';
 
 const EditButton = styled.span`
   background-color: inherit;
@@ -111,20 +111,7 @@ export class MemberInfo extends React.Component {
   }
 
   //put in warn functions for validations
-  handleInitialize() {
-    const initData = {
-      'name': this.props.member.name,
-      'role': this.props.member.role,
-      'email': this.props.member.email,
-      'phone': this.props.member.phone
-    };
-    this.props.initialize(initData);
-  }
-
-  componentWillMount(){
-    this.handleInitialize();
-}
-
+  
   toggleEditing = () => {
     this.setState({
       editing: !this.state.editing
@@ -135,49 +122,6 @@ export class MemberInfo extends React.Component {
     this.props.dispatch(patchInfoToMember(id, values));
     this.toggleEditing();
   }
-
-  onEmailChange = (e) => {
-    this.setState({
-      email: e.target.value
-    });
-  }
-
-  onPhoneChange = (e) => {
-    this.setState({
-      phone: e.target.value
-    });
-  }
-
-  onRoleChange = (e) => {
-    this.setState({
-      role: e.target.value
-    });
-  }
-
-  onNameChange = (e) => {
-    this.setState({
-      name: e.target.value
-    });
-  }
-
-  renderField ({
-   input,
-   label,
-   type,
-   meta: { touched, error, warning }
-   }) {
-     return  (
-       <div>
-         <label>{label}</label>
-         <div>
-           <input {...input} placeholder={label} type={type} />
-           {touched &&
-             ((error && <span>{error}</span>) ||
-               (warning && <span>{warning}</span>))}
-         </div>
-       </div>
-     )
-   }
 
   render() {
 
@@ -191,47 +135,37 @@ export class MemberInfo extends React.Component {
             </div>
             <Role>Role: {this.props.member.role}</Role>
             <Phone> Phone: {this.props.member.phone}</Phone>
-            <Email> Email: {this.props.member.email}</Email>
+            <Email> Email: <a href={`mailto:${this.props.member.email}`}>{this.props.member.email}</a></Email>
             {!this.state.editing && <EditButtonWrapper onClick={()=>this.toggleEditing()}><EditButton><FontAwesome name='edit'/></EditButton></EditButtonWrapper>}
           </div> :
           <Form onSubmit={this.props.handleSubmit((values)=>this.onSubmit(this.props.member.id, values))}>
           <legend>Name</legend>
           <Field
-            component={this.renderField}
+            component={TextField}
             type='text'
             name='name'
-            value={this.state.name}
             validate={[maxLength15, minLength2]}
-            onChange={(e)=>this.onNameChange(e)}
             />
           <legend>Role</legend>
             <Field
-              component={this.renderField}
-              type='text'
+              component={TextField}
               name='role'
-              value={this.state.role}
               validate={[maxLength15, minLength2]}
-              onChange={(e)=>this.onRoleChange(e)}
             />
             <legend>Phone</legend>
             <Field
-              component={this.renderField}
-              type='text'
+              component={TextField}
               name='phone'
               value={this.state.phone}
               validate={phoneNumber}
               warn={phoneNumber}
-              onChange={(e)=>this.onPhoneChange(e)}
             />
             <legend>Email</legend>
             <Field
-              component={this.renderField}
-              type='text'
+              component={TextField}
               name='email'
-              value={this.state.email}
               validate={[email]}
               warn={email}
-              onChange={(e)=>this.onEmailChange(e)}
             />
             <ButtonWrapper>
             <SubmitButton type='submit'><SubmitButtonWrapper><FontAwesome name='check-circle'/></SubmitButtonWrapper></SubmitButton>

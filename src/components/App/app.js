@@ -10,12 +10,14 @@ import Attendance from '../attendance/attendance';
 import Login from '../login/login'
 import HowTo from '../howTo/howTo';
 import SignUp from '../signUp/signUp';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state= {
-      loggedIn: true
+      loggedIn: false
     }
   }
 
@@ -27,7 +29,7 @@ class App extends React.Component {
         });
     } else {
       this.setState({
-        loggedIn: true
+        loggedIn: false
       });
     }
   }
@@ -35,6 +37,7 @@ class App extends React.Component {
   render() {
 
     return (
+      <MuiThemeProvider>
         <Router>
           <div>
             <Sidebar loggedIn={this.state.loggedIn}/>
@@ -74,6 +77,7 @@ class App extends React.Component {
             </main>
           </div>
         </Router>
+        </MuiThemeProvider>
       )
   }
 }

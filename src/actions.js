@@ -150,7 +150,7 @@ export const fetchMembers = () => dispatch => {
     datatype: 'json',
     headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${someToken.token}`
+    // 'Authorization': `Bearer ${someToken.token}`
     }
   })
     .then(res => {
@@ -190,8 +190,17 @@ export const fetchServices = () => dispatch => {
       }
       return res.json();
     })
-    .then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime})
-  )
+    .then(services => services.sort(function (a, b) { return b.date > a.date })
+    )
+    .then(services => services.map((service)=> (
+      Object.assign({}, service, {
+        time: moment(service.time).format('h:mm a'),
+        date: moment(service.date).format("dddd, MMMM Do YYYY")
+      })
+    )))
+    .then(services => {
+      console.log(services);
+      return services})
     .then(services => {
       dispatch(fetchServicesSuccess(services));
     }).catch(err => {
@@ -209,10 +218,11 @@ export const getSingleLeave = (memberId) => dispatch => {
       return Promise.reject(res.statusText);
     }
     return res.json();
-  }).then(services => services.sort(function(a,b) {return b.dateTime>a.dateTime}).map(
+  }).then(services => services.sort(function(a,b) {return b.date>a.date}).map(
     (obj) => (
       Object.assign({}, obj, {
-        dateTime: moment(obj.dateTime).format("dddd, MMMM Do YYYY, h:mm a")
+        date: moment(obj.date).format("dddd, MMMM Do YYYY"),
+        time: moment(obj.time).format('h:mm a')
       }
   ))))
   .then(services => {
@@ -223,6 +233,7 @@ export const getSingleLeave = (memberId) => dispatch => {
 };
 
 export const postService = (values) => dispatch => {
+  console.log(values);
   fetch(API_BASE_URL + '/services', {
     method: 'POST',
     headers: {
