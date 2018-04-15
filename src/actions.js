@@ -365,6 +365,26 @@ export const patchInfoToMember = (id, values) => dispatch => {
   })
 }
 
+export const patchAllottedLeave = (id, values) => dispatch => {
+  console.log(values);
+  fetch(API_BASE_URL + '/members/allottedLeave/' + id, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(values)
+  }).then(res => {
+    if (!res.ok) {
+      return Promise.reject(res.statusText);
+    }
+  }).catch(err=> {
+    console.error(err)
+  }).then(()=> {
+    dispatch(fetchServices());
+    dispatch(fetchMembers());
+  })
+}
+
 export const deleteService = (id) => dispatch => {
   fetch(API_BASE_URL + '/services/' + id, {
     method: 'DELETE'

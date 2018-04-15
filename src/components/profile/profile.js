@@ -4,6 +4,7 @@ import Leaves from '../leaves/leaves';
 import {fetchMembers, fetchServices} from '../../actions';
 import {MemberInfo} from '../memberInfo/memberInfo';
 import styled from 'styled-components';
+import LeaveIncrementors from '../leaveIncrementors/leaveIncrementors'
 
 
 const ProfileContainer = styled.div`
@@ -37,6 +38,7 @@ class Profile extends React.Component {
     return (
       <ProfileContainer>
         {this.props.member && <MemberInfo member={this.props.member} />}
+        <LeaveIncrementors member={this.props.member} />
         <div className='leaves'>
           <h2>Leave History:</h2>
           <Leaves member={this.props.member} services={this.props.services} />

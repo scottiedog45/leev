@@ -7,7 +7,7 @@ const initialState = {
   singleMemberLeave: [],
   token: '',
   loading: false,
-  loggedIn: false
+  loggedIn: true
 };
 
 //don't need optimistic UI for everything
