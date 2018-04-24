@@ -138,9 +138,7 @@ export class CreateServiceForm extends React.Component {
         leave: ''
       }
     ));
-    console.log(values);
     this.toggleOff();
-    console.log(values);
     this.props.dispatch(postService(values));
     this.props.dispatch(reset('service'))
   }

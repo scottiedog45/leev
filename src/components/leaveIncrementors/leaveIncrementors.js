@@ -18,9 +18,6 @@ const Form = styled.form`
   
 `;
 
-const ButtonContainer = styled.div`
-
-`;
 
 class LeaveIncrementors extends React.Component {
   constructor(props) {
